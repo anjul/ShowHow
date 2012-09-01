@@ -1,0 +1,488 @@
+<mediaelements>
+  <teaser url='Ch_00/F01.flv'/>
+  <chapterlist>
+        <chapter id='01' level='beginner,smartstart'>
+      <result>
+        <title>Introduction to iPod Shuffle</title>
+        <description>This is Apple's display-less and smallest iPod - the new 2nd generation 1GB iPod Shuffle.</description>
+        <image url='Ch_01/F01.jpg'/>
+        <duration time='00.00.44'/>
+                <pr_name>ipod-shuffle-2nd-gen</pr_name>
+        <sef_title>introduction-to-ipod-shuffle</sef_title>
+      </result>
+      <presenter text='Amy' id='1'>
+        <video url='Ch_01/F01.flv' id=''/>
+        <audio>
+          <option text='Neutral' url='Ch_01/F01_L01_A01.mp3' id='1'/>
+        </audio>
+      </presenter>
+    </chapter>
+        <chapter id='02' level='beginner,smartstart'>
+      <result>
+        <title>System Requirements for Windows and Mac</title>
+        <description>To use your iPod shuffle, you require a few hardware and software settings for your computer.</description>
+        <image url='Ch_02/F01.jpg'/>
+        <duration time='00.01.33'/>
+                <pr_name>ipod-shuffle-2nd-gen</pr_name>
+        <sef_title>system-requirements-for-windows-and-mac</sef_title>
+      </result>
+      <presenter text='Amy' id='1'>
+        <video url='Ch_02/F01.flv' id=''/>
+        <audio>
+          <option text='Neutral' url='Ch_02/F01_L01_A01.mp3' id='1'/>
+        </audio>
+      </presenter>
+    </chapter>
+        <chapter id='03' level='beginner,smartstart'>
+      <result>
+        <title>Switches and controls</title>
+        <description>Open the pack and you find a hard, transparent plastic box.</description>
+        <image url='Ch_03/F01.jpg'/>
+        <duration time='00.02.16'/>
+                <pr_name>ipod-shuffle-2nd-gen</pr_name>
+        <sef_title>switches-and-controls</sef_title>
+      </result>
+      <presenter text='Amy' id='1'>
+        <video url='Ch_03/F01.flv' id=''/>
+        <audio>
+          <option text='Neutral' url='Ch_03/F01_L01_A01.mp3' id='1'/>
+        </audio>
+      </presenter>
+    </chapter>
+        <chapter id='06' level='beginner,smartstart'>
+      <result>
+        <title>How to download and Install the latest iTunes and Quicktime</title>
+        <description>To use the iPod Shuffle, install the latest version of iTunes and Apple QuickTime Player software.</description>
+        <image url='Ch_06/F01.jpg'/>
+        <duration time='00.02.32'/>
+                <pr_name>ipod-shuffle-2nd-gen</pr_name>
+        <sef_title>how-to-download-and-install-the-latest-itunes-and-quicktime</sef_title>
+      </result>
+      <presenter text='Amy' id='1'>
+        <video url='Ch_06/F01.flv' id=''/>
+        <audio>
+          <option text='Neutral' url='Ch_06/F01_L01_A01.mp3' id='1'/>
+        </audio>
+      </presenter>
+    </chapter>
+        <chapter id='05' level='beginner'>
+      <result>
+        <title>What can it do - listen to music, podcasts, audio books or use as external storage device</title>
+        <description>You can use your iPod Shuffle for listening to songs or music.You can listen to Podcasts.</description>
+        <image url='Ch_05/F01.jpg'/>
+        <duration time='00.00.25'/>
+                <pr_name>ipod-shuffle-2nd-gen</pr_name>
+        <sef_title>what-can-it-do---listen-to-music%2C-podcasts%2C-audio-books-or-use-as-external-storage-device</sef_title>
+      </result>
+      <presenter text='Amy' id='1'>
+        <video url='Ch_05/F01.flv' id=''/>
+        <audio>
+          <option text='Neutral' url='Ch_05/F01_L01_A01.mp3' id='1'/>
+        </audio>
+      </presenter>
+    </chapter>
+        <chapter id='04' level='beginner'>
+      <result>
+        <title>Specifitactions and Operating Conditions</title>
+        <description>Your iPod shuffle, whether it's 1 GB or 2 GB, weighs 15.6 grams or 0.55 ounce.</description>
+        <image url='Ch_04/F01.jpg'/>
+        <duration time='00.01.06'/>
+                <pr_name>ipod-shuffle-2nd-gen</pr_name>
+        <sef_title>specifitactions-and-operating-conditions</sef_title>
+      </result>
+      <presenter text='Amy' id='1'>
+        <video url='Ch_04/F01.flv' id=''/>
+        <audio>
+          <option text='Neutral' url='Ch_04/F01_L01_A01.mp3' id='1'/>
+        </audio>
+      </presenter>
+    </chapter>
+        <chapter id='09' level='beginner,smartstart'>
+      <result>
+        <title>How to charge the iPod Shuffle</title>
+        <description>There is a built-in rechargeable lithium polymer battery inside your iPod Shuffle</description>
+        <image url='Ch_09/F01.jpg'/>
+        <duration time='00.01.50'/>
+                <pr_name>ipod-shuffle-2nd-gen</pr_name>
+        <sef_title>how-to-charge-the-ipod-shuffle</sef_title>
+      </result>
+      <presenter text='Amy' id='1'>
+        <video url='Ch_09/F01.flv' id=''/>
+        <audio>
+          <option text='Neutral' url='Ch_09/F01_L01_A01.mp3' id='1'/>
+        </audio>
+      </presenter>
+    </chapter>
+        <chapter id='26' level='advanced,smartstart'>
+      <result>
+        <title>How to set the volume on your Shuffle using iTunes</title>
+        <description>Sometimes, the volume of songs and other audio may vary depending on how the audio was recorded or encoded.</description>
+        <image url='Ch_26/F01.jpg'/>
+        <duration time='00.03.59'/>
+                <pr_name>ipod-shuffle-2nd-gen</pr_name>
+        <sef_title>how-to-set-the-volume-on-your-shuffle-using-itunes</sef_title>
+      </result>
+      <presenter text='Amy' id='1'>
+        <video url='Ch_26/F01.flv' id=''/>
+        <audio>
+          <option text='Neutral' url='Ch_26/F01_L01_A01.mp3' id='1'/>
+        </audio>
+      </presenter>
+    </chapter>
+        <chapter id='08' level='beginner,smartstart'>
+      <result>
+        <title>How to Connect to your computer</title>
+        <description>We connect the iPod Shuffle to the computer for two purposes - charging, and loading music and data.</description>
+        <image url='Ch_08/F01.jpg'/>
+        <duration time='00.02.05'/>
+                <pr_name>ipod-shuffle-2nd-gen</pr_name>
+        <sef_title>how-to-connect-to-your-computer</sef_title>
+      </result>
+      <presenter text='Amy' id='1'>
+        <video url='Ch_08/F01.flv' id=''/>
+        <audio>
+          <option text='Neutral' url='Ch_08/F01_L01_A01.mp3' id='1'/>
+        </audio>
+      </presenter>
+    </chapter>
+        <chapter id='07' level='beginner'>
+      <result>
+        <title>How to find your way around the iTunes Player and iTunes Store</title>
+        <description>iTunes has two parts, iTunes Player and iTunes Store. The iTunes interface is divided into six areas.</description>
+        <image url='Ch_07/F01.jpg'/>
+        <duration time='00.05.24'/>
+                <pr_name>ipod-shuffle-2nd-gen</pr_name>
+        <sef_title>how-to-find-your-way-around-the-itunes-player-and-itunes-store</sef_title>
+      </result>
+      <presenter text='Amy' id='1'>
+        <video url='Ch_07/F01.flv' id=''/>
+        <audio>
+          <option text='Neutral' url='Ch_07/F01_L01_A01.mp3' id='1'/>
+        </audio>
+      </presenter>
+    </chapter>
+        <chapter id='10' level='beginner,smartstart'>
+      <result>
+        <title>How to find the Battery Status</title>
+        <description>Before playing your iPod Shuffle, you must check its battery status.Two status lights - one on the top</description>
+        <image url='Ch_10/F01.jpg'/>
+        <duration time='00.01.25'/>
+                <pr_name>ipod-shuffle-2nd-gen</pr_name>
+        <sef_title>how-to-find-the-battery-status</sef_title>
+      </result>
+      <presenter text='Amy' id='1'>
+        <video url='Ch_10/F01.flv' id=''/>
+        <audio>
+          <option text='Neutral' url='Ch_10/F01_L01_A01.mp3' id='1'/>
+        </audio>
+      </presenter>
+    </chapter>
+        <chapter id='11' level='beginner,smartstart'>
+      <result>
+        <title>How to Sync with iTunes</title>
+        <description>To synchronize your iPod Shuffle with your computer for the first time</description>
+        <image url='Ch_11/F01.jpg'/>
+        <duration time='00.01.05'/>
+                <pr_name>ipod-shuffle-2nd-gen</pr_name>
+        <sef_title>how-to-sync-with-itunes</sef_title>
+      </result>
+      <presenter text='Amy' id='1'>
+        <video url='Ch_11/F01.flv' id=''/>
+        <audio>
+          <option text='Neutral' url='Ch_11/F01_L01_A01.mp3' id='1'/>
+        </audio>
+      </presenter>
+    </chapter>
+        <chapter id='12' level='beginner,smartstart'>
+      <result>
+        <title>How to Import audio into iTunes Library</title>
+        <description>You can also add music - and other audio - already existing on your computer, to iTunes. </description>
+        <image url='Ch_12/F01.jpg'/>
+        <duration time='00.03.45'/>
+                <pr_name>ipod-shuffle-2nd-gen</pr_name>
+        <sef_title>how-to-import-audio-into-itunes-library</sef_title>
+      </result>
+      <presenter text='Amy' id='1'>
+        <video url='Ch_12/F01.flv' id=''/>
+        <audio>
+          <option text='Neutral' url='Ch_12/F01_L01_A01.mp3' id='1'/>
+        </audio>
+      </presenter>
+    </chapter>
+        <chapter id='13' level='beginner,smartstart'>
+      <result>
+        <title>How to Load music manually</title>
+        <description>You can load songs, music tracks and playlists onto your iPod shuffle manually. To do this</description>
+        <image url='Ch_13/F01.jpg'/>
+        <duration time='00.01.21'/>
+                <pr_name>ipod-shuffle-2nd-gen</pr_name>
+        <sef_title>how-to-load-music-manually</sef_title>
+      </result>
+      <presenter text='Amy' id='1'>
+        <video url='Ch_13/F01.flv' id=''/>
+        <audio>
+          <option text='Neutral' url='Ch_13/F01_L01_A01.mp3' id='1'/>
+        </audio>
+      </presenter>
+    </chapter>
+        <chapter id='16' level='intermediate,smartstart'>
+      <result>
+        <title>How to Create and access your  iTunes Store account using  your Apple ID or your AOL account</title>
+        <description>iTunes Store, is the huge online resource of music and songs, albums, audiobooks</description>
+        <image url='Ch_16/F01.jpg'/>
+        <duration time='00.02.25'/>
+                <pr_name>ipod-shuffle-2nd-gen</pr_name>
+        <sef_title>how-to-create-and-access-your--itunes-store-account-using--your-apple-id-or-your-aol-account</sef_title>
+      </result>
+      <presenter text='Amy' id='1'>
+        <video url='Ch_16/F01.flv' id=''/>
+        <audio>
+          <option text='Neutral' url='Ch_16/F01_L01_A01.mp3' id='1'/>
+        </audio>
+      </presenter>
+    </chapter>
+        <chapter id='14' level='beginner,smartstart'>
+      <result>
+        <title>How to Play music using Circular Control Panel and various Playback Modese  - Shuffle and Repeat</title>
+        <description>To play music on your iPod Shuffle : Plug the earphones jack into the iPod shuffle.</description>
+        <image url='Ch_14/F01.jpg'/>
+        <duration time='00.02.05'/>
+                <pr_name>ipod-shuffle-2nd-gen</pr_name>
+        <sef_title>how-to-play-music-using-circular-control-panel-and-various-playback-modese----shuffle-and-repeat</sef_title>
+      </result>
+      <presenter text='Amy' id='1'>
+        <video url='Ch_14/F01.flv' id=''/>
+        <audio>
+          <option text='Neutral' url='Ch_14/F01_L01_A01.mp3' id='1'/>
+        </audio>
+      </presenter>
+    </chapter>
+        <chapter id='24' level='intermediate,smartstart'>
+      <result>
+        <title>How to order the music in your Shuffle using iTunes</title>
+        <description>Once songs are loaded onto iPod shuffle, you can rearrange their order with iTunes.</description>
+        <image url='Ch_24/F01.jpg'/>
+        <duration time='00.00.45'/>
+                <pr_name>ipod-shuffle-2nd-gen</pr_name>
+        <sef_title>how-to-order-the-music-in-your-shuffle-using-itunes</sef_title>
+      </result>
+      <presenter text='Amy' id='1'>
+        <video url='Ch_24/F01.flv' id=''/>
+        <audio>
+          <option text='Neutral' url='Ch_24/F01_L01_A01.mp3' id='1'/>
+        </audio>
+      </presenter>
+    </chapter>
+        <chapter id='17' level='intermediate,smartstart'>
+      <result>
+        <title>How to Search for music and using Quick links and Power search</title>
+        <description>You can get your favorite songs and music through iTunes Store.Searching the iTunes Store</description>
+        <image url='Ch_17/F01.jpg'/>
+        <duration time='00.03.01'/>
+                <pr_name>ipod-shuffle-2nd-gen</pr_name>
+        <sef_title>how-to-search-for-music-and-using-quick-links-and-power-search</sef_title>
+      </result>
+      <presenter text='Amy' id='1'>
+        <video url='Ch_17/F01.flv' id=''/>
+        <audio>
+          <option text='Neutral' url='Ch_17/F01_L01_A01.mp3' id='1'/>
+        </audio>
+      </presenter>
+    </chapter>
+        <chapter id='22' level='intermediate,smartstart'>
+      <result>
+        <title>How to organise your audio with iTunes - Create, modify and delete playlists and Smart playlists</title>
+        <description>Using iTunes, you can organize songs and other items into playlists, in any way you want.</description>
+        <image url='Ch_22/F01.jpg'/>
+        <duration time='00.06.07'/>
+                <pr_name>ipod-shuffle-2nd-gen</pr_name>
+        <sef_title>how-to-organise-your-audio-with-itunes---create%2C-modify-and-delete-playlists-and-smart-playlists</sef_title>
+      </result>
+      <presenter text='Amy' id='1'>
+        <video url='Ch_22/F01.flv' id=''/>
+        <audio>
+          <option text='Neutral' url='Ch_22/F01_L01_A01.mp3' id='1'/>
+        </audio>
+      </presenter>
+    </chapter>
+        <chapter id='15' level='beginner,smartstart'>
+      <result>
+        <title>How to Remove music or other items from iPod Shuffle</title>
+        <description>You can remove audio tracks from your iPod Shuffle only through iTunes.</description>
+        <image url='Ch_15/F01.jpg'/>
+        <duration time='00.00.58'/>
+                <pr_name>ipod-shuffle-2nd-gen</pr_name>
+        <sef_title>how-to-remove-music-or-other-items-from-ipod-shuffle</sef_title>
+      </result>
+      <presenter text='Amy' id='1'>
+        <video url='Ch_15/F01.flv' id=''/>
+        <audio>
+          <option text='Neutral' url='Ch_15/F01_L01_A01.mp3' id='1'/>
+        </audio>
+      </presenter>
+    </chapter>
+        <chapter id='19' level='intermediate'>
+      <result>
+        <title>How to find Audio podcasts,  download free ones to the iTunes library, subscribe, unsubscribe and transfer to your shuffle</title>
+        <description>A podcast is simply a digital media file of a radio-style program, distributed over the Internet, </description>
+        <image url='Ch_19/F01.jpg'/>
+        <duration time='00.06.57'/>
+                <pr_name>ipod-shuffle-2nd-gen</pr_name>
+        <sef_title>how-to-find-audio-podcasts%2C--download-free-ones-to-the-itunes-library%2C-subscribe%2C-unsubscribe-and-transfer-to-your-shuffle</sef_title>
+      </result>
+      <presenter text='Amy' id='1'>
+        <video url='Ch_19/F01.flv' id=''/>
+        <audio>
+          <option text='Neutral' url='Ch_19/F01_L01_A01.mp3' id='1'/>
+        </audio>
+      </presenter>
+    </chapter>
+        <chapter id='20' level='intermediate'>
+      <result>
+        <title>How to find and purchase an Audio book from the iTunes store and Audible.com, tranfer to and play them on your shuffle</title>
+        <description>Have you ever thought of listening to your favourite bestseller while you travel</description>
+        <image url='Ch_20/F01.jpg'/>
+        <duration time='00.04.24'/>
+                <pr_name>ipod-shuffle-2nd-gen</pr_name>
+        <sef_title>how-to-find-and-purchase-an-audio-book-from-the-itunes-store-and-audible.com%2C-tranfer-to-and-play-them-on-your-shuffle</sef_title>
+      </result>
+      <presenter text='Amy' id='1'>
+        <video url='Ch_20/F01.flv' id=''/>
+        <audio>
+          <option text='Neutral' url='Ch_20/F01_L01_A01.mp3' id='1'/>
+        </audio>
+      </presenter>
+    </chapter>
+        <chapter id='29' level='advanced,smartstart'>
+      <result>
+        <title>How to trouble shoot your iPod shuffle - Reset, Retry, Restart, Reinstall, Restore</title>
+        <description>Here... we will discuss some tips and troubleshooting methods of your iPod Shuffle</description>
+        <image url='Ch_29/F01.jpg'/>
+        <duration time='00.04.30'/>
+                <pr_name>ipod-shuffle-2nd-gen</pr_name>
+        <sef_title>how-to-trouble-shoot-your-ipod-shuffle---reset%2C-retry%2C-restart%2C-reinstall%2C-restore</sef_title>
+      </result>
+      <presenter text='Amy' id='1'>
+        <video url='Ch_29/F01.flv' id=''/>
+        <audio>
+          <option text='Neutral' url='Ch_29/F01_L01_A01.mp3' id='1'/>
+        </audio>
+      </presenter>
+    </chapter>
+        <chapter id='23' level='intermediate,smartstart'>
+      <result>
+        <title>How to Autofill music and how to  Autofill only checked items</title>
+        <description>You can set how music will be loaded from iTunes onto iPod Shuffle by configuring </description>
+        <image url='Ch_23/F01.jpg'/>
+        <duration time='00.03.22'/>
+                <pr_name>ipod-shuffle-2nd-gen</pr_name>
+        <sef_title>how-to-autofill-music-and-how-to--autofill-only-checked-items</sef_title>
+      </result>
+      <presenter text='Amy' id='1'>
+        <video url='Ch_23/F01.flv' id=''/>
+        <audio>
+          <option text='Neutral' url='Ch_23/F01_L01_A01.mp3' id='1'/>
+        </audio>
+      </presenter>
+    </chapter>
+        <chapter id='18' level='intermediate,smartstart'>
+      <result>
+        <title>How to buy and dowload a Song or Album online</title>
+        <description>Once you finish searching the iTunes Store, preview the item you wish to purchase.</description>
+        <image url='Ch_18/F01.jpg'/>
+        <duration time='00.01.23'/>
+                <pr_name>ipod-shuffle-2nd-gen</pr_name>
+        <sef_title>how-to-buy-and-dowload-a-song-or-album-online</sef_title>
+      </result>
+      <presenter text='Amy' id='1'>
+        <video url='Ch_18/F01.flv' id=''/>
+        <audio>
+          <option text='Neutral' url='Ch_18/F01_L01_A01.mp3' id='1'/>
+        </audio>
+      </presenter>
+    </chapter>
+        <chapter id='27' level='advanced,smartstart'>
+      <result>
+        <title>How to disable and reenable the iPod Shuffle buttons</title>
+        <description>You can disable the buttons on iPod shuffle so that nothing happens if they are pressed accidentally.</description>
+        <image url='Ch_27/F01.jpg'/>
+        <duration time='00.00.51'/>
+                <pr_name>ipod-shuffle-2nd-gen</pr_name>
+        <sef_title>how-to-disable-and-reenable-the-ipod-shuffle-buttons</sef_title>
+      </result>
+      <presenter text='Amy' id='1'>
+        <video url='Ch_27/F01.flv' id=''/>
+        <audio>
+          <option text='Neutral' url='Ch_27/F01_L01_A01.mp3' id='1'/>
+        </audio>
+      </presenter>
+    </chapter>
+        <chapter id='28' level='advanced'>
+      <result>
+        <title>Audio File formats support and not supported by iPod shuffle and how to convert tracks to 128 kbps AAC files while loading</title>
+        <description>It is very important to know the audio file formats supported by iPod shuffle.</description>
+        <image url='Ch_28/F01.jpg'/>
+        <duration time='00.03.17'/>
+                <pr_name>ipod-shuffle-2nd-gen</pr_name>
+        <sef_title>audio-file-formats-support-and-not-supported-by-ipod-shuffle-and-how-to-convert-tracks-to-128-kbps-aac-files-while-loading</sef_title>
+      </result>
+      <presenter text='Amy' id='1'>
+        <video url='Ch_28/F01.flv' id=''/>
+        <audio>
+          <option text='Neutral' url='Ch_28/F01_L01_A01.mp3' id='1'/>
+        </audio>
+      </presenter>
+    </chapter>
+        <chapter id='21' level='intermediate'>
+      <result>
+        <title>How to prevent iTunes from opening Automatically.</title>
+        <description>To prevent iTunes from opening automatically</description>
+        <image url='Ch_21/F01.jpg'/>
+        <duration time='00.00.52'/>
+                <pr_name>ipod-shuffle-2nd-gen</pr_name>
+        <sef_title>how-to-prevent-itunes-from-opening-automatically.</sef_title>
+      </result>
+      <presenter text='Amy' id='1'>
+        <video url='Ch_21/F01.flv' id=''/>
+        <audio>
+          <option text='Neutral' url='Ch_21/F01_L01_A01.mp3' id='1'/>
+        </audio>
+      </presenter>
+    </chapter>
+        <chapter id='30' level='advanced'>
+      <result>
+        <title>What to do when your Suffle does not turn on or respond.</title>
+        <description>Check if the iPod Shuffle buttons are disabled.If the status light blinks orange when you press a button</description>
+        <image url='Ch_30/F01.jpg'/>
+        <duration time='00.04.51'/>
+                <pr_name>ipod-shuffle-2nd-gen</pr_name>
+        <sef_title>what-to-do-when-your-suffle-does-not-turn-on-or-respond.</sef_title>
+      </result>
+      <presenter text='Amy' id='1'>
+        <video url='Ch_30/F01.flv' id=''/>
+        <audio>
+          <option text='Neutral' url='Ch_30/F01_L01_A01.mp3' id='1'/>
+        </audio>
+      </presenter>
+    </chapter>
+        <chapter id='25' level='intermediate'>
+      <result>
+        <title>How to use your Shuffle as an external storage device - copy and delete data from your shuffle</title>
+        <description>You can store and manage data files on iPod shuffle just as you would on your computer disk drives.</description>
+        <image url='Ch_25/F01.jpg'/>
+        <duration time='00.04.11'/>
+                <pr_name>ipod-shuffle-2nd-gen</pr_name>
+        <sef_title>how-to-use-your-shuffle-as-an-external-storage-device---copy-and-delete-data-from-your-shuffle</sef_title>
+      </result>
+      <presenter text='Amy' id='1'>
+        <video url='Ch_25/F01.flv' id=''/>
+        <audio>
+          <option text='Neutral' url='Ch_25/F01_L01_A01.mp3' id='1'/>
+        </audio>
+      </presenter>
+    </chapter>
+      </chapterlist>
+   <text>
+    <option url='?Sid=1' id='1'/>
+  </text>
+</mediaelements>

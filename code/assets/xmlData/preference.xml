@@ -1,0 +1,22 @@
+<preferences>
+   <presenter>
+    <option text='Amy' id='1'/>
+  </presenter>
+    <audiooptions>
+      <option text="English" id="1">
+        <accent text='Neutral' id='1'/>
+        <accent text='American' id='4'/>
+      </option>
+     </audiooptions>
+  <textoptions>
+    <text>
+      <option text='English' id='1'/>
+   </text>
+     </textoptions>
+  <user>
+    <presenter id='1'/>
+    <audio id='1'/>
+    <accent id='1'/>
+    <text id='1'/>
+  </user>
+</preferences>

@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='utf-8'?><cartProducts>
+  <product   id='1'>
+    <film id='1'>
+      <subproduct id='1' name='iPod Shuffle' image='/subproducts_files/1
+/1/letsbuy_1310346538666_apple_ipod_shuffle_2gb__silver_09162011-03.55.41.jpg' price='1000' />
+    </film>
+  </product>
+  <product   id='61'>
+    <film id='2821'>
+      <subproduct id='2' name='Croma Microwave' image='/images/microwave2.jpg' price='15000' />
+    </film>
+  </product>
+</cartProducts>

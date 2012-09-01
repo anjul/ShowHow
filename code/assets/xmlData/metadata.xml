@@ -1,0 +1,47 @@
+<metadata>
+  <filmDetails>
+    <title>Introduction to iPod Shuffle</title>
+    <description>This is Apple's display-less and smallest iPod - the new 2nd generation 1GB iPod Shuffle.</description>
+    <image url='Ch_01/F01.jpg'/>
+    <duration time='00.00.44'/>
+    <video url='Ch_01/F01.flv'/>
+    <audio url='Ch_01/F01_L01_A01.mp3'/>
+  </filmDetails>
+  <markers>
+      <marker time='1' id='631'>
+      <text></text>
+    </marker>
+       <marker time='11' id='632'>
+      <text>iPod Shuffle... small, no display, 1GB capacity</text>
+    </marker>
+       <marker time='21' id='633'>
+      <text>Can hold 16 hours of music</text>
+    </marker>
+       <marker time='36' id='634'>
+      <text>Gadget's key feature... "shuffle"</text>
+    </marker>
+     </markers>
+  <filmLinks>
+     </filmLinks>
+  <cuelist>
+  	    <cuepoint time='1' id='1'>
+      <subtitle></subtitle>
+      <heading>iPod Shuffle</heading>
+    </cuepoint>
+        <cuepoint time='11' id='2'>
+      <subtitle>iPod Shuffle... small, no display, 1GB capacity</subtitle>
+      <heading>iPod Shuffle</heading>
+    </cuepoint>
+        <cuepoint time='21' id='3'>
+      <subtitle>Can hold 16 hours of music</subtitle>
+      <heading>iPod Shuffle</heading>
+    </cuepoint>
+        <cuepoint time='36' id='4'>
+      <subtitle>Gadget's key feature... "shuffle"</subtitle>
+      <heading>iPod Shuffle</heading>
+    </cuepoint>
+      </cuelist>
+  <htmltext>
+    <![CDATA[<p class='headingText'><b>INTRODUCTION TO iPod SHUFFLE</b> </p><br><br><p class='bodyText'>Hello!!! I'm Amy... <br><br>This is Apple's display-less and smallest iPod - the new 2nd generation 1GB iPod Shuffle.<br><br>A 2GB model is also available. <br><br>The 1 GB model holds up to 16 hours of music, while the 2 GB model stores up to 32 hours of music.<br><br>Apple introduced this matchbox-sized, badge-like digital music player in early 2005.<br><br>This breakthrough gadget was designed around iPod's legendary shuffle feature.</p>]]>
+  </htmltext>
+</metadata>

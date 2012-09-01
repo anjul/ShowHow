@@ -1,0 +1,88 @@
+<mediaelements>
+  <teaser url='Ch_00/F01.flv'/>
+  <chapterlist>
+        <chapter id='09' level='beginner,smartstart'>
+      <result>
+        <title>How to charge the iPod Shuffle</title>
+        <description>There is a built-in rechargeable lithium polymer battery inside your iPod Shuffle</description>
+        <image url='Ch_09/F01.jpg'/>
+        <duration time='00.01.50'/>
+                <pr_name>ipod-shuffle-2nd-gen</pr_name>
+        <sef_title>how-to-charge-the-ipod-shuffle</sef_title>
+      </result>
+      <presenter text='Amy' id='1'>
+        <video url='Ch_09/F01.flv' id=''/>
+        <audio>
+          <option text='Neutral' url='Ch_09/F01_L01_A01.mp3' id='1'/>
+        </audio>
+      </presenter>
+    </chapter>
+        <chapter id='10' level='beginner,smartstart'>
+      <result>
+        <title>How to find the Battery Status</title>
+        <description>Before playing your iPod Shuffle, you must check its battery status.Two status lights - one on the top</description>
+        <image url='Ch_10/F01.jpg'/>
+        <duration time='00.01.25'/>
+                <pr_name>ipod-shuffle-2nd-gen</pr_name>
+        <sef_title>how-to-find-the-battery-status</sef_title>
+      </result>
+      <presenter text='Amy' id='1'>
+        <video url='Ch_10/F01.flv' id=''/>
+        <audio>
+          <option text='Neutral' url='Ch_10/F01_L01_A01.mp3' id='1'/>
+        </audio>
+      </presenter>
+    </chapter>
+        <chapter id='18' level='intermediate,smartstart'>
+      <result>
+        <title>How to buy and dowload a Song or Album online</title>
+        <description>Once you finish searching the iTunes Store, preview the item you wish to purchase.</description>
+        <image url='Ch_18/F01.jpg'/>
+        <duration time='00.01.23'/>
+                <pr_name>ipod-shuffle-2nd-gen</pr_name>
+        <sef_title>how-to-buy-and-dowload-a-song-or-album-online</sef_title>
+      </result>
+      <presenter text='Amy' id='1'>
+        <video url='Ch_18/F01.flv' id=''/>
+        <audio>
+          <option text='Neutral' url='Ch_18/F01_L01_A01.mp3' id='1'/>
+        </audio>
+      </presenter>
+    </chapter>
+        <chapter id='20' level='intermediate'>
+      <result>
+        <title>How to find and purchase an Audio book from the iTunes store and Audible.com, tranfer to and play them on your shuffle</title>
+        <description>Have you ever thought of listening to your favourite bestseller while you travel</description>
+        <image url='Ch_20/F01.jpg'/>
+        <duration time='00.04.24'/>
+                <pr_name>ipod-shuffle-2nd-gen</pr_name>
+        <sef_title>how-to-find-and-purchase-an-audio-book-from-the-itunes-store-and-audible.com%2C-tranfer-to-and-play-them-on-your-shuffle</sef_title>
+      </result>
+      <presenter text='Amy' id='1'>
+        <video url='Ch_20/F01.flv' id=''/>
+        <audio>
+          <option text='Neutral' url='Ch_20/F01_L01_A01.mp3' id='1'/>
+        </audio>
+      </presenter>
+    </chapter>
+        <chapter id='30' level='advanced'>
+      <result>
+        <title>What to do when your Suffle does not turn on or respond.</title>
+        <description>Check if the iPod Shuffle buttons are disabled.If the status light blinks orange when you press a button</description>
+        <image url='Ch_30/F01.jpg'/>
+        <duration time='00.04.51'/>
+                <pr_name>ipod-shuffle-2nd-gen</pr_name>
+        <sef_title>what-to-do-when-your-suffle-does-not-turn-on-or-respond.</sef_title>
+      </result>
+      <presenter text='Amy' id='1'>
+        <video url='Ch_30/F01.flv' id=''/>
+        <audio>
+          <option text='Neutral' url='Ch_30/F01_L01_A01.mp3' id='1'/>
+        </audio>
+      </presenter>
+    </chapter>
+      </chapterlist>
+   <text>
+    <option url='?Sid=1' id='1'/>
+  </text>
+</mediaelements>

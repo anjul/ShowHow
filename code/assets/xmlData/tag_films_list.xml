@@ -1,0 +1,88 @@
+<mediaelements>
+  <teaser url='Ch_00/F01.flv'/>
+  <chapterlist>
+        <chapter id='07' level='beginner'>
+      <result>
+        <title>How to find your way around the iTunes Player and iTunes Store</title>
+        <description>iTunes has two parts, iTunes Player and iTunes Store. The iTunes interface is divided into six areas.</description>
+        <image url='Ch_07/F01.jpg'/>
+        <duration time='00.05.24'/>
+                <pr_name>ipod-shuffle-2nd-gen</pr_name>
+        <sef_title>how-to-find-your-way-around-the-itunes-player-and-itunes-store</sef_title>
+      </result>
+      <presenter text='Amy' id='1'>
+        <video url='Ch_07/F01.flv' id=''/>
+        <audio>
+          <option text='Neutral' url='Ch_07/F01_L01_A01.mp3' id='1'/>
+        </audio>
+      </presenter>
+    </chapter>
+        <chapter id='16' level='intermediate,smartstart'>
+      <result>
+        <title>How to Create and access your  iTunes Store account using  your Apple ID or your AOL account</title>
+        <description>iTunes Store, is the huge online resource of music and songs, albums, audiobooks</description>
+        <image url='Ch_16/F01.jpg'/>
+        <duration time='00.02.25'/>
+                <pr_name>ipod-shuffle-2nd-gen</pr_name>
+        <sef_title>how-to-create-and-access-your--itunes-store-account-using--your-apple-id-or-your-aol-account</sef_title>
+      </result>
+      <presenter text='Amy' id='1'>
+        <video url='Ch_16/F01.flv' id=''/>
+        <audio>
+          <option text='Neutral' url='Ch_16/F01_L01_A01.mp3' id='1'/>
+        </audio>
+      </presenter>
+    </chapter>
+        <chapter id='18' level='intermediate,smartstart'>
+      <result>
+        <title>How to buy and dowload a Song or Album online</title>
+        <description>Once you finish searching the iTunes Store, preview the item you wish to purchase.</description>
+        <image url='Ch_18/F01.jpg'/>
+        <duration time='00.01.23'/>
+                <pr_name>ipod-shuffle-2nd-gen</pr_name>
+        <sef_title>how-to-buy-and-dowload-a-song-or-album-online</sef_title>
+      </result>
+      <presenter text='Amy' id='1'>
+        <video url='Ch_18/F01.flv' id=''/>
+        <audio>
+          <option text='Neutral' url='Ch_18/F01_L01_A01.mp3' id='1'/>
+        </audio>
+      </presenter>
+    </chapter>
+        <chapter id='20' level='intermediate'>
+      <result>
+        <title>How to find and purchase an Audio book from the iTunes store and Audible.com, tranfer to and play them on your shuffle</title>
+        <description>Have you ever thought of listening to your favourite bestseller while you travel</description>
+        <image url='Ch_20/F01.jpg'/>
+        <duration time='00.04.24'/>
+                <pr_name>ipod-shuffle-2nd-gen</pr_name>
+        <sef_title>how-to-find-and-purchase-an-audio-book-from-the-itunes-store-and-audible.com%2C-tranfer-to-and-play-them-on-your-shuffle</sef_title>
+      </result>
+      <presenter text='Amy' id='1'>
+        <video url='Ch_20/F01.flv' id=''/>
+        <audio>
+          <option text='Neutral' url='Ch_20/F01_L01_A01.mp3' id='1'/>
+        </audio>
+      </presenter>
+    </chapter>
+        <chapter id='22' level='intermediate,smartstart'>
+      <result>
+        <title>How to organise your audio with iTunes - Create, modify and delete playlists and Smart playlists</title>
+        <description>Using iTunes, you can organize songs and other items into playlists, in any way you want.</description>
+        <image url='Ch_22/F01.jpg'/>
+        <duration time='00.06.07'/>
+                <pr_name>ipod-shuffle-2nd-gen</pr_name>
+        <sef_title>how-to-organise-your-audio-with-itunes---create%2C-modify-and-delete-playlists-and-smart-playlists</sef_title>
+      </result>
+      <presenter text='Amy' id='1'>
+        <video url='Ch_22/F01.flv' id=''/>
+        <audio>
+          <option text='Neutral' url='Ch_22/F01_L01_A01.mp3' id='1'/>
+        </audio>
+      </presenter>
+    </chapter>
+      </chapterlist>
+   <text>
+    <option url='?Sid=1' id='1'/>
+  </text>
+</mediaelements>

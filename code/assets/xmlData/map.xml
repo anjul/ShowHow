@@ -1,0 +1,490 @@
+<map>
+  <node TEXT='iPod Shuffle' FOLDED='false'>
+    <font NAME="SansSerif" SIZE="18"/>
+    <node COLOR="#0033ff" TEXT='Advanced Features' FOLDED='true'>
+      <node  ASFUN="26" TEXT='Volume settings of Shuffle using iTunes' FOLDED='true'>
+        <icon BUILTIN='button_play' />
+        <node TEXT='Set iTunes to play music at same sound level' FOLDED='true' />
+        <node TEXT='iPod shuffle to use the iTunes volume settings' FOLDED='true' />
+        <node TEXT='Setting volume limit' FOLDED='true'>
+          <node TEXT='Limit maximum volume' FOLDED='true' />
+          <node TEXT='Password protected volume limit' FOLDED='true' />
+          <node TEXT='Deselect maximum volume limit' FOLDED='true' />
+        </node>
+      </node>
+      <node  ASFUN="27" TEXT='Disabling &amp; Enabling the iPod Shuffle buttons' FOLDED='true'>
+        <icon BUILTIN='button_play' />
+        <node TEXT='Disable the buttons' FOLDED='true' />
+        <node TEXT='Enable the buttons' FOLDED='true' />
+      </node>
+      <node ASFUN="28" TEXT='Audio File formats' FOLDED='true'>
+        <icon BUILTIN='button_play' />
+        <node TEXT='File formats supported by iPod Shuffle' FOLDED='true' />
+        <node TEXT='File formats not supported by iPod Shuffle' FOLDED='true' />
+        <node TEXT='Converting music to 128 kbps AAC file while loading into Shuffle' FOLDED='true' />
+        <node TEXT='Things to remember' FOLDED='true'>
+          <node TEXT='AAC or MP3 format has near CD-quality sound' FOLDED='true' />
+          <node TEXT='The default AAC format for iTunes' FOLDED='true' />
+          <node TEXT='Convert non-protected WMA files to AAC or MP3 format in iTunes' FOLDED='true' />
+        </node>
+      </node>
+      <node ASFUN="29" TEXT='Tips &amp; Troubleshooting ' FOLDED='true'>
+        <icon BUILTIN='button_play' />
+        <node  TEXT='The five Rs for iPod Shuffle' FOLDED='true'>
+          <node TEXT='Reset' FOLDED='true' />
+          <node TEXT='Retry' FOLDED='true' />
+          <node TEXT='Restart' FOLDED='true' />
+          <node TEXT='Reinstall' FOLDED='true' />
+          <node TEXT='Restore' FOLDED='true' />
+        </node>
+        <node ASFUN="30" TEXT='Suggestions on specific problems' FOLDED='true'>
+          <icon BUILTIN='button_play' />
+          <node TEXT='When your iPod Shuffle won&apos;t turn on or respond, the suggestions are……' FOLDED='true' />
+          <node TEXT='If iPod Shuffle isn&apos;t playing music, the suggestions are…..' FOLDED='true' />
+          <node TEXT='If you connect iPod Shuffle to your computer and nothing happens, the suggestions are….' FOLDED='true' />
+          <node TEXT='If audio files load slowly, the suggestions are……..' FOLDED='true' />
+          <node TEXT='If you can&apos;t load a song or other item onto iPod Shuffle, the suggestions are…..' FOLDED='true' />
+          <node TEXT='If the chapters in an audio-book play out of order, the suggestions are…..' FOLDED='true' />
+        </node>
+      </node>
+    </node>
+    <node COLOR="#0033ff" TEXT='Smart Start' FOLDED='true'>
+      <node ASFUN="1" TEXT='iPod Shuffle - an introduction' FOLDED='true'>
+        <icon BUILTIN='button_play' />
+      </node>
+      <node ASFUN="2" TEXT='Pre-requisites' FOLDED='true'>
+        <icon BUILTIN='button_play' />
+        <node TEXT='Your computer specification' FOLDED='true'>
+          <node TEXT='Hardware and Operating System requirements' FOLDED='true'>
+            <node TEXT='Mac' FOLDED='true'>
+              <node TEXT='Intel, PowerPC G5, G4, or G3 processor ' FOLDED='true' />
+              <node TEXT='Minimum 512 MB of RAM' FOLDED='true' />
+              <node TEXT='At least 200MB of available disk space ' FOLDED='true' />
+              <node TEXT='A USB 2.0 port. ' FOLDED='true' />
+              <node TEXT='Mac OS X version 10.4.8 or later' FOLDED='true' />
+            </node>
+            <node TEXT='Windows PC' FOLDED='true'>
+              <node TEXT='1GHz Intel or AMD processor ' FOLDED='true' />
+              <node TEXT='Minimum 512 MB of RAM' FOLDED='true' />
+              <node TEXT='At least 200MB of available disk space ' FOLDED='true' />
+              <node TEXT='A USB 2.0 port. ' FOLDED='true' />
+              <node TEXT='Windows XP Home or Professional with Service Pack 2 or later' FOLDED='true' />
+            </node>
+          </node>
+          <node TEXT='Software requirements' FOLDED='true'>
+            <node TEXT='iTunes version 7.4 or later' FOLDED='true' />
+            <node TEXT='Apple QuickTime player version 7.5.5 ' FOLDED='true' />
+          </node>
+        </node>
+        <node TEXT='Internet Connection' FOLDED='true' />
+      </node>
+      <node ASFUN="3" TEXT='Know your iPod Shuffle' FOLDED='true'>
+        <icon BUILTIN='button_play' />
+        <node TEXT='Unpack' FOLDED='true' />
+        <node TEXT='iPod Shuffle ' FOLDED='true'>
+          <node TEXT='Shuffle Clip' FOLDED='true' />
+          <node TEXT='Status Lights' FOLDED='true' />
+          <node TEXT='Switches' FOLDED='true'>
+            <node TEXT='Power switch' FOLDED='true'>
+              <node TEXT='Turn On' FOLDED='true' />
+              <node TEXT='Turn Off' FOLDED='true' />
+            </node>
+            <node TEXT='Shuffle switch' FOLDED='true'>
+              <node TEXT='Shuffle' FOLDED='true' />
+              <node TEXT='Repeat' FOLDED='true' />
+            </node>
+          </node>
+          <node TEXT='Circular control pad' FOLDED='true' />
+        </node>
+        <node TEXT='Earphone' FOLDED='true' />
+        <node TEXT='Dock with USB connector' FOLDED='true' />
+        <node TEXT='Quick reference manual' FOLDED='true' />
+      </node>
+      <node ASFUN="6" TEXT='iTunes and Apple QuickTime' FOLDED='true'>
+        <icon BUILTIN='button_play' />
+        <node TEXT='Introduction' FOLDED='true' />
+        <node TEXT='Installation' FOLDED='true' />
+      </node>
+      <node ASFUN="8" TEXT='Connect the Shuffle to computer' FOLDED='true'>
+        <icon BUILTIN='button_play' />
+        <node TEXT='Connecting iPod Shuffle to your computer' FOLDED='true' />
+        <node TEXT='Disconnecting iPod Shuffle from your computer' FOLDED='true'>
+          <node TEXT='Ejecting from iTunes' FOLDED='true' />
+          <node TEXT='Trashing iPod Shuffle icon on your computer' FOLDED='true'>
+            <node TEXT='Mac user' FOLDED='true' />
+            <node TEXT='PC user' FOLDED='true' />
+          </node>
+        </node>
+      </node>
+      <node TEXT='Charge the iPod Shuffle' FOLDED='true'>
+        <node ASFUN="9" TEXT='How to charge the Battery' FOLDED='true'>
+          <icon BUILTIN='button_play' />
+          <node TEXT='Charging through your computer' FOLDED='true' />
+          <node TEXT='Charging the Battery through iPod USB Power Adapter' FOLDED='true' />
+        </node>
+        <node ASFUN="10" TEXT='The Battery Status' FOLDED='true'>
+          <icon BUILTIN='button_play' />
+          <node TEXT='Status Light' FOLDED='true' />
+          <node TEXT='Check the battery status while Shuffle is playing' FOLDED='true' />
+          <node TEXT='Things to remember' FOLDED='true'>
+            <node TEXT='80% charge time' FOLDED='true' />
+            <node TEXT='Full charge time' FOLDED='true' />
+            <node TEXT='Music playing time when fully charged' FOLDED='true' />
+          </node>
+        </node>
+      </node>
+      <node TEXT='The first interaction with iTunes' FOLDED='true'>
+        <node ASFUN="11" TEXT='Sync your iPod Shuffle with iTunes' FOLDED='true'>
+          <icon BUILTIN='button_play' />
+          <node TEXT='Sync your iPod Shuffle with your computer for the first time' FOLDED='true'>
+            <node TEXT='Connect your Shuffle' FOLDED='true' />
+            <node TEXT='Register' FOLDED='true' />
+            <node TEXT='Setup Assistant Screen' FOLDED='true' />
+            <node TEXT='Syncing' FOLDED='true' />
+          </node>
+        </node>
+        <node ASFUN="12" TEXT='Importing audio into iTunes Library' FOLDED='true'>
+          <icon BUILTIN='button_play' />
+          <node TEXT='Music from Audio CDs into iTunes' FOLDED='true'>
+            <node TEXT='Importing' FOLDED='true' />
+            <node TEXT='Include music information' FOLDED='true' />
+          </node>
+          <node TEXT='Audio files from your computer into iTunes' FOLDED='true' />
+        </node>
+        <node ASFUN="13" TEXT='Loading music on iPod Shuffle manually' FOLDED='true'>
+          <icon BUILTIN='button_play' />
+        </node>
+      </node>
+      <node ASFUN="14" TEXT='Playing music' FOLDED='true'>
+        <icon BUILTIN='button_play' />
+        <node TEXT='Circular Control Pad' FOLDED='true' />
+        <node TEXT='Playing modes' FOLDED='true' />
+      </node>
+      <node ASFUN="15" TEXT=' Removing music or other item from iPod Shuffle' FOLDED='true'>
+        <icon BUILTIN='button_play' />
+      </node>
+      <node  TEXT='iTunes and iTunes Store' FOLDED='true'>
+        <node ASFUN="16" TEXT='Access your online account' FOLDED='true'>
+          <icon BUILTIN='button_play' />
+          <node TEXT='Purpose' FOLDED='true' />
+          <node TEXT='iTunes Store account or Apple ID' FOLDED='true'>
+            <node TEXT='Sign Up' FOLDED='true' />
+            <node TEXT='Sign Out' FOLDED='true' />
+            <node TEXT='Sign In' FOLDED='true' />
+          </node>
+          <node TEXT='AOL account' FOLDED='true' />
+        </node>
+        <node ASFUN="17" TEXT='Searching music' FOLDED='true'>
+          <icon BUILTIN='button_play' />
+          <node TEXT='Searching the iTunes Store' FOLDED='true' />
+          <node TEXT='Browsing the iTunes Store using Quick Links' FOLDED='true' />
+          <node TEXT='Power Search' FOLDED='true' />
+        </node>
+        <node ASFUN="18" TEXT='Song or album - buying online' FOLDED='true'>
+          <icon BUILTIN='button_play' />
+          <node TEXT='Previewing' FOLDED='true' />
+          <node TEXT='Purchasing online to download' FOLDED='true' />
+        </node>
+      </node>
+      <node ASFUN="22" TEXT='Organize your audio with iTunes' FOLDED='true'>
+        <icon BUILTIN='button_play' />
+        <node TEXT='Playlist' FOLDED='true'>
+          <node TEXT='Create your Playlist' FOLDED='true'>
+            <node TEXT='New Playlist' FOLDED='true' />
+            <node TEXT='New Playlist from selection' FOLDED='true' />
+          </node>
+          <node TEXT='Modify your Playlist' FOLDED='true'>
+            <node TEXT='Adding music to playlist' FOLDED='true' />
+            <node TEXT='Removing music from playlist' FOLDED='true' />
+          </node>
+          <node TEXT='Delete your playlist' FOLDED='true' />
+        </node>
+        <node TEXT='Smart Playlist' FOLDED='true'>
+          <node TEXT='Create' FOLDED='true' />
+          <node TEXT='Modify' FOLDED='true' />
+        </node>
+      </node>
+      <node ASFUN="23" TEXT='Autofill music on iPod Shuffle' FOLDED='true'>
+        <icon BUILTIN='button_play' />
+        <node TEXT='Autofill generally' FOLDED='true'>
+          <node TEXT='Choose items randomly' FOLDED='true' />
+          <node TEXT='Choose higher rated items more often' FOLDED='true' />
+          <node TEXT='Replace all items when autofilling' FOLDED='true' />
+        </node>
+        <node TEXT='Autofill only checked items' FOLDED='true' />
+      </node>
+      <node ASFUN="24" TEXT='Arrange the order of music and other item on iPod Shuffle' FOLDED='true'>
+        <icon BUILTIN='button_play' />
+      </node>
+      <node ASFUN="26" TEXT='Volume settings of Shuffle using iTunes' FOLDED='true'>
+        <icon BUILTIN='button_play' />
+        <node TEXT='Set iTunes to play music at same sound level' FOLDED='true' />
+        <node TEXT='iPod shuffle to use the iTunes volume settings' FOLDED='true' />
+        <node TEXT='Setting volume limit' FOLDED='true'>
+          <node TEXT='Limit maximum volume' FOLDED='true' />
+          <node TEXT='Password protected volume limit' FOLDED='true' />
+          <node TEXT='Deselect maximum volume limit' FOLDED='true' />
+        </node>
+      </node>
+      <node ASFUN="27" TEXT='Disabling &amp; Enabling the iPod Shuffle buttons' FOLDED='true'>
+        <icon BUILTIN='button_play' />
+        <node TEXT='Disable the buttons' FOLDED='true' />
+        <node TEXT='Enable the buttons' FOLDED='true' />
+      </node>
+      <node ASFUN="29" TEXT='The five Rs for iPod Shuffle' FOLDED='true'>
+        <icon BUILTIN='button_play' />
+        <node TEXT='Reset' FOLDED='true' />
+        <node TEXT='Retry' FOLDED='true' />
+        <node TEXT='Restart' FOLDED='true' />
+        <node TEXT='Reinstall' FOLDED='true' />
+        <node TEXT='Restore' FOLDED='true' />
+      </node>
+    </node>
+    <node COLOR="#0033ff" TEXT='Basic Features' FOLDED='true'>
+      <node ASFUN="1" TEXT='iPod Shuffle - an introduction' FOLDED='true'>
+        <icon BUILTIN='button_play' />
+      </node>
+      <node TEXT='Your iPod Shuffle' FOLDED='true'>
+        <node ASFUN="2" TEXT='Pre-requisites' FOLDED='true'>
+          <icon BUILTIN='button_play' />
+          <node TEXT='Your computer specification' FOLDED='true'>
+            <node TEXT='Hardware and Operating System requirements' FOLDED='true'>
+              <node TEXT='Mac' FOLDED='true'>
+                <node TEXT='Intel, PowerPC G5, G4, or G3 processor ' FOLDED='true' />
+                <node TEXT='Minimum 512 MB of RAM' FOLDED='true' />
+                <node TEXT='At least 200MB of available disk space ' FOLDED='true' />
+                <node TEXT='A USB 2.0 port. ' FOLDED='true' />
+                <node TEXT='Mac OS X version 10.4.8 or later' FOLDED='true' />
+              </node>
+              <node TEXT='Windows PC' FOLDED='true'>
+                <node TEXT='1GHz Intel or AMD processor ' FOLDED='true' />
+                <node TEXT='Minimum 512 MB of RAM' FOLDED='true' />
+                <node TEXT='At least 200MB of available disk space ' FOLDED='true' />
+                <node TEXT='A USB 2.0 port. ' FOLDED='true' />
+                <node TEXT='Windows XP Home or Professional with Service Pack 2 or later' FOLDED='true' />
+              </node>
+            </node>
+            <node TEXT='Software requirements' FOLDED='true'>
+              <node TEXT='iTunes version 7.4 or later' FOLDED='true' />
+              <node TEXT='Apple QuickTime player version 7.5.5 ' FOLDED='true' />
+            </node>
+          </node>
+          <node TEXT='Internet Connection' FOLDED='true' />
+        </node>
+        <node ASFUN="3" TEXT='Know your iPod Shuffle' FOLDED='true'>
+          <icon BUILTIN='button_play' />
+          <node TEXT='Unpack' FOLDED='true' />
+          <node TEXT='iPod Shuffle ' FOLDED='true'>
+            <node TEXT='Shuffle Clip' FOLDED='true' />
+            <node TEXT='Status Lights' FOLDED='true' />
+            <node TEXT='Switches' FOLDED='true'>
+              <node TEXT='Power switch' FOLDED='true'>
+                <node TEXT='Turn On' FOLDED='true' />
+                <node TEXT='Turn Off' FOLDED='true' />
+              </node>
+              <node TEXT='Shuffle switch' FOLDED='true'>
+                <node TEXT='Shuffle' FOLDED='true' />
+                <node TEXT='Repeat' FOLDED='true' />
+              </node>
+            </node>
+            <node TEXT='Circular control pad' FOLDED='true' />
+          </node>
+          <node TEXT='Earphone' FOLDED='true' />
+          <node TEXT='Dock with USB connector' FOLDED='true' />
+          <node TEXT='Quick reference manual' FOLDED='true' />
+        </node>
+        <node ASFUN="4" TEXT='Technical Specification of iPod Shuffle' FOLDED='true'>
+          <icon BUILTIN='button_play' />
+          <node TEXT='iPod Shuffle physical attributes' FOLDED='true'>
+            <node TEXT='Weight' FOLDED='true' />
+            <node TEXT='Height' FOLDED='true' />
+            <node TEXT='Width' FOLDED='true' />
+            <node TEXT='Depth' FOLDED='true' />
+          </node>
+          <node TEXT='Environmental compatibility' FOLDED='true'>
+            <node TEXT='Temparatue' FOLDED='true' />
+            <node TEXT='Relative humidity' FOLDED='true' />
+            <node TEXT='Altitude' FOLDED='true' />
+          </node>
+        </node>
+        <node ASFUN="5" TEXT='What can you do with your iPod Shuffle?' FOLDED='true'>
+          <icon BUILTIN='button_play' />
+          <node TEXT='Listening to music' FOLDED='true'>
+            <node TEXT='Songs or music' FOLDED='true' />
+            <node TEXT='Podcasts' FOLDED='true' />
+            <node TEXT='Audiobooks' FOLDED='true' />
+          </node>
+          <node TEXT='External storage device' FOLDED='true' />
+        </node>
+      </node>
+      <node ASFUN="6" TEXT='iTunes and Apple QuickTime' FOLDED='true'>
+        <icon BUILTIN='button_play' />
+        <node TEXT='Introduction' FOLDED='true' />
+        <node TEXT='Installation' FOLDED='true' />
+      </node>
+      <node ASFUN="7" TEXT='Interface of iTunes' FOLDED='true'>
+        <icon BUILTIN='button_play' />
+      </node>
+      <node ASFUN="8" TEXT='Connect the Shuffle to computer' FOLDED='true'>
+        <icon BUILTIN='button_play' />
+        <node TEXT='Connecting iPod Shuffle to your computer' FOLDED='true' />
+        <node TEXT='Disconnecting iPod Shuffle from your computer' FOLDED='true'>
+          <node TEXT='Ejecting from iTunes' FOLDED='true' />
+          <node TEXT='Trashing iPod Shuffle icon on your computer' FOLDED='true'>
+            <node TEXT='Mac user' FOLDED='true' />
+            <node TEXT='PC user' FOLDED='true' />
+          </node>
+        </node>
+      </node>
+      <node ASFUN="9" TEXT='Charge the iPod Shuffle' FOLDED='true'>
+        <node TEXT='How to charge the Battery' FOLDED='true'>
+          <icon BUILTIN='button_play' />
+          <node TEXT='Charging through your computer' FOLDED='true' />
+          <node TEXT='Charging the Battery through iPod USB Power Adapter' FOLDED='true' />
+        </node>
+        <node ASFUN="10" TEXT='The Battery Status' FOLDED='true'>
+          <icon BUILTIN='button_play' />
+          <node TEXT='Status Light' FOLDED='true' />
+          <node TEXT='Check the battery status while Shuffle is playing' FOLDED='true' />
+          <node TEXT='Things to remember' FOLDED='true'>
+            <node TEXT='80% charge time' FOLDED='true' />
+            <node TEXT='Full charge time' FOLDED='true' />
+            <node TEXT='Music playing time when fully charged' FOLDED='true' />
+          </node>
+        </node>
+      </node>
+      <node  TEXT='The first interaction with iTunes' FOLDED='true'>
+        <node ASFUN="11" TEXT='Sync your iPod Shuffle with iTunes' FOLDED='true'>
+          <icon BUILTIN='button_play' />
+          <node TEXT='Sync your iPod Shuffle with your computer for the first time' FOLDED='true'>
+            <node TEXT='Connect your Shuffle' FOLDED='true' />
+            <node TEXT='Register' FOLDED='true' />
+            <node TEXT='Setup Assistant Screen' FOLDED='true' />
+            <node TEXT='Syncing' FOLDED='true' />
+          </node>
+        </node>
+        <node ASFUN="12" TEXT='Importing audio into iTunes Library' FOLDED='true'>
+          <icon BUILTIN='button_play' />
+          <node TEXT='Music from Audio CDs into iTunes' FOLDED='true'>
+            <node TEXT='Importing' FOLDED='true' />
+            <node TEXT='Include music information' FOLDED='true' />
+          </node>
+          <node TEXT='Audio files from your computer into iTunes' FOLDED='true' />
+        </node>
+        <node ASFUN="13" TEXT='Loading music on iPod Shuffle manually' FOLDED='true'>
+          <icon BUILTIN='button_play' />
+        </node>
+      </node>
+      <node ASFUN="14" TEXT='Playing music' FOLDED='true'>
+        <icon BUILTIN='button_play' />
+        <node TEXT='Circular Control Pad' FOLDED='true' />
+        <node TEXT='Playing modes' FOLDED='true' />
+      </node>
+      <node ASFUN="15" TEXT='Removing music or other item from iPod Shuffle' FOLDED='true'>
+        <icon BUILTIN='button_play' />
+      </node>
+    </node>
+    <node COLOR="#0033ff" TEXT='Intermediate Features' FOLDED='true'>
+      <node TEXT='iTunes and iTunes Store' FOLDED='true'>
+        <node ASFUN="16" TEXT='Access your online account' FOLDED='true'>
+          <icon BUILTIN='button_play' />
+          <node TEXT='Purpose' FOLDED='true' />
+          <node TEXT='iTunes Store account or Apple ID' FOLDED='true'>
+            <node TEXT='Sign Up' FOLDED='true' />
+            <node TEXT='Sign Out' FOLDED='true' />
+            <node TEXT='Sign In' FOLDED='true' />
+          </node>
+          <node TEXT='AOL account' FOLDED='true' />
+        </node>
+        <node ASFUN="17" TEXT='Searching music' FOLDED='true'>
+          <icon BUILTIN='button_play' />
+          <node TEXT='Searching the iTunes Store' FOLDED='true' />
+          <node TEXT='Browsing the iTunes Store using Quick Links' FOLDED='true' />
+          <node TEXT='Power Search' FOLDED='true' />
+        </node>
+        <node ASFUN="18" TEXT='Song or album - buying online' FOLDED='true'>
+          <icon BUILTIN='button_play' />
+          <node TEXT='Previewing' FOLDED='true' />
+          <node TEXT='Purchasing online to download' FOLDED='true' />
+        </node>
+        <node ASFUN="19" TEXT='Podcasts' FOLDED='true'>
+          <icon BUILTIN='button_play' />
+          <node TEXT='What is Podcast?' FOLDED='true' />
+          <node TEXT='Download free podcasts' FOLDED='true'>
+            <node TEXT='Browse' FOLDED='true' />
+            <node TEXT='Download' FOLDED='true' />
+          </node>
+          <node TEXT='Playing your podcast in iTunes' FOLDED='true' />
+          <node TEXT='Subscribe or unsubscribe a downloaded podcast' FOLDED='true'>
+            <node TEXT='Subscribe' FOLDED='true' />
+            <node TEXT='Unsubscribe' FOLDED='true' />
+          </node>
+          <node TEXT='Transferring the podcasts to your Shuffle' FOLDED='true' />
+        </node>
+        <node ASFUN="20" TEXT='Audiobooks' FOLDED='true'>
+          <icon BUILTIN='button_play' />
+          <node TEXT='Audiobook basics' FOLDED='true' />
+          <node TEXT='iTunes Store' FOLDED='true'>
+            <node TEXT='Search' FOLDED='true' />
+            <node TEXT='Preview in iTunes' FOLDED='true' />
+            <node TEXT='Purchase and download' FOLDED='true' />
+          </node>
+          <node TEXT='audible.com' FOLDED='true'>
+            <node TEXT='Create audible account' FOLDED='true' />
+            <node TEXT='Purchase' FOLDED='true' />
+            <node TEXT='Audible Manager for Windows users' FOLDED='true' />
+          </node>
+          <node TEXT='Transferring audiobook on your Shuffle' FOLDED='true' />
+          <node TEXT='Playing audiobook' FOLDED='true' />
+        </node>
+        <node ASFUN="21" TEXT='Preventing iTunes from opening automatically' FOLDED='true'>
+          <icon BUILTIN='button_play' />
+        </node>
+      </node>
+      <node ASFUN="22" TEXT='Organize your audio with iTunes' FOLDED='true'>
+        <icon BUILTIN='button_play' />
+        <node TEXT='Playlist' FOLDED='true'>
+          <node TEXT='Create your Playlist' FOLDED='true'>
+            <node TEXT='New Playlist' FOLDED='true' />
+            <node TEXT='New Playlist from selection' FOLDED='true' />
+          </node>
+          <node TEXT='Modify your Playlist' FOLDED='true'>
+            <node TEXT='Adding music to playlist' FOLDED='true' />
+            <node TEXT='Removing music from playlist' FOLDED='true' />
+          </node>
+          <node TEXT='Delete your playlist' FOLDED='true' />
+        </node>
+        <node TEXT='Smart Playlist' FOLDED='true'>
+          <node TEXT='Create' FOLDED='true' />
+          <node TEXT='Modify' FOLDED='true' />
+        </node>
+      </node>
+      <node ASFUN="23" TEXT='Autofill music on iPod Shuffle' FOLDED='true'>
+        <icon BUILTIN='button_play' />
+        <node TEXT='Autofill generally' FOLDED='true'>
+          <node TEXT='Choose items randomly' FOLDED='true' />
+          <node TEXT='Choose higher rated items more often' FOLDED='true' />
+          <node TEXT='Replace all items when autofilling' FOLDED='true' />
+        </node>
+        <node TEXT='Autofill only checked items' FOLDED='true' />
+      </node>
+      <node ASFUN="24" TEXT='Arrange the order of music and other item on iPod Shuffle' FOLDED='true'>
+        <icon BUILTIN='button_play' />
+      </node>
+      <node ASFUN="25" TEXT='Using iPod Shuffle as an External Disk' FOLDED='true'>
+        <icon BUILTIN='button_play' />
+        <node TEXT='Copy data from your computer to the Shuffle' FOLDED='true'>
+          <node TEXT='Using Windows Explorer' FOLDED='true' />
+          <node TEXT='Using Mac Finder' FOLDED='true' />
+        </node>
+        <node TEXT='Delete data files from your iPod Shuffle ' FOLDED='true' />
+        <node TEXT='Copy data from your Shuffle to the other computer' FOLDED='true' />
+        <node TEXT='Things to remember' FOLDED='true'>
+          <node TEXT='iPod Shuffle disk icon' FOLDED='true' />
+          <node TEXT='FAT-32  file system for iPod Shuffle' FOLDED='true' />
+          <node TEXT='Audio files copied as data on iPod Shuffle ' FOLDED='true' />
+        </node>
+      </node>
+    </node>
+  </node>
+</map>
