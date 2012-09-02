@@ -1,12 +1,15 @@
 package
 {
-	import flash.display.Sprite;
+	import code.model.AppModel;	
+	import flash.display.MovieClip;
 	
-	public class ShowHow extends Sprite
+	public class ShowHow extends MovieClip
 	{
+		private var objAppModel:AppModel = AppModel.getInstance();
+		
 		public function ShowHow()
 		{
-			trace("Wow It Works")
+			objAppModel.stageRef = this;
 		}
 	}
 }
