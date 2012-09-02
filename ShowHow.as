@@ -11,7 +11,6 @@ package
 		private var objAppModel:AppModel = AppModel.getInstance();
 		private var videoPlayer:VideoPlayer;
 		private var homeView:HomeView;
-		private var finder:Finder_MC;
 		
 		public function ShowHow()
 		{
@@ -22,9 +21,6 @@ package
 			
 			homeView = new HomeView();
 			this.addChild(homeView);
-			
-			/*finder = new Finder_MC();
-			trace(">>"+finder)*/
 		}
 	}
 }

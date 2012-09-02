@@ -19,21 +19,25 @@
 		
 		private var objAppModel:AppModel= AppModel.getInstance();
 		private var omniHolder:MovieClip = new MovieClip();
-		private var omniX:int=545;
-		private var omniY:int=10;
-		private var finderX:int=omniX-25;
-		private var finderY:int=omniY+58;
-		private var smartStartX:int=finderX;
-		private var smartStartY:int=finderY;
-		private var welcomeX:int=finderX;
-		private var welcomeY:int=smartStartY+20;
-		private var homeBtnX:int=omniX-58
-		private var homeBtnY:int=omniY+7
+		private var omniX:int = 545;
+		private var omniY:int = 10;
+		
+		private var finderX:int = omniX-25;
+		private var finderY:int = omniY+58;
+		private var smartStartX:int = finderX;
+		private var smartStartY:int = finderY;
+		private var welcomeX:int = finderX;
+		private var welcomeY:int = smartStartY+20;
+		private var homeBtnX:int = omniX-58;
+		private var homeBtnY:int = omniY+7;
+		private var showHowLogoX:int = -10;
+		private var showHowLogoY:int = omniY-5;
 		
 		private var finderMc:Finder_MC;
 		private var smartStartMC:SmartStart_MC;
 		private var welcomeMC:Welcome_MC;
 		private var homeBtn:HomeBtn_MC;
+		private var showHowLogo:MovieClip;
 		
 		
 		public function HomeView()
@@ -45,6 +49,7 @@
 			attachSmartStartMC();
 			attachFinderMC();		
 			attachHomeBtn();
+			attachShowHowLogo();
 		}
 		
 		 private function loadOmniSwf():void
@@ -155,6 +160,52 @@
 			 objAppModel.stageRef.addChild(homeBtn);
 			 homeBtn.x = homeBtnX;
 			 homeBtn.y = homeBtnY;
+		 }
+		 
+		 private function attachShowHowLogo():void
+		 {
+			 showHowLogo = new MovieClip();
+			 urlRequest.url = AppVO.BASEURL+AppVO.SHOWHOW_LOGO;
+			 
+			 loader.load(urlRequest);
+			 loader.contentLoaderInfo.addEventListener(Event.COMPLETE,showHowLogoEventHandler);
+			 loader.contentLoaderInfo.addEventListener(ProgressEvent.PROGRESS,showHowLogoEventHandler);
+			 loader.contentLoaderInfo.addEventListener(IOErrorEvent.IO_ERROR,showHowLogoEventHandler);
+			 
+		 }
+		 
+		 private function showHowLogoEventHandler(event:*):void
+		 {
+			 switch(event.type)
+			 {
+				 case 'open':
+					 trace("open");					
+					 break;
+				 
+				 case 'progress':
+					 trace("Progress");
+					 break;
+				 
+				 case 'init':
+					 //trace("init");
+					 break;
+				 
+				 case 'complete':
+					 trace("Complete");
+					 showHowLogo.addChild(loader);
+					 objAppModel.stageRef.addChild(showHowLogo);
+					 showHowLogo.x = showHowLogoX;
+					 showHowLogo.y = showHowLogoY;
+					 break;
+				 
+				 case 'ioError':
+					 trace("IO Error or Bad File name error");
+					 break;
+				 
+				 default:
+					 trace("Desired Event Not Found");
+					 break;
+			 }
 		 }
 	} 
 }

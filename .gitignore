@@ -8,4 +8,5 @@ lib/
 #.actionScriptProperties
 #.flexProperties
 .settings/
+.settings/ShowHow_publishProfile.xml
 #.project
