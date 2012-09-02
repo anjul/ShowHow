@@ -1,4 +1,4 @@
-package code.model
+﻿package code.model
 {
 	public class AppModel
 	{
@@ -21,4 +21,4 @@ package code.model
 			return objAppModel;
 		}
 	}
-}class SingletonEnforcer
+}class SingletonEnforcer{}
