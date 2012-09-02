@@ -16,7 +16,7 @@
 		{
 			if(objAppModel == null)
 			{
-				objAppModel = new objAppModel(new SingletonEnforcer());
+				objAppModel = new AppModel(new SingletonEnforcer());
 			}
 			return objAppModel;
 		}

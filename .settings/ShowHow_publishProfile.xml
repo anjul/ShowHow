@@ -22,10 +22,10 @@
     <qtDefaultName>1</qtDefaultName>
     <rnwkDefaultName>1</rnwkDefaultName>
     <swcDefaultName>1</swcDefaultName>
-    <flashFileName>E:\Officials\GitHub\ShowHow\bin-debug\ShowHow.swf</flashFileName>
+    <flashFileName>E:\Officials\GitHub\ShowHow-Anjul\bin-debug\ShowHow.swf</flashFileName>
     <projectorWinFileName>ShowHow.exe</projectorWinFileName>
     <projectorMacFileName>ShowHow.app</projectorMacFileName>
-    <htmlFileName>E:\Officials\GitHub\ShowHow\bin-debug\ShowHow.html</htmlFileName>
+    <htmlFileName>E:\Officials\GitHub\ShowHow-Anjul\bin-debug\ShowHow.html</htmlFileName>
     <gifFileName>ShowHow.gif</gifFileName>
     <jpegFileName>ShowHow.jpg</jpegFileName>
     <pngFileName>ShowHow.png</pngFileName>
@@ -42,8 +42,8 @@
     <AlternateFilename>ShowHow_alternate.html</AlternateFilename>
     <UsingOwnAlternateFile>0</UsingOwnAlternateFile>
     <OwnAlternateFilename></OwnAlternateFilename>
-    <Width>550</Width>
-    <Height>400</Height>
+    <Width>980</Width>
+    <Height>530</Height>
     <Align>0</Align>
     <Units>0</Units>
     <Loop>1</Loop>
@@ -56,7 +56,7 @@
     <WindowMode>0</WindowMode>
     <DisplayMenu>1</DisplayMenu>
     <DeviceFont>0</DeviceFont>
-    <TemplateFileName>C:\Users\A&amp;apos;\AppData\Local\Adobe\Flash CS5.5\en_US\Configuration\HTML\Default.html</TemplateFileName>
+    <TemplateFileName>C:\Users\A&amp;amp;apos;\AppData\Local\Adobe\Flash CS5.5\en_US\Configuration\HTML\Default.html</TemplateFileName>
     <showTagWarnMsg>1</showTagWarnMsg>
   </PublishHtmlProperties>
   <PublishFlashProperties enabled="true">
@@ -126,8 +126,8 @@
     </LibraryVersions>
   </PublishFlashProperties>
   <PublishJpegProperties enabled="true">
-    <Width>550</Width>
-    <Height>400</Height>
+    <Width>980</Width>
+    <Height>530</Height>
     <Progressive>0</Progressive>
     <DPI>4718592</DPI>
     <Size>0</Size>
@@ -152,8 +152,8 @@
     <exportSMIL>1</exportSMIL>
   </PublishRNWKProperties>
   <PublishGifProperties enabled="true">
-    <Width>550</Width>
-    <Height>400</Height>
+    <Width>980</Width>
+    <Height>530</Height>
     <Animated>0</Animated>
     <MatchMovieDim>1</MatchMovieDim>
     <Loop>1</Loop>
@@ -171,8 +171,8 @@
     <PaletteName></PaletteName>
   </PublishGifProperties>
   <PublishPNGProperties enabled="true">
-    <Width>550</Width>
-    <Height>400</Height>
+    <Width>980</Width>
+    <Height>530</Height>
     <OptimizeColors>1</OptimizeColors>
     <Interlace>0</Interlace>
     <Transparent>0</Transparent>
@@ -188,8 +188,8 @@
     <PaletteName></PaletteName>
   </PublishPNGProperties>
   <PublishQTProperties enabled="true">
-    <Width>550</Width>
-    <Height>400</Height>
+    <Width>980</Width>
+    <Height>530</Height>
     <MatchMovieDim>1</MatchMovieDim>
     <UseQTSoundCompression>0</UseQTSoundCompression>
     <AlphaOption></AlphaOption>
