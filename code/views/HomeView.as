@@ -1,6 +1,7 @@
 ﻿package code.views
 {
 	import code.model.AppModel;
+	import code.views.HomeViewConstants;
 	import code.vo.AppVO;
 	
 	import flash.display.Loader;
@@ -83,10 +84,10 @@
 				 
 				 case 'complete':
 					 trace("Complete");
-					 omniHolder.addChild(loader);
-					 objAppModel.stageRef.addChild(omniHolder);
-					 omniHolder.x=omniX;
-					 omniHolder.y=omniY;
+					 HomeViewConstants.omniHolder.addChild(loader);
+					 objAppModel.stageRef.addChild(HomeViewConstants.omniHolder);
+					 HomeViewConstants.omniHolder.x=omniX;
+					 HomeViewConstants.omniHolder.y=omniY;
 					 break;
 				 
 				 case 'ioError':
@@ -100,71 +101,69 @@
 		 }
 		 
 		 private function attachFinderMC():void
-		 {
-			 
-			 finderMc = new Finder_MC();
-			 objAppModel.stageRef.addChild(finderMc);
-			 finderMc.x = finderX;
-			 finderMc.y = finderY;
+		 {			 
+			// finderMc = new Finder_MC();
+			 objAppModel.stageRef.addChild(HomeViewConstants.finderMc);
+			 HomeViewConstants.finderMc.x = finderX;
+			 HomeViewConstants.finderMc.y = finderY;
 		 }
 		 
 		 private function attachSmartStartMC():void
 		 {
-			 smartStartMC = new SmartStart_MC();
-			 objAppModel.stageRef.addChild(smartStartMC);
-			 smartStartMC.x = smartStartX;
-			 smartStartMC.y = smartStartY;
-			 smartStartMC.stop();
-			 smartStartMC.btn_1.addEventListener(MouseEvent.ROLL_OVER,onClick);
-			 smartStartMC.btn_2.addEventListener(MouseEvent.ROLL_OVER,onClick);
-			 smartStartMC.btn_3.addEventListener(MouseEvent.ROLL_OVER,onClick);
-			 smartStartMC.btn_4.addEventListener(MouseEvent.ROLL_OVER,onClick);
-			 smartStartMC.btn_5.addEventListener(MouseEvent.ROLL_OVER,onClick);
+			 //smartStartMC = new SmartStart_MC();
+			 objAppModel.stageRef.addChild(HomeViewConstants.smartStartMC);
+			 HomeViewConstants.smartStartMC.x = smartStartX;
+			 HomeViewConstants.smartStartMC.y = smartStartY;
+			 HomeViewConstants.smartStartMC.stop();
 			 
-			 smartStartMC.btn_1.addEventListener(MouseEvent.ROLL_OUT,onClick);
-			 smartStartMC.btn_2.addEventListener(MouseEvent.ROLL_OUT,onClick);
-			 smartStartMC.btn_3.addEventListener(MouseEvent.ROLL_OUT,onClick);
-			 smartStartMC.btn_4.addEventListener(MouseEvent.ROLL_OUT,onClick);
-			 smartStartMC.btn_5.addEventListener(MouseEvent.ROLL_OUT,onClick);
+			 HomeViewConstants.smartStartMC.btn_1.addEventListener(MouseEvent.ROLL_OVER,onClick);
+			 HomeViewConstants.smartStartMC.btn_2.addEventListener(MouseEvent.ROLL_OVER,onClick);
+			 HomeViewConstants.smartStartMC.btn_3.addEventListener(MouseEvent.ROLL_OVER,onClick);
+			 HomeViewConstants.smartStartMC.btn_4.addEventListener(MouseEvent.ROLL_OVER,onClick);
+			 HomeViewConstants.smartStartMC.btn_5.addEventListener(MouseEvent.ROLL_OVER,onClick);
+			 
+			 HomeViewConstants.smartStartMC.btn_1.addEventListener(MouseEvent.ROLL_OUT,onClick);
+			 HomeViewConstants.smartStartMC.btn_2.addEventListener(MouseEvent.ROLL_OUT,onClick);
+			 HomeViewConstants.smartStartMC.btn_3.addEventListener(MouseEvent.ROLL_OUT,onClick);
+			 HomeViewConstants.smartStartMC.btn_4.addEventListener(MouseEvent.ROLL_OUT,onClick);
+			 HomeViewConstants.smartStartMC.btn_5.addEventListener(MouseEvent.ROLL_OUT,onClick);
 		 }
 		 
 		 private function onClick(event:MouseEvent):void
 		 {
-			 trace("Click="+event.target.name+">>"+event.type)
-			 
 			switch(event.type)
 			{
 				case "rollOver":
-					smartStartMC.play();
+					HomeViewConstants.smartStartMC.play();
 					break;
 				case "rollOut":
 					
-					smartStartMC.play();
+					HomeViewConstants.smartStartMC.play();
 					break;
 			}			
 		 }
 		 
 		 private function attachWelcomeMC():void
 		 {
-			 welcomeMC = new Welcome_MC();
-			 objAppModel.stageRef.addChild(welcomeMC);
-			 welcomeMC.x = welcomeX;
-			 welcomeMC.y = welcomeY;
+			 //welcomeMC = new Welcome_MC();
+			 objAppModel.stageRef.addChild(HomeViewConstants.welcomeMC);
+			 HomeViewConstants.welcomeMC.x = welcomeX;
+			 HomeViewConstants.welcomeMC.y = welcomeY;
 		 }
 		 
 		 private function attachHomeBtn():void
 		 {
-			 homeBtn = new HomeBtn_MC();
-			 homeBtn.scaleX= 1.3;
-			 homeBtn.scaleY= 1.3;			 
-			 objAppModel.stageRef.addChild(homeBtn);
-			 homeBtn.x = homeBtnX;
-			 homeBtn.y = homeBtnY;
+			 //homeBtn = new HomeBtn_MC();
+			 HomeViewConstants.homeBtn.scaleX= 1.3;
+			 HomeViewConstants.homeBtn.scaleY= 1.3;			 
+			 objAppModel.stageRef.addChild(HomeViewConstants.homeBtn);
+			 HomeViewConstants.homeBtn.x = homeBtnX;
+			 HomeViewConstants.homeBtn.y = homeBtnY;
 		 }
 		 
 		 private function attachShowHowLogo():void
 		 {
-			 showHowLogo = new MovieClip();
+			 //showHowLogo = new MovieClip();
 			 urlRequest.url = AppVO.BASEURL+AppVO.SHOWHOW_LOGO;
 			 
 			 loader.load(urlRequest);
@@ -179,11 +178,11 @@
 			 switch(event.type)
 			 {
 				 case 'open':
-					 trace("open");					
+					 //trace("open");					
 					 break;
 				 
 				 case 'progress':
-					 trace("Progress");
+					 //trace("Progress");
 					 break;
 				 
 				 case 'init':
@@ -192,10 +191,10 @@
 				 
 				 case 'complete':
 					 trace("Complete");
-					 showHowLogo.addChild(loader);
-					 objAppModel.stageRef.addChild(showHowLogo);
-					 showHowLogo.x = showHowLogoX;
-					 showHowLogo.y = showHowLogoY;
+					 HomeViewConstants.showHowLogo.addChild(loader);
+					 objAppModel.stageRef.addChild(HomeViewConstants.showHowLogo);
+					 HomeViewConstants.showHowLogo.x = showHowLogoX;
+					 HomeViewConstants.showHowLogo.y = showHowLogoY;
 					 break;
 				 
 				 case 'ioError':

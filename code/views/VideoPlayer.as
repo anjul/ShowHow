@@ -1,6 +1,7 @@
 package code.views
 {
 	import code.model.AppModel;
+	import code.views.HomeViewConstants;
 	
 	import flash.display.MovieClip;
 	import flash.display.StageAlign;
@@ -74,8 +75,8 @@ package code.views
 		
 		public function VideoPlayer()
 		{
-			//objAppModel.stageRef.scaleMode	= StageScaleMode.NO_SCALE;
-			//objAppModel.stageRef.align		= StageAlign.TOP_LEFT;
+			objAppModel.stageRef.stage.scaleMode	= StageScaleMode.NO_SCALE;
+			objAppModel.stageRef.stage.align		= StageAlign.TOP_LEFT;
 			
 			initVideoPlayer();
 		}
@@ -104,8 +105,8 @@ package code.views
 			// add global event listener when mouse is released
 			objAppModel.stageRef.stage.addEventListener(MouseEvent.MOUSE_UP, mouseReleased);
 			
-			// add fullscreen listener
-			objAppModel.stageRef.stage.addEventListener(FullScreenEvent.FULL_SCREEN, onFullscreen);
+			// add fullscreen listener [AS]Commented for the time being
+			//objAppModel.stageRef.stage.addEventListener(FullScreenEvent.FULL_SCREEN, onFullscreen);
 			
 			// add event listeners to all buttons
 			objAppModel.stageRef.mcVideoControls.btnPause.addEventListener(MouseEvent.CLICK, pauseClicked);
@@ -115,8 +116,9 @@ package code.views
 			objAppModel.stageRef.mcVideoControls.btnPrevious.addEventListener(MouseEvent.CLICK, playPrevious);
 			objAppModel.stageRef.mcVideoControls.btnMute.addEventListener(MouseEvent.CLICK, muteClicked);
 			objAppModel.stageRef.mcVideoControls.btnUnmute.addEventListener(MouseEvent.CLICK, unmuteClicked);
-			objAppModel.stageRef.mcVideoControls.btnFullscreenOn.addEventListener(MouseEvent.CLICK, fullscreenOnClicked);
-			objAppModel.stageRef.mcVideoControls.btnFullscreenOff.addEventListener(MouseEvent.CLICK, fullscreenOffClicked);
+			//[AS]:: Fullscreen Buttons are off as of now.
+			//objAppModel.stageRef.mcVideoControls.btnFullscreenOn.addEventListener(MouseEvent.CLICK, fullscreenOnClicked);
+			//objAppModel.stageRef.mcVideoControls.btnFullscreenOff.addEventListener(MouseEvent.CLICK, fullscreenOffClicked);
 			
 			objAppModel.stageRef.mcVideoControls.btnVolumeBar.addEventListener(MouseEvent.MOUSE_DOWN, volumeScrubberClicked);
 			objAppModel.stageRef.mcVideoControls.mcVolumeScrubber.btnVolumeScrubber.addEventListener(MouseEvent.MOUSE_DOWN, volumeScrubberClicked);
@@ -417,9 +419,20 @@ package code.views
 				objAppModel.stageRef.mcVideoControls.y = (Capabilities.screenResolutionY - 33);
 				
 				// size up video display
-				objAppModel.stageRef.vidDisplay.height 	= (Capabilities.screenResolutionY - 33);
+				objAppModel.stageRef.vidDisplay.height 	= Capabilities.screenResolutionY	//(Capabilities.screenResolutionY - 33);
 				objAppModel.stageRef.vidDisplay.width 	= objAppModel.stageRef.vidDisplay.height * 4 / 3;
-				objAppModel.stageRef.vidDisplay.x		= (Capabilities.screenResolutionX - objAppModel.stageRef.vidDisplay.width) / 2; 
+				//objAppModel.stageRef.vidDisplay.x		= (Capabilities.screenResolutionX - objAppModel.stageRef.vidDisplay.width) / 2;
+				
+				objAppModel.stageRef.vidDisplay.x		= (stage.fullScreenWidth - objAppModel.stageRef.vidDisplay.width) / 2;
+				objAppModel.stageRef.vidDisplay.y		= (stage.fullScreenHeight- objAppModel.stageRef.vidDisplay.height ) / 2;
+				
+				// [AS:3/09/12]Visiblitity off for HomeView Static assets
+				HomeViewConstants.finderMc.visible =false;
+				HomeViewConstants.homeBtn.visible =false;
+				HomeViewConstants.omniHolder.visible =false;
+				HomeViewConstants.showHowLogo.visible =false;
+				HomeViewConstants.smartStartMC.visible =false;
+				HomeViewConstants.welcomeMC.visible =false;
 			} else {
 				// switch fullscreen buttons
 				objAppModel.stageRef.mcVideoControls.btnFullscreenOn.visible = true;
@@ -434,6 +447,13 @@ package code.views
 				objAppModel.stageRef.vidDisplay.x = 0;
 				objAppModel.stageRef.vidDisplay.width = 460;
 				objAppModel.stageRef.vidDisplay.height = 275;
+				
+				HomeViewConstants.finderMc.visible =true;
+				HomeViewConstants.homeBtn.visible =true;
+				HomeViewConstants.omniHolder.visible =true;
+				HomeViewConstants.showHowLogo.visible =true;
+				HomeViewConstants.smartStartMC.visible =true;
+				HomeViewConstants.welcomeMC.visible =true;
 			}
 		}
 		
