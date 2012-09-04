@@ -16,6 +16,7 @@
 	{
 		private var omniUrl:String;
 		private var loader:Loader;
+		private var shLogoLoader:Loader;
 		private var urlRequest:URLRequest;
 		
 		private var objAppModel:AppModel= AppModel.getInstance();
@@ -71,11 +72,11 @@
 			 switch(event.type)
 			 {
 				 case 'open':
-					trace("open");					
+					//trace("open");					
 					 break;
 				 
 				 case 'progress':
-					 trace("Progress");
+					// trace("Progress");
 					 break;
 				 
 				 case 'init':
@@ -83,7 +84,7 @@
 					 break;
 				 
 				 case 'complete':
-					 trace("Complete");
+					 trace("Omni LoadedComplete>>"+HomeViewConstants.omniHolder);				
 					 HomeViewConstants.omniHolder.addChild(loader);
 					 objAppModel.stageRef.addChild(HomeViewConstants.omniHolder);
 					 HomeViewConstants.omniHolder.x=omniX;
@@ -101,8 +102,7 @@
 		 }
 		 
 		 private function attachFinderMC():void
-		 {			 
-			// finderMc = new Finder_MC();
+		 {				
 			 objAppModel.stageRef.addChild(HomeViewConstants.finderMc);
 			 HomeViewConstants.finderMc.x = finderX;
 			 HomeViewConstants.finderMc.y = finderY;
@@ -110,7 +110,6 @@
 		 
 		 private function attachSmartStartMC():void
 		 {
-			 //smartStartMC = new SmartStart_MC();
 			 objAppModel.stageRef.addChild(HomeViewConstants.smartStartMC);
 			 HomeViewConstants.smartStartMC.x = smartStartX;
 			 HomeViewConstants.smartStartMC.y = smartStartY;
@@ -144,16 +143,14 @@
 		 }
 		 
 		 private function attachWelcomeMC():void
-		 {
-			 //welcomeMC = new Welcome_MC();
+		 {			
 			 objAppModel.stageRef.addChild(HomeViewConstants.welcomeMC);
 			 HomeViewConstants.welcomeMC.x = welcomeX;
 			 HomeViewConstants.welcomeMC.y = welcomeY;
 		 }
 		 
 		 private function attachHomeBtn():void
-		 {
-			 //homeBtn = new HomeBtn_MC();
+		 {			
 			 HomeViewConstants.homeBtn.scaleX= 1.3;
 			 HomeViewConstants.homeBtn.scaleY= 1.3;			 
 			 objAppModel.stageRef.addChild(HomeViewConstants.homeBtn);
@@ -162,14 +159,14 @@
 		 }
 		 
 		 private function attachShowHowLogo():void
-		 {
-			 //showHowLogo = new MovieClip();
+		 {	
 			 urlRequest.url = AppVO.BASEURL+AppVO.SHOWHOW_LOGO;
+			 shLogoLoader = new Loader();
 			 
-			 loader.load(urlRequest);
-			 loader.contentLoaderInfo.addEventListener(Event.COMPLETE,showHowLogoEventHandler);
-			 loader.contentLoaderInfo.addEventListener(ProgressEvent.PROGRESS,showHowLogoEventHandler);
-			 loader.contentLoaderInfo.addEventListener(IOErrorEvent.IO_ERROR,showHowLogoEventHandler);
+			 shLogoLoader.load(urlRequest);
+			 shLogoLoader.contentLoaderInfo.addEventListener(Event.COMPLETE,showHowLogoEventHandler);
+			 shLogoLoader.contentLoaderInfo.addEventListener(ProgressEvent.PROGRESS,showHowLogoEventHandler);
+			 shLogoLoader.contentLoaderInfo.addEventListener(IOErrorEvent.IO_ERROR,showHowLogoEventHandler);
 			 
 		 }
 		 
@@ -191,7 +188,7 @@
 				 
 				 case 'complete':
 					 trace("Complete");
-					 HomeViewConstants.showHowLogo.addChild(loader);
+					 HomeViewConstants.showHowLogo.addChild(shLogoLoader);
 					 objAppModel.stageRef.addChild(HomeViewConstants.showHowLogo);
 					 HomeViewConstants.showHowLogo.x = showHowLogoX;
 					 HomeViewConstants.showHowLogo.y = showHowLogoY;

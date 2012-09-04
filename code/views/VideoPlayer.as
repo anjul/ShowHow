@@ -18,6 +18,7 @@ package code.views
 	import flash.net.URLRequest;
 	import flash.system.Capabilities;
 	import flash.utils.Timer;
+	import flash.geom.Point;
 	
 	/**
 	 * ...
@@ -106,7 +107,7 @@ package code.views
 			objAppModel.stageRef.stage.addEventListener(MouseEvent.MOUSE_UP, mouseReleased);
 			
 			// add fullscreen listener [AS]Commented for the time being
-			//objAppModel.stageRef.stage.addEventListener(FullScreenEvent.FULL_SCREEN, onFullscreen);
+			objAppModel.stageRef.stage.addEventListener(FullScreenEvent.FULL_SCREEN, onFullscreen);
 			
 			// add event listeners to all buttons
 			objAppModel.stageRef.mcVideoControls.btnPause.addEventListener(MouseEvent.CLICK, pauseClicked);
@@ -117,8 +118,8 @@ package code.views
 			objAppModel.stageRef.mcVideoControls.btnMute.addEventListener(MouseEvent.CLICK, muteClicked);
 			objAppModel.stageRef.mcVideoControls.btnUnmute.addEventListener(MouseEvent.CLICK, unmuteClicked);
 			//[AS]:: Fullscreen Buttons are off as of now.
-			//objAppModel.stageRef.mcVideoControls.btnFullscreenOn.addEventListener(MouseEvent.CLICK, fullscreenOnClicked);
-			//objAppModel.stageRef.mcVideoControls.btnFullscreenOff.addEventListener(MouseEvent.CLICK, fullscreenOffClicked);
+			objAppModel.stageRef.mcVideoControls.btnFullscreenOn.addEventListener(MouseEvent.CLICK, fullscreenOnClicked);
+			objAppModel.stageRef.mcVideoControls.btnFullscreenOff.addEventListener(MouseEvent.CLICK, fullscreenOffClicked);
 			
 			objAppModel.stageRef.mcVideoControls.btnVolumeBar.addEventListener(MouseEvent.MOUSE_DOWN, volumeScrubberClicked);
 			objAppModel.stageRef.mcVideoControls.mcVolumeScrubber.btnVolumeScrubber.addEventListener(MouseEvent.MOUSE_DOWN, volumeScrubberClicked);
@@ -177,7 +178,7 @@ package code.views
 			urlRequest = new URLRequest(strSource);
 			urlLoader = new URLLoader();
 			urlLoader.addEventListener(Event.COMPLETE, playlistLoaded);
-			urlLoader.load(urlRequest);
+			urlLoader.load(urlRequest); 
 		}
 		
 		function asyncErrorHandler(event:AsyncErrorEvent):void
@@ -418,13 +419,25 @@ package code.views
 				objAppModel.stageRef.mcVideoControls.x = (Capabilities.screenResolutionX - 460) / 2;
 				objAppModel.stageRef.mcVideoControls.y = (Capabilities.screenResolutionY - 33);
 				
+				//Code Added by [AS]
+				var point1:Point = new Point(0,0);
+				var obj1:Object = objAppModel.stageRef.vidDisplay.localToGlobal(point1);
+				
+				objAppModel.stageRef.vidDisplay.height 	= Capabilities.screenResolutionY;
+				objAppModel.stageRef.vidDisplay.width 	= Capabilities.screenResolutionX;
+				
+				objAppModel.stageRef.vidDisplay.x 	= objAppModel.stageRef.vidDisplay.x - obj1.x;
+				objAppModel.stageRef.vidDisplay.y 	= objAppModel.stageRef.vidDisplay.y - obj1.y;
+				
+				
+				//Code Commented by [AS]
 				// size up video display
-				objAppModel.stageRef.vidDisplay.height 	= Capabilities.screenResolutionY	//(Capabilities.screenResolutionY - 33);
-				objAppModel.stageRef.vidDisplay.width 	= objAppModel.stageRef.vidDisplay.height * 4 / 3;
+				/*objAppModel.stageRef.vidDisplay.height 	= Capabilities.screenResolutionY	//(Capabilities.screenResolutionY - 33);
+				objAppModel.stageRef.vidDisplay.width 	= objAppModel.stageRef.vidDisplay.height * 4 / 3;*/
 				//objAppModel.stageRef.vidDisplay.x		= (Capabilities.screenResolutionX - objAppModel.stageRef.vidDisplay.width) / 2;
 				
-				objAppModel.stageRef.vidDisplay.x		= (stage.fullScreenWidth - objAppModel.stageRef.vidDisplay.width) / 2;
-				objAppModel.stageRef.vidDisplay.y		= (stage.fullScreenHeight- objAppModel.stageRef.vidDisplay.height ) / 2;
+				//objAppModel.stageRef.vidDisplay.x		= (stage.fullScreenWidth - objAppModel.stageRef.vidDisplay.width) / 2;
+				//objAppModel.stageRef.vidDisplay.y		= (stage.fullScreenHeight- objAppModel.stageRef.vidDisplay.height ) / 2;
 				
 				// [AS:3/09/12]Visiblitity off for HomeView Static assets
 				HomeViewConstants.finderMc.visible =false;
@@ -439,14 +452,14 @@ package code.views
 				objAppModel.stageRef.mcVideoControls.btnFullscreenOff.visible = false;
 				
 				// reset controls position
-				objAppModel.stageRef.mcVideoControls.x = 0;
-				objAppModel.stageRef.mcVideoControls.y = 275;
+				objAppModel.stageRef.mcVideoControls.x = 39.55;
+				objAppModel.stageRef.mcVideoControls.y = 485.15;
 				
 				// reset video display
-				objAppModel.stageRef.vidDisplay.y = 0;
-				objAppModel.stageRef.vidDisplay.x = 0;
-				objAppModel.stageRef.vidDisplay.width = 460;
-				objAppModel.stageRef.vidDisplay.height = 275;
+				objAppModel.stageRef.vidDisplay.y = 88;
+				objAppModel.stageRef.vidDisplay.x = 5;
+				objAppModel.stageRef.vidDisplay.width = 510.75;
+				objAppModel.stageRef.vidDisplay.height = 286.3;
 				
 				HomeViewConstants.finderMc.visible =true;
 				HomeViewConstants.homeBtn.visible =true;

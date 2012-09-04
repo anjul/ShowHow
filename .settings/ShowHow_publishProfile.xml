@@ -11,7 +11,7 @@
     <png>0</png>
     <qt>0</qt>
     <rnwk>0</rnwk>
-    <swc>0</swc>
+    <swc>1</swc>
     <flashDefaultName>0</flashDefaultName>
     <projectorWinDefaultName>1</projectorWinDefaultName>
     <projectorMacDefaultName>1</projectorMacDefaultName>
@@ -21,7 +21,7 @@
     <pngDefaultName>1</pngDefaultName>
     <qtDefaultName>1</qtDefaultName>
     <rnwkDefaultName>1</rnwkDefaultName>
-    <swcDefaultName>1</swcDefaultName>
+    <swcDefaultName>0</swcDefaultName>
     <flashFileName>E:\Officials\GitHub\ShowHow-Anjul\bin-debug\ShowHow.swf</flashFileName>
     <projectorWinFileName>ShowHow.exe</projectorWinFileName>
     <projectorMacFileName>ShowHow.app</projectorMacFileName>
@@ -31,7 +31,7 @@
     <pngFileName>ShowHow.png</pngFileName>
     <qtFileName>ShowHow.mov</qtFileName>
     <rnwkFileName>ShowHow.smil</rnwkFileName>
-    <swcFileName>ShowHow.swc</swcFileName>
+    <swcFileName>./lib/ShowHow.swc</swcFileName>
   </PublishFormatProperties>
   <PublishHtmlProperties enabled="true">
     <VersionDetectionIfAvailable>0</VersionDetectionIfAvailable>
@@ -56,7 +56,7 @@
     <WindowMode>0</WindowMode>
     <DisplayMenu>1</DisplayMenu>
     <DeviceFont>0</DeviceFont>
-    <TemplateFileName>C:\Users\A&amp;amp;amp;amp;apos;\AppData\Local\Adobe\Flash CS5.5\en_US\Configuration\HTML\Default.html</TemplateFileName>
+    <TemplateFileName>C:\Users\A&apos;\AppData\Local\Adobe\Flash CS5.5\en_US\Configuration\HTML\Default.html</TemplateFileName>
     <showTagWarnMsg>1</showTagWarnMsg>
   </PublishHtmlProperties>
   <PublishFlashProperties enabled="true">
@@ -94,7 +94,7 @@
     <AS3Dialect>AS3</AS3Dialect>
     <AS3ExportFrame>1</AS3ExportFrame>
     <AS3Optimize>1</AS3Optimize>
-    <ExportSwc>0</ExportSwc>
+    <ExportSwc>1</ExportSwc>
     <ScriptStuckDelay>15</ScriptStuckDelay>
     <IncludeXMP>1</IncludeXMP>
     <HardwareAcceleration>0</HardwareAcceleration>
