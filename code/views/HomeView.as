@@ -134,10 +134,11 @@
 			{
 				case "rollOver":
 					HomeViewConstants.smartStartMC.play();
+					event.currentTarget.gotoAndPlay(2);
 					break;
-				case "rollOut":
-					
+				case "rollOut":		
 					HomeViewConstants.smartStartMC.play();
+					event.currentTarget.gotoAndPlay(16);
 					break;
 			}			
 		 }
@@ -156,6 +157,10 @@
 			 objAppModel.stageRef.addChild(HomeViewConstants.homeBtn);
 			 HomeViewConstants.homeBtn.x = homeBtnX;
 			 HomeViewConstants.homeBtn.y = homeBtnY;
+			 HomeViewConstants.homeBtn.buttonMode=true;
+			 HomeViewConstants.homeBtn.addEventListener(MouseEvent.CLICK,showHowLogoEventHandler);
+			 HomeViewConstants.homeBtn.addEventListener(MouseEvent.ROLL_OVER,showHowLogoEventHandler);
+			 HomeViewConstants.homeBtn.addEventListener(MouseEvent.ROLL_OUT,showHowLogoEventHandler);
 		 }
 		 
 		 private function attachShowHowLogo():void
@@ -192,10 +197,24 @@
 					 objAppModel.stageRef.addChild(HomeViewConstants.showHowLogo);
 					 HomeViewConstants.showHowLogo.x = showHowLogoX;
 					 HomeViewConstants.showHowLogo.y = showHowLogoY;
+					 HomeViewConstants.showHowLogo.buttonMode=true;
+					 
 					 break;
 				 
 				 case 'ioError':
 					 trace("IO Error or Bad File name error");
+					 break;
+				 
+				 case 'click':					 
+					 HomeViewConstants.homeBtn.gotoAndStop(5);
+					 break;
+				 
+				 case 'rollOut':					 
+					 HomeViewConstants.homeBtn.gotoAndStop(1);
+					 break;
+				 
+				 case 'rollOver':					 
+					 HomeViewConstants.homeBtn.gotoAndStop(5);
 					 break;
 				 
 				 default:
