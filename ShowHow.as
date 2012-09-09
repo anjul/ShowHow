@@ -1,8 +1,10 @@
 package
 {
 	import code.model.AppModel;
+	import code.services.ServiceConstants;
 	import code.views.HomeView;
 	import code.views.VideoPlayer;
+	import code.vo.AppVO;
 	
 	import flash.display.MovieClip;
 	
@@ -15,6 +17,7 @@ package
 		public function ShowHow()
 		{
 			objAppModel.stageRef = this;
+			objAppModel.loadXML(AppVO.BASEURL+ServiceConstants.FILMS_XML_PATH);
 			
 			videoPlayer = new VideoPlayer();
 			this.addChild(videoPlayer);

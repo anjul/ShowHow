@@ -40,18 +40,20 @@
 		private var welcomeMC:Welcome_MC;
 		private var homeBtn:HomeBtn_MC;
 		private var showHowLogo:MovieClip;
+		private var checkClicked:Boolean = true;
 		
 		
 		public function HomeView()
 		{
-			trace("Home View")
+			//trace("Home View")
 			omniUrl = AppVO.BASEURL+AppVO.OMNI_SWF;
+			attachShowHowLogo();
 			loadOmniSwf();	
 			attachWelcomeMC();
 			attachSmartStartMC();
 			attachFinderMC();		
 			attachHomeBtn();
-			attachShowHowLogo();
+			
 		}
 		
 		 private function loadOmniSwf():void
@@ -111,36 +113,153 @@
 		 private function attachSmartStartMC():void
 		 {
 			 objAppModel.stageRef.addChild(HomeViewConstants.smartStartMC);
+			 useButtonMode(true);
 			 HomeViewConstants.smartStartMC.x = smartStartX;
 			 HomeViewConstants.smartStartMC.y = smartStartY;
-			 HomeViewConstants.smartStartMC.stop();
+			 HomeViewConstants.smartStartMC.stop();			 
+			 HomeViewConstants.smartStartMC.tabSmartstart.addEventListener(MouseEvent.ROLL_OVER,tabEvents);
+			 HomeViewConstants.smartStartMC.tabPlaylist.addEventListener(MouseEvent.ROLL_OVER,tabEvents);
+			 HomeViewConstants.smartStartMC.tabSh2snap.addEventListener(MouseEvent.ROLL_OVER,tabEvents);
+			 HomeViewConstants.smartStartMC.tabSh2map.addEventListener(MouseEvent.ROLL_OVER,tabEvents);
+			 HomeViewConstants.smartStartMC.tabMostviewed.addEventListener(MouseEvent.ROLL_OVER,tabEvents);
 			 
-			 HomeViewConstants.smartStartMC.btn_1.addEventListener(MouseEvent.ROLL_OVER,onClick);
-			 HomeViewConstants.smartStartMC.btn_2.addEventListener(MouseEvent.ROLL_OVER,onClick);
-			 HomeViewConstants.smartStartMC.btn_3.addEventListener(MouseEvent.ROLL_OVER,onClick);
-			 HomeViewConstants.smartStartMC.btn_4.addEventListener(MouseEvent.ROLL_OVER,onClick);
-			 HomeViewConstants.smartStartMC.btn_5.addEventListener(MouseEvent.ROLL_OVER,onClick);
+			 HomeViewConstants.smartStartMC.tabSmartstart.addEventListener(MouseEvent.ROLL_OUT,tabEvents);
+			 HomeViewConstants.smartStartMC.tabPlaylist.addEventListener(MouseEvent.ROLL_OUT,tabEvents);
+			 HomeViewConstants.smartStartMC.tabSh2snap.addEventListener(MouseEvent.ROLL_OUT,tabEvents);
+			 HomeViewConstants.smartStartMC.tabSh2map.addEventListener(MouseEvent.ROLL_OUT,tabEvents);
+			 HomeViewConstants.smartStartMC.tabMostviewed.addEventListener(MouseEvent.ROLL_OUT,tabEvents);
 			 
-			 HomeViewConstants.smartStartMC.btn_1.addEventListener(MouseEvent.ROLL_OUT,onClick);
-			 HomeViewConstants.smartStartMC.btn_2.addEventListener(MouseEvent.ROLL_OUT,onClick);
-			 HomeViewConstants.smartStartMC.btn_3.addEventListener(MouseEvent.ROLL_OUT,onClick);
-			 HomeViewConstants.smartStartMC.btn_4.addEventListener(MouseEvent.ROLL_OUT,onClick);
-			 HomeViewConstants.smartStartMC.btn_5.addEventListener(MouseEvent.ROLL_OUT,onClick);
+			 HomeViewConstants.smartStartMC.tabSmartstart.addEventListener(MouseEvent.CLICK,tabEvents);
+			 HomeViewConstants.smartStartMC.tabPlaylist.addEventListener(MouseEvent.CLICK,tabEvents);
+			 HomeViewConstants.smartStartMC.tabSh2snap.addEventListener(MouseEvent.CLICK,tabEvents);
+			 HomeViewConstants.smartStartMC.tabSh2map.addEventListener(MouseEvent.CLICK,tabEvents);
+			 HomeViewConstants.smartStartMC.tabMostviewed.addEventListener(MouseEvent.CLICK,tabEvents);
+			 ////////////////////////////////////////////////////////////////////
+			 
+			 HomeViewConstants.smartStartMC.tabSh2snap_full.back2videoBtn_mc.addEventListener(MouseEvent.CLICK,back2videoBtn_ClickHandler);
+			 
+			 HomeViewConstants.smartStartMC.tabSh2snap_full.SH2snapFullBtn1.addEventListener(MouseEvent.CLICK,sh2SnapButtonEvents);
+			 HomeViewConstants.smartStartMC.tabSh2snap_full.SH2snapFullBtn2.addEventListener(MouseEvent.CLICK,sh2SnapButtonEvents);
+			 HomeViewConstants.smartStartMC.tabSh2snap_full.SH2snapFullBtn3.addEventListener(MouseEvent.CLICK,sh2SnapButtonEvents);
+			 HomeViewConstants.smartStartMC.tabSh2snap_full.SH2snapFullBtn4.addEventListener(MouseEvent.CLICK,sh2SnapButtonEvents);
+			 
+			 HomeViewConstants.smartStartMC.tabSh2snap_full.SH2snapFullBtn1.addEventListener(MouseEvent.ROLL_OVER,sh2SnapButtonEvents);
+			 HomeViewConstants.smartStartMC.tabSh2snap_full.SH2snapFullBtn2.addEventListener(MouseEvent.ROLL_OVER,sh2SnapButtonEvents);
+			 HomeViewConstants.smartStartMC.tabSh2snap_full.SH2snapFullBtn3.addEventListener(MouseEvent.ROLL_OVER,sh2SnapButtonEvents);
+			 HomeViewConstants.smartStartMC.tabSh2snap_full.SH2snapFullBtn4.addEventListener(MouseEvent.ROLL_OVER,sh2SnapButtonEvents);
+			 
+			 HomeViewConstants.smartStartMC.tabSh2snap_full.SH2snapFullBtn1.addEventListener(MouseEvent.ROLL_OUT,sh2SnapButtonEvents);
+			 HomeViewConstants.smartStartMC.tabSh2snap_full.SH2snapFullBtn2.addEventListener(MouseEvent.ROLL_OUT,sh2SnapButtonEvents);
+			 HomeViewConstants.smartStartMC.tabSh2snap_full.SH2snapFullBtn3.addEventListener(MouseEvent.ROLL_OUT,sh2SnapButtonEvents);
+			 HomeViewConstants.smartStartMC.tabSh2snap_full.SH2snapFullBtn4.addEventListener(MouseEvent.ROLL_OUT,sh2SnapButtonEvents);
+		 }		 
+		 
+		 private function useButtonMode(bool:Boolean):void
+		 {
+			 HomeViewConstants.smartStartMC.tabSmartstart.buttonMode = bool;
+			 HomeViewConstants.smartStartMC.tabPlaylist.buttonMode = bool
+			 HomeViewConstants.smartStartMC.tabSh2snap.buttonMode = bool
+			 HomeViewConstants.smartStartMC.tabSh2map.buttonMode = bool
+			 HomeViewConstants.smartStartMC.tabMostviewed.buttonMode = bool
+				 
+			 HomeViewConstants.smartStartMC.tabSh2snap_full.SH2snapFullBtn1.buttonMode = bool;
+			 HomeViewConstants.smartStartMC.tabSh2snap_full.SH2snapFullBtn2.buttonMode = bool;
+			 HomeViewConstants.smartStartMC.tabSh2snap_full.SH2snapFullBtn3.buttonMode = bool;
+			 HomeViewConstants.smartStartMC.tabSh2snap_full.SH2snapFullBtn4.buttonMode = bool;
+			 
+			 HomeViewConstants.smartStartMC.tabSh2snap_full.back2videoBtn_mc.buttonMode = bool;
 		 }
 		 
-		 private function onClick(event:MouseEvent):void
+		 private function tabEvents(event:MouseEvent):void
 		 {
+			var tabMC = event.target.parent[event.currentTarget.name+"_mc"];
+			var tabFullMC = event.target.parent[event.currentTarget.name+"_full"];
 			switch(event.type)
 			{
 				case "rollOver":
-					HomeViewConstants.smartStartMC.play();
-					event.currentTarget.gotoAndPlay(2);
+					tabMC.gotoAndPlay(1);
 					break;
 				case "rollOut":		
-					HomeViewConstants.smartStartMC.play();
-					event.currentTarget.gotoAndPlay(16);
+					tabMC.gotoAndPlay(21);
+					break;
+				
+				case "click":		
+					tabFullMC.play()
 					break;
 			}			
+		 }
+		 
+		 
+		 private function sh2SnapButtonEvents(event:MouseEvent):void
+		 {			
+			 switch(event.type)
+			 {				 
+				 case "rollOver":					
+					 if(checkClicked)
+					 {
+						 checkClicked = false;
+						 event.target.gotoAndStop(2);
+					 }
+					 else
+					 {
+						 event.target.gotoAndStop(1);
+					 }
+					 break;
+				 
+				 case "rollOut":	
+					 if(checkClicked)
+					 {
+						 event.target.gotoAndStop(2);
+					 }
+					 else
+					 {
+						checkClicked = true;
+					 	event.target.gotoAndStop(1);						
+					 }
+					 break;
+				 
+				 case "click":		
+					 	checkClicked = true;
+						disableSH2snapFullBtnSates(event.target);
+						event.target.gotoAndStop(2);
+						attachVideoBucket(event.target);
+					 break;
+			 }			
+		 }
+		 
+		 function disableSH2snapFullBtnSates(target:Object):void
+		 {			
+			 var str:String = target.name;
+			 var subStr:String = str.substr(0,str.length-1);
+						 
+			 for(var i:uint=1;i<5;i++)
+			 {
+				 target.parent[subStr+i].gotoAndStop(1);				
+			 }
+			 target.gotoAndStop(2);
+		 }
+		 
+		 function attachVideoBucket(target:Object):void
+		 {
+			 var videoBucketMC:MovieClip = new MovieClip();
+			 videoBucketMC.addChild(HomeViewConstants.videoBucket);
+			 videoBucketMC.x= 25;
+			 videoBucketMC.y= 140;
+			 this.addChild(videoBucketMC);
+		 }
+		 
+		 function back2videoBtn_ClickHandler(event:MouseEvent):void
+		 {			 
+			 event.currentTarget.parent.addEventListener(Event.ENTER_FRAME,frameUpdate);			 
+		 }
+		 
+		 private function frameUpdate(event:Event):void
+		 {		
+			 event.currentTarget.prevFrame()
+			 if(event.currentTarget.currentFrame==1)
+			 {
+				 event.currentTarget.removeEventListener(Event.ENTER_FRAME,frameUpdate);		
+			 }
 		 }
 		 
 		 private function attachWelcomeMC():void
@@ -165,14 +284,12 @@
 		 
 		 private function attachShowHowLogo():void
 		 {	
-			 urlRequest.url = AppVO.BASEURL+AppVO.SHOWHOW_LOGO;
-			 shLogoLoader = new Loader();
-			 
-			 shLogoLoader.load(urlRequest);
+			 objAppModel.stageRef.addChild(HomeViewConstants.showHowLogo);
+			 shLogoLoader = new Loader();			 
+			 shLogoLoader.load(new URLRequest(AppVO.BASEURL+AppVO.SHOWHOW_LOGO));
 			 shLogoLoader.contentLoaderInfo.addEventListener(Event.COMPLETE,showHowLogoEventHandler);
 			 shLogoLoader.contentLoaderInfo.addEventListener(ProgressEvent.PROGRESS,showHowLogoEventHandler);
-			 shLogoLoader.contentLoaderInfo.addEventListener(IOErrorEvent.IO_ERROR,showHowLogoEventHandler);
-			 
+			 shLogoLoader.contentLoaderInfo.addEventListener(IOErrorEvent.IO_ERROR,showHowLogoEventHandler);			 
 		 }
 		 
 		 private function showHowLogoEventHandler(event:*):void
@@ -194,11 +311,9 @@
 				 case 'complete':
 					 trace("Complete");
 					 HomeViewConstants.showHowLogo.addChild(shLogoLoader);
-					 objAppModel.stageRef.addChild(HomeViewConstants.showHowLogo);
 					 HomeViewConstants.showHowLogo.x = showHowLogoX;
 					 HomeViewConstants.showHowLogo.y = showHowLogoY;
-					 HomeViewConstants.showHowLogo.buttonMode=true;
-					 
+					 HomeViewConstants.showHowLogo.buttonMode=true;					 
 					 break;
 				 
 				 case 'ioError':

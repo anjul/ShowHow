@@ -10,5 +10,6 @@ package code.views
 		public static const finderMc:Finder_MC = new Finder_MC();
 		public static const homeBtn:HomeBtn_MC = new HomeBtn_MC();
 		public static const showHowLogo:MovieClip = new MovieClip();
+		public static const videoBucket:VideoBucket = new VideoBucket();		
 	}
 }
