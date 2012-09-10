@@ -3,12 +3,15 @@ package code.views
 	import code.model.AppModel;
 	import code.views.HomeViewConstants;
 	
+	import com.greensock.TweenLite;
+	
 	import flash.display.MovieClip;
 	import flash.display.StageAlign;
 	import flash.display.StageDisplayState;
 	import flash.display.StageScaleMode;
 	import flash.events.*;
 	import flash.events.MouseEvent;
+	import flash.geom.Point;
 	import flash.geom.Rectangle;
 	import flash.media.SoundTransform;
 	import flash.net.NetConnection;
@@ -18,7 +21,7 @@ package code.views
 	import flash.net.URLRequest;
 	import flash.system.Capabilities;
 	import flash.utils.Timer;
-	import flash.geom.Point;
+	
 	
 	/**
 	 * ...
@@ -71,6 +74,11 @@ package code.views
 		var urlRequest:URLRequest;
 		// playlist xml
 		var xmlPlaylist:XML;
+		//////
+		private var checkClicked:Boolean = true;
+		
+
+		
 		private var objAppModel:AppModel=AppModel.getInstance();		
 		var strSource:String = objAppModel.stageRef.loaderInfo.parameters.playlist == null ? "playlist.xml" : objAppModel.stageRef.loaderInfo.parameters.playlist;
 		
@@ -78,6 +86,7 @@ package code.views
 		{
 			objAppModel.stageRef.stage.scaleMode	= StageScaleMode.NO_SCALE;
 			objAppModel.stageRef.stage.align		= StageAlign.TOP_LEFT;
+			
 			
 			initVideoPlayer();
 		}
@@ -128,6 +137,34 @@ package code.views
 			
 			objAppModel.stageRef.mcVideoControls.mcVideoDescription.btnDescription.addEventListener(MouseEvent.MOUSE_OVER, startDescriptionScroll);
 			objAppModel.stageRef.mcVideoControls.mcVideoDescription.btnDescription.addEventListener(MouseEvent.MOUSE_OUT, stopDescriptionScroll);
+			////////////////////////////////////////////////////////////
+			
+			objAppModel.stageRef.vptabControlBtn1.addEventListener(MouseEvent.CLICK, vptabControls);
+			objAppModel.stageRef.vptabControlBtn1.addEventListener(MouseEvent.ROLL_OVER, vptabControls);
+			objAppModel.stageRef.vptabControlBtn1.addEventListener(MouseEvent.ROLL_OUT, vptabControls);
+			
+			objAppModel.stageRef.vptabControlBtn2.addEventListener(MouseEvent.CLICK, vptabControls);
+			objAppModel.stageRef.vptabControlBtn2.addEventListener(MouseEvent.ROLL_OVER, vptabControls);
+			objAppModel.stageRef.vptabControlBtn2.addEventListener(MouseEvent.ROLL_OUT, vptabControls);
+			
+			objAppModel.stageRef.vptabControlBtn3.addEventListener(MouseEvent.CLICK, vptabControls);
+			objAppModel.stageRef.vptabControlBtn3.addEventListener(MouseEvent.ROLL_OVER, vptabControls);
+			objAppModel.stageRef.vptabControlBtn3.addEventListener(MouseEvent.ROLL_OUT, vptabControls);
+			
+			
+			
+			HomeViewConstants.smartStartMC.videoprefMain_mc.cancel_mc.addEventListener(MouseEvent.CLICK, vptabPreference);
+			HomeViewConstants.smartStartMC.videoprefMain_mc.cancel_mc.addEventListener(MouseEvent.ROLL_OVER, vptabControls);
+			HomeViewConstants.smartStartMC.videoprefMain_mc.cancel_mc.addEventListener(MouseEvent.ROLL_OUT, vptabControls);
+			
+			
+			
+			objAppModel.stageRef.vptabControlBtn1.buttonMode = true;
+			objAppModel.stageRef.vptabControlBtn2.buttonMode = true;
+			objAppModel.stageRef.vptabControlBtn3.buttonMode = true;
+			
+			
+			//////////////////////////////////////////////////////////
 			
 			// create timer for updating all visual parts of player and add
 			// event listener
@@ -179,7 +216,162 @@ package code.views
 			urlLoader = new URLLoader();
 			urlLoader.addEventListener(Event.COMPLETE, playlistLoaded);
 			urlLoader.load(urlRequest); 
+			TweenLite.to(objAppModel.stageRef.videoControlMain.videoControls_mc,0,  {alpha:0});
+			TweenLite.to(objAppModel.stageRef.videoControlMain.controlTransbg_mc,0, {alpha:0});
+			
+			TweenLite.to(HomeViewConstants.smartStartMC.videoprefMain_mc,0, {alpha:0});
+			HomeViewConstants.smartStartMC.videoprefMain_mc.visible=false
+			
 		}
+		private function vptabControls(event:MouseEvent):void
+		{			
+			switch(event.type)
+			{				 
+				case "rollOver":					
+					if(checkClicked)
+					{
+						checkClicked = false;
+						event.target.gotoAndStop(2);
+					}
+					else
+					{
+						event.target.gotoAndStop(1);
+					}
+					break;
+				
+				case "rollOut":	
+					if(checkClicked)
+					{
+						event.target.gotoAndStop(2);
+					}
+					else
+					{
+						checkClicked = true;
+						event.target.gotoAndStop(1);						
+					}
+					break;
+				
+				case "click":		
+					checkClicked = true;
+					trace(">>>>"+event.currentTarget.name)
+					
+					videotabControlplay(event.currentTarget)
+					disablevptabControlsBtnStates(event.currentTarget);
+					
+					//event.target.gotoAndStop(2);
+					break;
+				
+			}			
+		}
+		
+		function videotabControlplay(target:Object):void{
+			var strval:String = target.name;
+			var subStr:String = strval.substr(strval.length-1,strval.length);
+			//trace(strval+"--------->"+subStr)
+			if(subStr=="1"){
+				
+				vptabPreference()
+			}else if(subStr=="2"){
+				
+				
+				vptabControlsclick()
+			}else if(subStr=="3"){
+				vptabSubtext()
+			}
+			
+		}
+		
+		
+		function disablevptabControlsBtnStates(target:Object):void
+		{			
+			var str:String = target.name;
+			var subStr:String = str.substr(0,str.length-1);
+			trace(target.name+")))))((((("+str)
+			for(var i:uint=1;i<4;i++)
+			{
+				trace("$$"+target.parent[subStr+i])
+				target.parent[subStr+i].gotoAndStop(1);		
+				//target.subStr+i.gotoAndStop(1);				
+			}
+			target.gotoAndStop(2);
+		}
+				
+		/////////////////////////////////////////////start----videopref btn///////////////////////////////////////
+		var vptabpreferencecliked:Boolean=true
+		
+		function vptabPreference(event:MouseEvent=null):void{
+			
+			trace("iiiiiiiiiiiiiiiiii")
+			if(vptabpreferencecliked==true){
+				
+				HomeViewConstants.smartStartMC.videoprefMain_mc.visible=true
+				vptabpreferencecliked=false
+				var tweentitlea:TweenLite=objAppModel.tweenManager(HomeViewConstants.smartStartMC.videoprefMain_mc,.5,{alpha:1})
+				tweentitlea.play()
+				
+			}else{
+				HomeViewConstants.smartStartMC.videoprefMain_mc.visible=false
+				vptabpreferencecliked=true
+				var tweentitleb=objAppModel.tweenManager(HomeViewConstants.smartStartMC.videoprefMain_mc,.5,{alpha:0})
+				tweentitleb.play()
+			}
+		}
+		
+		/////////////////////////////////////////////end----videopref btn///////////////////////////////////////
+		
+		/////////////////////////////////////////////start----subtext btn///////////////////////////////////////
+		var vptabSubtextcliked:Boolean=true
+			
+		function vptabSubtext():void{
+			
+		
+			if(  vptabSubtextcliked==true){
+				vptabSubtextcliked=false
+		var tweentitlea=objAppModel.tweenManager(objAppModel.stageRef.subtitle_mc,.5,{y:375, alpha:1})
+		tweentitlea.play()
+			
+		}else{
+			vptabSubtextcliked=true
+			var tweentitleb=objAppModel.tweenManager(objAppModel.stageRef.subtitle_mc,.5,{y:258, alpha:0})
+			tweentitleb.play()
+		}
+	}
+		
+		/////////////////////////////////////////////end----subtext btn///////////////////////////////////////
+		
+		/////////////////////////////////////////////start----control btn///////////////////////////////////////
+		var vpcontrolcliked:Boolean=true
+		function vptabControlsclick():void{
+							
+			if(  vpcontrolcliked==true){
+				vpcontrolcliked=false
+				var tween1a=objAppModel.tweenManager(objAppModel.stageRef.videoControlMain.controlTransbg_mc,.5,{y:155, alpha:1, onComplete:vptabControlscomplete})
+				tween1a.play()
+				objAppModel.stageRef.mcVideoControls.visible = false
+				
+			}else{
+				vpcontrolcliked=true
+				var tween2b=objAppModel.tweenManager(objAppModel.stageRef.videoControlMain.videoControls_mc, .5, {alpha:0,onComplete:vptabControlsback});
+				tween2b.play()
+				
+			}
+						
+		}
+		
+		function vptabControlscomplete(){
+			
+			var tween2a=objAppModel.tweenManager(objAppModel.stageRef.videoControlMain.videoControls_mc, .5, {alpha:1});
+			tween2a.play()
+			
+		}
+		function vptabControlsback(){
+			objAppModel.stageRef.mcVideoControls.visible = true
+			var tween1b=objAppModel.tweenManager(objAppModel.stageRef.videoControlMain.controlTransbg_mc,.5,{y:1, alpha:0})
+			tween1b.play()
+			
+		}
+		
+		/////////////////////////////////////////////end----control btn///////////////////////////////////////
 		
 		function asyncErrorHandler(event:AsyncErrorEvent):void
 		{
@@ -187,7 +379,7 @@ package code.views
 		}
 		
 		
-		function playClicked(e:MouseEvent):void
+		function playClicked(e:MouseEvent=null):void
 		{
 			// check's, if the flv has already begun
 			// to download. if so, resume playback, else
@@ -429,6 +621,9 @@ package code.views
 				objAppModel.stageRef.vidDisplay.x 	= objAppModel.stageRef.vidDisplay.x - obj1.x;
 				objAppModel.stageRef.vidDisplay.y 	= objAppModel.stageRef.vidDisplay.y - obj1.y;
 				
+				//[AS]:: Mangae Depth Between VideoDisplay and McVideoControls
+				//objAppModel.stageRef.mcVideoControls.swapChildren(objAppModel.stageRef.vidDisplay);
+				
 				
 				//Code Commented by [AS]
 				// size up video display
@@ -495,7 +690,7 @@ package code.views
 			} else {
 				strSource = xmlPlaylist..vid[intVid].@src;
 			}
-			
+			playClicked();
 			// show video display
 			objAppModel.stageRef.vidDisplay.visible					= true;
 			

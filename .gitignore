@@ -3,6 +3,7 @@ bin-debug/
 bin-release/
 release/
 lib/
+com/greensock/
 
 # Project property files
 #.actionScriptProperties

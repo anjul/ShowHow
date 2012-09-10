@@ -17,7 +17,8 @@ package
 		public function ShowHow()
 		{
 			objAppModel.stageRef = this;
-			objAppModel.loadXML(AppVO.BASEURL+ServiceConstants.FILMS_XML_PATH);
+			//objAppModel.loadXML(/*AppVO.BASEURL+*/ServiceConstants.FILMS_XML_PATH); // First XML load call has sent
+			objAppModel.loadXML(AppVO.BASEURL+ServiceConstants.FILMS_XML_PATH); // First XML load call has sent
 			
 			videoPlayer = new VideoPlayer();
 			this.addChild(videoPlayer);

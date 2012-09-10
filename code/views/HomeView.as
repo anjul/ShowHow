@@ -3,6 +3,7 @@
 	import code.model.AppModel;
 	import code.views.HomeViewConstants;
 	import code.vo.AppVO;
+	import code.vo.FilmsVO;
 	
 	import flash.display.Loader;
 	import flash.display.MovieClip;
@@ -21,20 +22,20 @@
 		
 		private var objAppModel:AppModel= AppModel.getInstance();
 		private var omniHolder:MovieClip = new MovieClip();
-		private var omniX:int = 545;
-		private var omniY:int = 10;
+		private var omniX:uint = 545;
+		private var omniY:uint = 10;
 		
-		private var finderX:int = omniX-25;
-		private var finderY:int = omniY+58;
-		private var smartStartX:int = finderX;
-		private var smartStartY:int = finderY;
-		private var welcomeX:int = finderX;
-		private var welcomeY:int = smartStartY+20;
-		private var homeBtnX:int = omniX-58;
-		private var homeBtnY:int = omniY+7;
+		private var finderX:uint = omniX-25;
+		private var finderY:uint = omniY+58;
+		private var smartStartX:uint = finderX;
+		private var smartStartY:uint = finderY;
+		private var welcomeX:uint = finderX;
+		private var welcomeY:uint = smartStartY+20;
+		private var homeBtnX:uint = omniX-58;
+		private var homeBtnY:uint = omniY+7;
 		private var showHowLogoX:int = -10;
-		private var showHowLogoY:int = omniY-5;
-		
+		private var showHowLogoY:uint = omniY-5;
+	
 		private var finderMc:Finder_MC;
 		private var smartStartMC:SmartStart_MC;
 		private var welcomeMC:Welcome_MC;
@@ -42,6 +43,7 @@
 		private var showHowLogo:MovieClip;
 		private var checkClicked:Boolean = true;
 		
+		private var videoBucket:VideoBucketHolder;
 		
 		public function HomeView()
 		{
@@ -86,7 +88,7 @@
 					 break;
 				 
 				 case 'complete':
-					 trace("Omni LoadedComplete>>"+HomeViewConstants.omniHolder);				
+					// trace("Omni LoadedComplete>>"+HomeViewConstants.omniHolder);				
 					 HomeViewConstants.omniHolder.addChild(loader);
 					 objAppModel.stageRef.addChild(HomeViewConstants.omniHolder);
 					 HomeViewConstants.omniHolder.x=omniX;
@@ -179,6 +181,7 @@
 				case "rollOver":
 					tabMC.gotoAndPlay(1);
 					break;
+				
 				case "rollOut":		
 					tabMC.gotoAndPlay(21);
 					break;
@@ -227,7 +230,7 @@
 			 }			
 		 }
 		 
-		 function disableSH2snapFullBtnSates(target:Object):void
+		private function disableSH2snapFullBtnSates(target:Object):void
 		 {			
 			 var str:String = target.name;
 			 var subStr:String = str.substr(0,str.length-1);
@@ -239,18 +242,66 @@
 			 target.gotoAndStop(2);
 		 }
 		 
-		 function attachVideoBucket(target:Object):void
+		private function attachVideoBucket(target:Object):void
 		 {
-			 var videoBucketMC:MovieClip = new MovieClip();
-			 videoBucketMC.addChild(HomeViewConstants.videoBucket);
-			 videoBucketMC.x= 25;
-			 videoBucketMC.y= 140;
-			 this.addChild(videoBucketMC);
+			 // Before adding a child need to check if it's already existed or not
+		
+			/*if(!(HomeViewConstants.videoBucketHolder.contains(HomeViewConstants.videoBucket)
+				&&this.contains(HomeViewConstants.videoBucketHolder)))
+			{
+				 HomeViewConstants.videoBucketHolder.addChild(HomeViewConstants.videoBucket);
+				 HomeViewConstants.videoBucketHolder.x= HomeViewConstants.videoBucketMCX;
+				 HomeViewConstants.videoBucketHolder.y= HomeViewConstants.videoBucketMCY;
+				 this.addChild(HomeViewConstants.videoBucketHolder);
+			}*/
+			createvideoBucketInstances(target);				
 		 }
 		 
-		 function back2videoBtn_ClickHandler(event:MouseEvent):void
+		private function createvideoBucketInstances(target:Object):void
+		{
+			if(target.name == "SH2snapFullBtn1")
+			{
+				for(var i:uint=0;i<5;i++)
+				{
+					var vidBucket:VideoBucket = new VideoBucket();
+					HomeViewConstants.videoBucketHolder.addChild(vidBucket);
+					vidBucket.x = HomeViewConstants.videoBucketMCX
+					vidBucket.y = HomeViewConstants.videoBucketMCY;
+					HomeViewConstants.videoBucketMCY=(vidBucket.height)+20
+						
+						/*if(i>=2){
+					
+							HomeViewConstants.videoBucketMCX=(vidBucket.width)
+							HomeViewConstants.videoBucketMCY=140
+								
+							vidBucket.x = HomeViewConstants.videoBucketMCX
+							vidBucket.y = HomeViewConstants.videoBucketMCY;
+								
+						}*/
+				
+					/*if(i%2==0&&i!=0)
+					{
+						vidBucket.x = HomeViewConstants.videoBucketMCX;
+						vidBucket.y = HomeViewConstants.videoBucketMCY;
+						
+					}else if(i%2==1){
+						
+					}else{
+						vidBucket.x = HomeViewConstants.videoBucketMCX;
+						vidBucket.y = HomeViewConstants.videoBucketMCY;
+					}*/
+				} this.addChild(HomeViewConstants.videoBucketHolder); 
+				HomeViewConstants.videoBucketHolder.visible = true;
+			}
+		}
+		 
+		private function back2videoBtn_ClickHandler(event:MouseEvent):void
 		 {			 
-			 event.currentTarget.parent.addEventListener(Event.ENTER_FRAME,frameUpdate);			 
+			 event.currentTarget.parent.addEventListener(Event.ENTER_FRAME,frameUpdate);
+			 if(this.contains(HomeViewConstants.videoBucketHolder))
+			 {
+				 HomeViewConstants.videoBucketHolder.visible = false;
+			 }
 		 }
 		 
 		 private function frameUpdate(event:Event):void
