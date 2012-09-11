@@ -73,7 +73,7 @@
 							contentPush(FilmsVO.LEVEL_ADVANCED,i);
 						}
 					}
-					trace("B>>"+FilmsVO.beginnerMediaArr.length+" I>>"+FilmsVO.intermediateMediaArr.length+" A>>"+FilmsVO.advancedMediaArr.length+" S>>"+FilmsVO.smartStartMediaArr.length)
+					//trace("B>>"+FilmsVO.beginnerMediaArr.length+" I>>"+FilmsVO.intermediateMediaArr.length+" A>>"+FilmsVO.advancedMediaArr.length+" S>>"+FilmsVO.smartStartMediaArr.length)
 					//loadXML(AppVO.BASEURL + ServiceConstants.TAGS_XML);
 					break;
 			}				

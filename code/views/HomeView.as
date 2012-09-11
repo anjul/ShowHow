@@ -55,7 +55,7 @@
 			attachSmartStartMC();
 			attachFinderMC();		
 			attachHomeBtn();
-			
+			videoBucket = new VideoBucketHolder();
 		}
 		
 		 private function loadOmniSwf():void
@@ -225,7 +225,7 @@
 					 	checkClicked = true;
 						disableSH2snapFullBtnSates(event.target);
 						event.target.gotoAndStop(2);
-						attachVideoBucket(event.target);
+						attachVideoBucket(event.target); // Need to use whenever  videoBucket need to attach
 					 break;
 			 }			
 		 }
@@ -242,58 +242,27 @@
 			 target.gotoAndStop(2);
 		 }
 		 
-		private function attachVideoBucket(target:Object):void
+		private function attachVideoBucket(sh2SnapTab:Object):void
 		 {
 			 // Before adding a child need to check if it's already existed or not
 		
-			/*if(!(HomeViewConstants.videoBucketHolder.contains(HomeViewConstants.videoBucket)
-				&&this.contains(HomeViewConstants.videoBucketHolder)))
+			//if(videoBucket==null)
+			if(this.contains(videoBucket))
 			{
-				 HomeViewConstants.videoBucketHolder.addChild(HomeViewConstants.videoBucket);
-				 HomeViewConstants.videoBucketHolder.x= HomeViewConstants.videoBucketMCX;
-				 HomeViewConstants.videoBucketHolder.y= HomeViewConstants.videoBucketMCY;
-				 this.addChild(HomeViewConstants.videoBucketHolder);
-			}*/
-			createvideoBucketInstances(target);				
-		 }
-		 
-		private function createvideoBucketInstances(target:Object):void
-		{
-			if(target.name == "SH2snapFullBtn1")
-			{
-				for(var i:uint=0;i<5;i++)
-				{
-					var vidBucket:VideoBucket = new VideoBucket();
-					HomeViewConstants.videoBucketHolder.addChild(vidBucket);
-					vidBucket.x = HomeViewConstants.videoBucketMCX
-					vidBucket.y = HomeViewConstants.videoBucketMCY;
-					HomeViewConstants.videoBucketMCY=(vidBucket.height)+20
-						
-						/*if(i>=2){
-					
-							HomeViewConstants.videoBucketMCX=(vidBucket.width)
-							HomeViewConstants.videoBucketMCY=140
-								
-							vidBucket.x = HomeViewConstants.videoBucketMCX
-							vidBucket.y = HomeViewConstants.videoBucketMCY;
-								
-						}*/
-				
-					/*if(i%2==0&&i!=0)
-					{
-						vidBucket.x = HomeViewConstants.videoBucketMCX;
-						vidBucket.y = HomeViewConstants.videoBucketMCY;
-						
-					}else if(i%2==1){
-						
-					}else{
-						vidBucket.x = HomeViewConstants.videoBucketMCX;
-						vidBucket.y = HomeViewConstants.videoBucketMCY;
-					}*/
-				} this.addChild(HomeViewConstants.videoBucketHolder); 
-				HomeViewConstants.videoBucketHolder.visible = true;
+				this.removeChild(videoBucket);
+				videoBucket = null;
+				videoBucket = new VideoBucketHolder();
+				VideoBucketConstants.VIDEOBUCKET_ARRAY= [];						
+				videoBucket.openSH2SnapTab(sh2SnapTab);
+				trace("True")
 			}
-		}
+			else{				
+				videoBucket.openSH2SnapTab(sh2SnapTab);trace("False")
+			}
+			this.addChild(videoBucket);
+			videoBucket.x = 30;
+			videoBucket.y = 70;				
+		 }
 		 
 		private function back2videoBtn_ClickHandler(event:MouseEvent):void
 		 {			 

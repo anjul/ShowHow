@@ -7,6 +7,7 @@ package code.services
 		public static const TAGS_XML:String="tagsXML";
 		public static const TEXT_XML:String="textXML";
 		public static const FILMS_XML_PATH="product/35/films/"; //"assets/xmlData/films.xml"
+		public static const FILMS_LOCAL_XML_PATH="assets/xmlData/films.xml"
 		public static const PREFERENCES_XML_PATH="product/35/preference/";
 		public static const TAGS_XML_PATH="product/35/tags/";
 		public static const TEXT_XML_PATH="product/35/text/";

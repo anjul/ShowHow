@@ -8,8 +8,7 @@ package code.vo
 		public static var advancedMediaArr:Array=[];
 		
 		public static var objResult:Object=new Object();
-		//public static var objPresenter:Object=new Object();
-		
+	
 		public static const LEVEL_SMARTSTART:String='smartstart';
 		public static const LEVEL_BEGINNER:String='beginner';
 		public static const LEVEL_INTERMEDIATE:String='intermediate';
