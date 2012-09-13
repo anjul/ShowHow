@@ -2,8 +2,11 @@
 {
 	import code.services.BaseService;
 	import code.services.ServiceConstants;
+	import code.views.VideoPlayer;
 	import code.vo.AppVO;
-	import code.vo.FilmsVO;
+	import code.vo.FilmConstants;
+	import code.vo.FilmVO;
+	
 	import com.greensock.TweenLite;
 	
 	import flash.events.Event;
@@ -14,6 +17,7 @@
 		public var stageRef:Object;
 		private var mediaXML:XML;
 		private var currentServiceID:String="mediaelements";
+		public static var refVideoPlayer:VideoPlayer;
 		
 		public function AppModel(singletonEnf:SingletonEnforcer)
 		{
@@ -49,28 +53,28 @@
 			{
 				case ServiceConstants.FILMS_XML:
 					mediaXML = oXML.copy();
-					for(var i:uint=0;i<mediaXML.chapterlist.chapter.length();i++)
+					for(var i:int=0;i<mediaXML.chapterlist.chapter.length();i++)
 					{
 						var strSplit = mediaXML.chapterlist.chapter.@level[i].toString().split(',');
 												
-						if(strSplit[0]==FilmsVO.LEVEL_BEGINNER || strSplit[1]==FilmsVO.LEVEL_BEGINNER)
+						if(strSplit[0]==FilmConstants.LEVEL_BEGINNER || strSplit[1]==FilmConstants.LEVEL_BEGINNER)
 						{
-							contentPush(FilmsVO.LEVEL_BEGINNER,i);
+							contentPush(FilmConstants.LEVEL_BEGINNER,i);
 						}
 						
-						if(strSplit[0]==FilmsVO.LEVEL_SMARTSTART || strSplit[1]==FilmsVO.LEVEL_SMARTSTART)
+						if(strSplit[0]==FilmConstants.LEVEL_SMARTSTART || strSplit[1]==FilmConstants.LEVEL_SMARTSTART)
 						{
-							contentPush(FilmsVO.LEVEL_SMARTSTART,i);
+							contentPush(FilmConstants.LEVEL_SMARTSTART,i);
 						} 
 						
-						if(strSplit[0]==FilmsVO.LEVEL_INTERMEDIATE || strSplit[1]==FilmsVO.LEVEL_INTERMEDIATE)
+						if(strSplit[0]==FilmConstants.LEVEL_INTERMEDIATE || strSplit[1]==FilmConstants.LEVEL_INTERMEDIATE)
 						{
-							contentPush(FilmsVO.LEVEL_INTERMEDIATE,i);
+							contentPush(FilmConstants.LEVEL_INTERMEDIATE,i);
 						} 
 						
-						if(strSplit[0]==FilmsVO.LEVEL_ADVANCED || strSplit[1]==FilmsVO.LEVEL_ADVANCED)
+						if(strSplit[0]==FilmConstants.LEVEL_ADVANCED || strSplit[1]==FilmConstants.LEVEL_ADVANCED)
 						{
-							contentPush(FilmsVO.LEVEL_ADVANCED,i);
+							contentPush(FilmConstants.LEVEL_ADVANCED,i);
 						}
 					}
 					//trace("B>>"+FilmsVO.beginnerMediaArr.length+" I>>"+FilmsVO.intermediateMediaArr.length+" A>>"+FilmsVO.advancedMediaArr.length+" S>>"+FilmsVO.smartStartMediaArr.length)
@@ -81,33 +85,37 @@
 		
 		private function contentPush(mediaLevel:String,index:uint):void
 		{			
-			FilmsVO.objResult.title = mediaXML.chapterlist.chapter.result[index].title.toString();
-			FilmsVO.objResult.description = mediaXML.chapterlist.chapter.result[index].description.toString();
-			FilmsVO.objResult.image = mediaXML.chapterlist.chapter.result[index].image.@url.toString();
-			FilmsVO.objResult.duration = mediaXML.chapterlist.chapter.result[index].duration.@time.toString();
-			FilmsVO.objResult.pr_name = mediaXML.chapterlist.chapter.result[index].title.pr_name.toString();
-			FilmsVO.objResult.sef_title = mediaXML.chapterlist.chapter.result[index].sef_title.toString();
+			var filmVO:FilmVO = new FilmVO();
+			filmVO.videoTitle = mediaXML.chapterlist.chapter.result[index].title.toString();
+			filmVO.description = mediaXML.chapterlist.chapter.result[index].description.toString();
+			filmVO.image_url = mediaXML.chapterlist.chapter.result[index].image.@url.toString();
+			filmVO.duration = mediaXML.chapterlist.chapter.result[index].duration.@time.toString();
+			filmVO.pr_name = mediaXML.chapterlist.chapter.result[index].title.pr_name.toString();
+			filmVO.sef_title = mediaXML.chapterlist.chapter.result[index].sef_title.toString();
 			
-			FilmsVO.objResult.title = mediaXML.chapterlist.chapter.presenter[index].@text;
-			FilmsVO.objResult.presenterID = mediaXML.chapterlist.chapter.presenter[index].@id; 
-			FilmsVO.objResult.videoURL = mediaXML.chapterlist.chapter.presenter[index].video.@url; 
+			filmVO.presenterTitle = mediaXML.chapterlist.chapter.presenter[index].@text.toString();
+			filmVO.presenterID = mediaXML.chapterlist.chapter.presenter[index].@id.toString();
+			filmVO.videoURL = mediaXML.chapterlist.chapter.presenter[index].video.@url.toString();
 			
-			FilmsVO.objResult.audioID = mediaXML.chapterlist.chapter.presenter[index].audio.option.@id; 
-			FilmsVO.objResult.audioURL = mediaXML.chapterlist.chapter.presenter[index].audio.option.@url; 
-			FilmsVO.objResult.optionText = mediaXML.chapterlist.chapter.presenter[index].audio.option.@text; 
+			filmVO.audioID = mediaXML.chapterlist.chapter.presenter[index].audio.option.@id.toString();
+			filmVO.audioURL = mediaXML.chapterlist.chapter.presenter[index].audio.option.@url.toString();
+			filmVO.optionText = mediaXML.chapterlist.chapter.presenter[index].audio.option.@text.toString();
 				
-			if(mediaLevel==FilmsVO.LEVEL_BEGINNER)
+			if(mediaLevel==FilmConstants.LEVEL_BEGINNER)
 			{
-				FilmsVO.beginnerMediaArr.push(FilmsVO.objResult);
-			}else if(mediaLevel==FilmsVO.LEVEL_INTERMEDIATE)
+				FilmConstants.beginnerMediaArr.push(filmVO);		
+			}
+			else if(mediaLevel==FilmConstants.LEVEL_INTERMEDIATE)
 			{
-				FilmsVO.intermediateMediaArr.push(FilmsVO.objResult);
-			}else if(mediaLevel==FilmsVO.LEVEL_SMARTSTART)
+				FilmConstants.intermediateMediaArr.push(filmVO);
+			}
+			else if(mediaLevel==FilmConstants.LEVEL_SMARTSTART)
 			{
-				FilmsVO.smartStartMediaArr.push(FilmsVO.objResult);
-			}else if(mediaLevel==FilmsVO.LEVEL_ADVANCED)
+				FilmConstants.smartStartMediaArr.push(filmVO);
+			}
+			else if(mediaLevel==FilmConstants.LEVEL_ADVANCED)
 			{
-				FilmsVO.advancedMediaArr.push(FilmsVO.objResult);
+				FilmConstants.advancedMediaArr.push(filmVO);
 			}
 		}
 	}

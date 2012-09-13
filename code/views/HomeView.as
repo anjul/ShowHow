@@ -3,7 +3,7 @@
 	import code.model.AppModel;
 	import code.views.HomeViewConstants;
 	import code.vo.AppVO;
-	import code.vo.FilmsVO;
+	import code.vo.FilmConstants;
 	
 	import flash.display.Loader;
 	import flash.display.MovieClip;
@@ -44,6 +44,7 @@
 		private var checkClicked:Boolean = true;
 		
 		private var videoBucket:VideoBucketHolder;
+		private var objVideoPlayer:VideoPlayer;
 		
 		public function HomeView()
 		{
@@ -54,8 +55,9 @@
 			attachWelcomeMC();
 			attachSmartStartMC();
 			attachFinderMC();		
-			attachHomeBtn();
+			attachHomeBtn();		
 			videoBucket = new VideoBucketHolder();
+			objVideoPlayer = VideoPlayer.getInstance();
 		}
 		
 		 private function loadOmniSwf():void
@@ -186,7 +188,8 @@
 					tabMC.gotoAndPlay(21);
 					break;
 				
-				case "click":		
+				case "click":	
+					objVideoPlayer.controlVideoPlayBack(false);		// Pausing the video
 					tabFullMC.play()
 					break;
 			}			
@@ -196,7 +199,7 @@
 		 private function sh2SnapButtonEvents(event:MouseEvent):void
 		 {			
 			 switch(event.type)
-			 {				 
+			 {					
 				 case "rollOver":					
 					 if(checkClicked)
 					 {
@@ -254,10 +257,9 @@
 				videoBucket = new VideoBucketHolder();
 				VideoBucketConstants.VIDEOBUCKET_ARRAY= [];						
 				videoBucket.openSH2SnapTab(sh2SnapTab);
-				trace("True")
 			}
 			else{				
-				videoBucket.openSH2SnapTab(sh2SnapTab);trace("False")
+				videoBucket.openSH2SnapTab(sh2SnapTab);
 			}
 			this.addChild(videoBucket);
 			videoBucket.x = 30;
@@ -267,10 +269,11 @@
 		private function back2videoBtn_ClickHandler(event:MouseEvent):void
 		 {			 
 			 event.currentTarget.parent.addEventListener(Event.ENTER_FRAME,frameUpdate);
-			 if(this.contains(HomeViewConstants.videoBucketHolder))
+			 if(this.contains(videoBucket))
 			 {
-				 HomeViewConstants.videoBucketHolder.visible = false;
-			 }
+//				 videoBucket.visible = false;
+				 this.removeChild(videoBucket)
+			 }			
 		 }
 		 
 		 private function frameUpdate(event:Event):void
@@ -279,6 +282,7 @@
 			 if(event.currentTarget.currentFrame==1)
 			 {
 				 event.currentTarget.removeEventListener(Event.ENTER_FRAME,frameUpdate);		
+				 objVideoPlayer.controlVideoPlayBack(true);
 			 }
 		 }
 		 

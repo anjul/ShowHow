@@ -29,7 +29,7 @@ package code.services
 		public function loadXML(xmlPath:String):void 
 		{			
 			isHTTPCall = false;
-			
+			trace("Path ="+xmlPath)
 			webserviceURL = new URLRequest(xmlPath);
 			connectWebservice();
 		}

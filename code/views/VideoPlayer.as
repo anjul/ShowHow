@@ -30,6 +30,8 @@ package code.views
 	public class VideoPlayer extends MovieClip
 	{
 		
+		private static var objVideoPlayer:VideoPlayer;
+		
 		// time to buffer for the video in sec.
 		const BUFFER_TIME:Number				= 8;
 		// start volume when initializing player
@@ -76,19 +78,29 @@ package code.views
 		var xmlPlaylist:XML;
 		//////
 		private var checkClicked:Boolean = true;
-		
-
-		
-		private var objAppModel:AppModel=AppModel.getInstance();		
+	
+		private var objAppModel:AppModel=AppModel.getInstance();
 		var strSource:String = objAppModel.stageRef.loaderInfo.parameters.playlist == null ? "playlist.xml" : objAppModel.stageRef.loaderInfo.parameters.playlist;
 		
-		public function VideoPlayer()
+		public function VideoPlayer(singletonEnf:SingletonEnforcer)
 		{
-			objAppModel.stageRef.stage.scaleMode	= StageScaleMode.NO_SCALE;
-			objAppModel.stageRef.stage.align		= StageAlign.TOP_LEFT;
-			
-			
-			initVideoPlayer();
+			if(singletonEnf==null)
+			{
+				throw new  Error("To instantiate this class use getInstance(), use of new is not allowed");
+			}else{
+				objAppModel.stageRef.stage.scaleMode	= StageScaleMode.NO_SCALE;
+				objAppModel.stageRef.stage.align		= StageAlign.TOP_LEFT;
+				initVideoPlayer();
+			}			
+		}
+		
+		public static function getInstance():VideoPlayer
+		{
+			if(objVideoPlayer==null)
+			{
+				objVideoPlayer = new VideoPlayer(new SingletonEnforcer());
+			}
+			return objVideoPlayer;
 		}
 		
 		// ###############################
@@ -107,10 +119,10 @@ package code.views
 			
 			// set the progress/preload fill width to 1
 			objAppModel.stageRef.mcVideoControls.mcProgressFill.mcFillRed.width	= 1;
-			objAppModel.stageRef.mcVideoControls.mcProgressFill.mcFillGrey.width	= 1;
+			objAppModel.stageRef.mcVideoControls.mcProgressFill.mcFillGrey.width= 1;
 			
 			// set time and duration label
-			objAppModel.stageRef.mcVideoControls.lblTimeDuration.htmlText		= "<font color='#000000'>00:00</font>00:00";
+			objAppModel.stageRef.mcVideoControls.lblTimeDuration.htmlText	= "<font color='#000000'>00:00</font>00:00";
 			
 			// add global event listener when mouse is released
 			objAppModel.stageRef.stage.addEventListener(MouseEvent.MOUSE_UP, mouseReleased);
@@ -151,14 +163,10 @@ package code.views
 			objAppModel.stageRef.vptabControlBtn3.addEventListener(MouseEvent.ROLL_OVER, vptabControls);
 			objAppModel.stageRef.vptabControlBtn3.addEventListener(MouseEvent.ROLL_OUT, vptabControls);
 			
-			
-			
 			HomeViewConstants.smartStartMC.videoprefMain_mc.cancel_mc.addEventListener(MouseEvent.CLICK, vptabPreference);
 			HomeViewConstants.smartStartMC.videoprefMain_mc.cancel_mc.addEventListener(MouseEvent.ROLL_OVER, vptabControls);
 			HomeViewConstants.smartStartMC.videoprefMain_mc.cancel_mc.addEventListener(MouseEvent.ROLL_OUT, vptabControls);
-			
-			
-			
+		
 			objAppModel.stageRef.vptabControlBtn1.buttonMode = true;
 			objAppModel.stageRef.vptabControlBtn2.buttonMode = true;
 			objAppModel.stageRef.vptabControlBtn3.buttonMode = true;
@@ -399,7 +407,7 @@ package code.views
 			objAppModel.stageRef.mcVideoControls.btnPlay.visible		= false;
 		}
 		
-		function pauseClicked(e:MouseEvent):void {
+		function pauseClicked(e:MouseEvent=null):void {
 			// pause video
 			nsStream.pause();
 			
@@ -685,14 +693,14 @@ package code.views
 				nsStream.play(String(xmlPlaylist..vid[intVid].@src));
 				
 				// switch button visibility
-				objAppModel.stageRef.mcVideoControls.btnPause.visible	= true;
-				objAppModel.stageRef..btnPlay.visible		= false;
+				objAppModel.stageRef.mcVideoControls.btnPause.visible= true;
+				objAppModel.stageRef.btnPlay.visible = false;
 			} else {
 				strSource = xmlPlaylist..vid[intVid].@src;
 			}
 			playClicked();
 			// show video display
-			objAppModel.stageRef.vidDisplay.visible					= true;
+			objAppModel.stageRef.vidDisplay.visible	= true;
 			
 			// reset description label position and assign new description
 			objAppModel.stageRef.mcVideoControls.mcVideoDescription.lblDescription.x = 0;
@@ -726,8 +734,17 @@ package code.views
 			bolDescriptionHover = false;
 		}
 		
-		
-		
-	}
-	
-}
+		//Method Added By [AS::13Sep12], to Control VideoPlayer playback functions from outside
+		public function controlVideoPlayBack(bool:Boolean):void
+		{
+			if(bool)
+			{
+				playClicked();
+			}
+			else
+			{
+				pauseClicked();
+			}			
+		}
+	}	
+}class SingletonEnforcer{}
