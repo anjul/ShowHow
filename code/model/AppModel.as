@@ -17,7 +17,7 @@
 		public var stageRef:Object;
 		private var mediaXML:XML;
 		private var currentServiceID:String="mediaelements";
-		public static var refVideoPlayer:VideoPlayer;
+		public static var AUTOPLAY_VIDEO_URL:String;
 		
 		public function AppModel(singletonEnf:SingletonEnforcer)
 		{
@@ -53,6 +53,8 @@
 			{
 				case ServiceConstants.FILMS_XML:
 					mediaXML = oXML.copy();
+					AppModel.AUTOPLAY_VIDEO_URL = mediaXML.teaser.@url.toString();
+					
 					for(var i:int=0;i<mediaXML.chapterlist.chapter.length();i++)
 					{
 						var strSplit = mediaXML.chapterlist.chapter.@level[i].toString().split(',');

@@ -76,6 +76,7 @@ package code.views
 		var urlRequest:URLRequest;
 		// playlist xml
 		var xmlPlaylist:XML;
+		
 		//////
 		private var checkClicked:Boolean = true;
 	
@@ -219,7 +220,7 @@ package code.views
 			
 			// create new request for loading the playlist xml, add an event listener
 			// and load it
-			trace(strSource)
+			trace(strSource+"AutoPlay//"+AppModel.AUTOPLAY_VIDEO_URL)
 			urlRequest = new URLRequest(strSource);
 			urlLoader = new URLLoader();
 			urlLoader.addEventListener(Event.COMPLETE, playlistLoaded);
