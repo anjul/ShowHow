@@ -2,6 +2,7 @@
 {
 	import code.services.BaseService;
 	import code.services.ServiceConstants;
+	import code.views.HomeView;
 	import code.views.VideoPlayer;
 	import code.vo.AppVO;
 	import code.vo.FilmConstants;
@@ -15,9 +16,19 @@
 	{
 		private static var objAppModel:AppModel;
 		public var stageRef:Object;
+		
 		private var mediaXML:XML;
+		private var preferenceXML:XML;
+		private var tagXML:XML;
+		private var textXML:XML;
+		
 		private var currentServiceID:String="mediaelements";
 		public static var AUTOPLAY_VIDEO_URL:String;
+		public var player:String="player/"
+		public var content:String="/content/"
+		public  var homeViewRef:HomeView;
+		public static var BASE_URL:String;
+		public static var PID:String;
 		
 		public function AppModel(singletonEnf:SingletonEnforcer)
 		{
@@ -53,7 +64,7 @@
 			{
 				case ServiceConstants.FILMS_XML:
 					mediaXML = oXML.copy();
-					AppModel.AUTOPLAY_VIDEO_URL = mediaXML.teaser.@url.toString();
+					AppModel.AUTOPLAY_VIDEO_URL = AppModel.BASE_URL+player+AppModel.PID+content+mediaXML.teaser.@url.toString();
 					
 					for(var i:int=0;i<mediaXML.chapterlist.chapter.length();i++)
 					{
@@ -78,10 +89,30 @@
 						{
 							contentPush(FilmConstants.LEVEL_ADVANCED,i);
 						}
+						
 					}
+					loadXML(ServiceConstants.FULL_PATH+ServiceConstants.PREFERENCES_XML_PATH);
 					//trace("B>>"+FilmsVO.beginnerMediaArr.length+" I>>"+FilmsVO.intermediateMediaArr.length+" A>>"+FilmsVO.advancedMediaArr.length+" S>>"+FilmsVO.smartStartMediaArr.length)
 					//loadXML(AppVO.BASEURL + ServiceConstants.TAGS_XML);
 					break;
+				
+				case ServiceConstants.PREFERENCES_XML:
+					preferenceXML = oXML.copy();
+					
+					loadXML(ServiceConstants.FULL_PATH+ServiceConstants.TAGS_XML_PATH);
+					break;
+				
+				case ServiceConstants.TAGS_XML:
+					tagXML = oXML.copy();
+					
+					loadXML(ServiceConstants.FULL_PATH+ServiceConstants.TEXT_XML_PATH);
+					break; 
+				
+				case ServiceConstants.TEXT_XML:
+					textXML = oXML.copy();
+					
+					loadXML(ServiceConstants.FULL_PATH+ServiceConstants.TEXT_XML);
+					break; 
 			}				
 		}
 		

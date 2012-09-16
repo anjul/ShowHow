@@ -9,6 +9,7 @@ package code.views
 	import flash.display.StageAlign;
 	import flash.display.StageDisplayState;
 	import flash.display.StageScaleMode;
+	import flash.errors.IOError;
 	import flash.events.*;
 	import flash.events.MouseEvent;
 	import flash.geom.Point;
@@ -33,13 +34,13 @@ package code.views
 		private static var objVideoPlayer:VideoPlayer;
 		
 		// time to buffer for the video in sec.
-		const BUFFER_TIME:Number				= 8;
+		const BUFFER_TIME:Number= 3;
 		// start volume when initializing player
-		const DEFAULT_VOLUME:Number				= 0.6;
+		const DEFAULT_VOLUME:Number	= 0.6;
 		// update delay in milliseconds.
-		const DISPLAY_TIMER_UPDATE_DELAY:int	= 10;
+		const DISPLAY_TIMER_UPDATE_DELAY:int= 10;
 		// smoothing for video. may slow down old computers
-		const SMOOTHING:Boolean					= true;
+		const SMOOTHING:Boolean	= true;
 		
 		// ###############################
 		// ############# VARIABLES
@@ -50,15 +51,15 @@ package code.views
 		// flag for knowing in which direction the description label is currently moving
 		var bolDescriptionHoverForward:Boolean = true;
 		// flag for knowing if flv has been loaded
-		var bolLoaded:Boolean					= false;
+		var bolLoaded:Boolean= false;
 		// flag for volume scrubbing
-		var bolVolumeScrub:Boolean				= false;
+		var bolVolumeScrub:Boolean= false;
 		// flag for progress scrubbing
-		var bolProgressScrub:Boolean			= false;
+		var bolProgressScrub:Boolean= false;
 		// holds the number of the active video
 		var intActiveVid:int;
 		// holds the last used volume, but never 0
-		var intLastVolume:Number				= DEFAULT_VOLUME;
+		var intLastVolume:Number= DEFAULT_VOLUME;
 		// net connection object for net stream
 		var ncConnection:NetConnection;
 		// net stream object
@@ -81,7 +82,7 @@ package code.views
 		private var checkClicked:Boolean = true;
 	
 		private var objAppModel:AppModel=AppModel.getInstance();
-		var strSource:String = objAppModel.stageRef.loaderInfo.parameters.playlist == null ? "playlist.xml" : objAppModel.stageRef.loaderInfo.parameters.playlist;
+		var strSource:String = AppModel.AUTOPLAY_VIDEO_URL; //objAppModel.stageRef.loaderInfo.parameters.playlist == null ? "playlist.xml" : objAppModel.stageRef.loaderInfo.parameters.playlist;
 		
 		public function VideoPlayer(singletonEnf:SingletonEnforcer)
 		{
@@ -220,13 +221,18 @@ package code.views
 			
 			// create new request for loading the playlist xml, add an event listener
 			// and load it
-			trace(strSource+"AutoPlay//"+AppModel.AUTOPLAY_VIDEO_URL)
+			
+			//[AS]:: Commented as no need
+			/*trace(strSource+"AutoPlay//"+AppModel.AUTOPLAY_VIDEO_URL)
 			urlRequest = new URLRequest(strSource);
 			urlLoader = new URLLoader();
 			urlLoader.addEventListener(Event.COMPLETE, playlistLoaded);
-			urlLoader.load(urlRequest); 
-			TweenLite.to(objAppModel.stageRef.videoControlMain.videoControls_mc,0,  {alpha:0});
-			TweenLite.to(objAppModel.stageRef.videoControlMain.controlTransbg_mc,0, {alpha:0});
+			urlLoader.load(urlRequest); */
+			
+			playlistLoaded();		// Call to video palyer to play default video
+			
+			TweenLite.to(objAppModel.stageRef.videoControlMain.videoControls_mc,0,{alpha:0});
+			TweenLite.to(objAppModel.stageRef.videoControlMain.controlTransbg_mc,0,{alpha:0});
 			
 			TweenLite.to(HomeViewConstants.smartStartMC.videoprefMain_mc,0, {alpha:0});
 			HomeViewConstants.smartStartMC.videoprefMain_mc.visible=false
@@ -262,7 +268,7 @@ package code.views
 				
 				case "click":		
 					checkClicked = true;
-					trace(">>>>"+event.currentTarget.name)
+				//	trace(">>>>"+event.currentTarget.name)
 					
 					videotabControlplay(event.currentTarget)
 					disablevptabControlsBtnStates(event.currentTarget);
@@ -294,11 +300,9 @@ package code.views
 		function disablevptabControlsBtnStates(target:Object):void
 		{			
 			var str:String = target.name;
-			var subStr:String = str.substr(0,str.length-1);
-			trace(target.name+")))))((((("+str)
+			var subStr:String = str.substr(0,str.length-1);		
 			for(var i:uint=1;i<4;i++)
-			{
-				trace("$$"+target.parent[subStr+i])
+			{				
 				target.parent[subStr+i].gotoAndStop(1);		
 				//target.subStr+i.gotoAndStop(1);				
 			}
@@ -310,7 +314,6 @@ package code.views
 		
 		function vptabPreference(event:MouseEvent=null):void{
 			
-			trace("iiiiiiiiiiiiiiiiii")
 			if(vptabpreferencecliked==true){
 				
 				HomeViewConstants.smartStartMC.videoprefMain_mc.visible=true
@@ -331,9 +334,7 @@ package code.views
 		/////////////////////////////////////////////start----subtext btn///////////////////////////////////////
 		var vptabSubtextcliked:Boolean=true
 			
-		function vptabSubtext():void{
-			
-		
+		function vptabSubtext():void{		
 			if(  vptabSubtextcliked==true){
 				vptabSubtextcliked=false
 		var tweentitlea=objAppModel.tweenManager(objAppModel.stageRef.subtitle_mc,.5,{y:375, alpha:1})
@@ -361,23 +362,19 @@ package code.views
 			}else{
 				vpcontrolcliked=true
 				var tween2b=objAppModel.tweenManager(objAppModel.stageRef.videoControlMain.videoControls_mc, .5, {alpha:0,onComplete:vptabControlsback});
-				tween2b.play()
-				
-			}
-						
+				tween2b.play()				
+			}						
 		}
 		
-		function vptabControlscomplete(){
-			
+		function vptabControlscomplete(){			
 			var tween2a=objAppModel.tweenManager(objAppModel.stageRef.videoControlMain.videoControls_mc, .5, {alpha:1});
-			tween2a.play()
-			
+			tween2a.play()			
 		}
+		
 		function vptabControlsback(){
 			objAppModel.stageRef.mcVideoControls.visible = true
 			var tween1b=objAppModel.tweenManager(objAppModel.stageRef.videoControlMain.controlTransbg_mc,.5,{y:1, alpha:0})
-			tween1b.play()
-			
+			tween1b.play()			
 		}
 		
 		/////////////////////////////////////////////end----control btn///////////////////////////////////////
@@ -387,13 +384,29 @@ package code.views
 			trace(event.text);
 		}
 		
+		//[AS]:: New Method ADDED
+		private function playSelectedVideo(videoURL:String):void
+		{
+			strSource = videoURL;
+			nsStream.play(strSource);
+		}
+			
 		
-		function playClicked(e:MouseEvent=null):void
+		
+		function playClicked(e:MouseEvent=null,str:String=null):void
 		{
 			// check's, if the flv has already begun
 			// to download. if so, resume playback, else
 			// load the file
+			
+			if(str!=null)
+			{
+				strSource=str;
+				bolLoaded = false;
+				trace("NEW VIDEO CLICKED")
+			}
 			if(!bolLoaded) {
+				trace("StrSource="+strSource)
 				nsStream.play(strSource);
 				bolLoaded = true;
 			}
@@ -404,8 +417,8 @@ package code.views
 			objAppModel.stageRef.vidDisplay.visible = true;
 			
 			// switch play/pause visibility
-			objAppModel.stageRef.mcVideoControls.btnPause.visible	= true;
-			objAppModel.stageRef.mcVideoControls.btnPlay.visible		= false;
+			objAppModel.stageRef.mcVideoControls.btnPause.visible= true;
+			objAppModel.stageRef.mcVideoControls.btnPlay.visible= false;
 		}
 		
 		function pauseClicked(e:MouseEvent=null):void {
@@ -413,11 +426,11 @@ package code.views
 			nsStream.pause();
 			
 			// switch play/pause visibility
-			objAppModel.stageRef.mcVideoControls.btnPause.visible	= false;
-			objAppModel.stageRef.mcVideoControls.btnPlay.visible		= true;
+			objAppModel.stageRef.mcVideoControls.btnPause.visible = false;
+			objAppModel.stageRef.mcVideoControls.btnPlay.visible = true;
 		}
 		
-		function stopClicked(e:MouseEvent):void {
+		function stopClicked(e:MouseEvent=null):void {
 			// calls stop function
 			stopVideoPlayer();
 		}
@@ -427,7 +440,7 @@ package code.views
 			setVolume(0);
 			
 			// update scrubber and fill position/width
-			objAppModel.stageRef.mcVideoControls.mcVolumeScrubber.x				= 345;
+			objAppModel.stageRef.mcVideoControls.mcVolumeScrubber.x	= 345;
 			objAppModel.stageRef.mcVideoControls.mcVolumeFill.mcFillRed.width	= 1;
 		}
 		
@@ -531,7 +544,9 @@ package code.views
 		
 		function netStatusHandler(event:NetStatusEvent):void {
 			// handles net status events
-			switch (event.info.code) {
+			trace(event.info.code)
+			switch (event.info.code)
+			{
 				// trace a messeage when the stream is not found
 				case "NetStream.Play.StreamNotFound":
 					trace("Stream not found: " + strSource);
@@ -539,9 +554,9 @@ package code.views
 				// when the video reaches its end, we check if there are
 				// more video left or stop the player
 				case "NetStream.Play.Stop":
-					if(intActiveVid + 1 < xmlPlaylist..vid.length())
+					/*if(intActiveVid + 1 < xmlPlaylist..vid.length())
 						playNext();
-					else
+					else*/
 						stopVideoPlayer();
 					break;
 			}
@@ -555,11 +570,11 @@ package code.views
 			// in order to clear the display, we need to
 			// set the visibility to false since the clear
 			// function has a bug
-			objAppModel.stageRef.vidDisplay.visible					= false;
+			objAppModel.stageRef.vidDisplay.visible	= false;
 			
 			// switch play/pause button visibility
-			objAppModel.stageRef.mcVideoControls.btnPause.visible	= false;
-			objAppModel.stageRef.mcVideoControls.btnPlay.visible		= true;
+			objAppModel.stageRef.mcVideoControls.btnPause.visible= false;
+			objAppModel.stageRef.mcVideoControls.btnPlay.visible= true;
 		}
 		
 		function setVolume(intVolume:Number = 0):void {
@@ -674,9 +689,9 @@ package code.views
 			}
 		}
 		
-		function playlistLoaded(e:Event):void {
+		private function playlistLoaded():void {
 			// create new xml with loaded data from loader
-			xmlPlaylist = new XML(urlLoader.data);
+			//xmlPlaylist = new XML(urlLoader.data);
 			
 			// set source of the first video but don't play it
 			playVid(0, false)
@@ -691,21 +706,22 @@ package code.views
 				tmrDisplay.stop();
 				
 				// play requested video
-				nsStream.play(String(xmlPlaylist..vid[intVid].@src));
+				nsStream.play(strSource);
+				objAppModel.stageRef.debugText.text=strSource;
 				
 				// switch button visibility
 				objAppModel.stageRef.mcVideoControls.btnPause.visible= true;
 				objAppModel.stageRef.btnPlay.visible = false;
-			} else {
-				strSource = xmlPlaylist..vid[intVid].@src;
 			}
-			playClicked();
+			//playClicked();
 			// show video display
 			objAppModel.stageRef.vidDisplay.visible	= true;
 			
 			// reset description label position and assign new description
 			objAppModel.stageRef.mcVideoControls.mcVideoDescription.lblDescription.x = 0;
-			objAppModel.stageRef.mcVideoControls.mcVideoDescription.lblDescription.htmlText = (intVid + 1) + ". <font color='#000000'>" + String(xmlPlaylist..vid[intVid].@desc) + "</font>";
+			
+			//[AS]:: Need to check
+			//objAppModel.stageRef.mcVideoControls.mcVideoDescription.lblDescription.htmlText = (intVid + 1) + ". <font color='#000000'>" + String(xmlPlaylist..vid[intVid].@desc) + "</font>";
 			
 			// update active video number
 			intActiveVid = intVid;
@@ -736,7 +752,7 @@ package code.views
 		}
 		
 		//Method Added By [AS::13Sep12], to Control VideoPlayer playback functions from outside
-		public function controlVideoPlayBack(bool:Boolean):void
+		public function controlVideoPlayBack(bool:Boolean,videoURL:String=null):void
 		{
 			if(bool)
 			{
@@ -744,7 +760,16 @@ package code.views
 			}
 			else
 			{
-				pauseClicked();
+				if(videoURL!=null)
+				{
+					trace("Request for new video play="+videoURL)
+					strSource = videoURL;
+					bolLoaded = false;
+					playClicked();
+					//playSelectedVideo(videoURL);
+				}else{
+					pauseClicked();
+				}
 			}			
 		}
 	}	

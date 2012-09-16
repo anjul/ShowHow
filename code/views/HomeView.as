@@ -45,6 +45,7 @@
 		
 		private var videoBucket:VideoBucketHolder;
 		private var objVideoPlayer:VideoPlayer;
+		private var tabFullMC;
 		
 		public function HomeView()
 		{
@@ -116,6 +117,7 @@
 		 
 		 private function attachSmartStartMC():void
 		 {
+			trace(HomeViewConstants.smartStartMC.tabSh2snap_full)
 			 objAppModel.stageRef.addChild(HomeViewConstants.smartStartMC);
 			 useButtonMode(true);
 			 HomeViewConstants.smartStartMC.x = smartStartX;
@@ -141,6 +143,10 @@
 			 ////////////////////////////////////////////////////////////////////
 			 
 			 HomeViewConstants.smartStartMC.tabSh2snap_full.back2videoBtn_mc.addEventListener(MouseEvent.CLICK,back2videoBtn_ClickHandler);
+			 HomeViewConstants.smartStartMC.tabSmartstart_full.back2videoBtn_mc.addEventListener(MouseEvent.CLICK,back2videoBtn_ClickHandler);
+			 HomeViewConstants.smartStartMC.tabPlaylist_full.back2videoBtn_mc.addEventListener(MouseEvent.CLICK,back2videoBtn_ClickHandler);
+			 HomeViewConstants.smartStartMC.tabSh2map_full.back2videoBtn_mc.addEventListener(MouseEvent.CLICK,back2videoBtn_ClickHandler);
+			 HomeViewConstants.smartStartMC.tabMostviewed_full.back2videoBtn_mc.addEventListener(MouseEvent.CLICK,back2videoBtn_ClickHandler);
 			 
 			 HomeViewConstants.smartStartMC.tabSh2snap_full.SH2snapFullBtn1.addEventListener(MouseEvent.CLICK,sh2SnapButtonEvents);
 			 HomeViewConstants.smartStartMC.tabSh2snap_full.SH2snapFullBtn2.addEventListener(MouseEvent.CLICK,sh2SnapButtonEvents);
@@ -172,12 +178,17 @@
 			 HomeViewConstants.smartStartMC.tabSh2snap_full.SH2snapFullBtn4.buttonMode = bool;
 			 
 			 HomeViewConstants.smartStartMC.tabSh2snap_full.back2videoBtn_mc.buttonMode = bool;
+			 HomeViewConstants.smartStartMC.tabSmartstart_full.back2videoBtn_mc.buttonMode = bool;
+			 HomeViewConstants.smartStartMC.tabPlaylist_full.back2videoBtn_mc.buttonMode = bool;
+			 HomeViewConstants.smartStartMC.tabSh2map_full.back2videoBtn_mc.buttonMode = bool;
+			 HomeViewConstants.smartStartMC.tabMostviewed_full.back2videoBtn_mc.buttonMode = bool;
 		 }
 		 
 		 private function tabEvents(event:MouseEvent):void
 		 {
 			var tabMC = event.target.parent[event.currentTarget.name+"_mc"];
-			var tabFullMC = event.target.parent[event.currentTarget.name+"_full"];
+			tabFullMC = event.target.parent[event.currentTarget.name+"_full"];
+			
 			switch(event.type)
 			{
 				case "rollOver":
@@ -188,7 +199,7 @@
 					tabMC.gotoAndPlay(21);
 					break;
 				
-				case "click":	
+				case "click":					
 					objVideoPlayer.controlVideoPlayBack(false);		// Pausing the video
 					tabFullMC.play()
 					break;
@@ -262,23 +273,24 @@
 				videoBucket.openSH2SnapTab(sh2SnapTab);
 			}
 			this.addChild(videoBucket);
+			
 			videoBucket.x = 30;
 			videoBucket.y = 70;				
 		 }
 		 
-		private function back2videoBtn_ClickHandler(event:MouseEvent):void
-		 {			 
-			 event.currentTarget.parent.addEventListener(Event.ENTER_FRAME,frameUpdate);
-			 if(this.contains(videoBucket))
-			 {
-//				 videoBucket.visible = false;
-				 this.removeChild(videoBucket)
-			 }			
-		 }
-		 
+		public function back2videoBtn_ClickHandler(event:MouseEvent=null):void
+		{		
+			//event.currentTarget.parent.addEventListener(Event.ENTER_FRAME,frameUpdate);		
+			tabFullMC.addEventListener(Event.ENTER_FRAME,frameUpdate);		
+			if(this.contains(videoBucket))
+			{
+				this.removeChild(videoBucket)
+			}			
+		}
+				 
 		 private function frameUpdate(event:Event):void
 		 {		
-			 event.currentTarget.prevFrame()
+			 event.currentTarget.prevFrame();
 			 if(event.currentTarget.currentFrame==1)
 			 {
 				 event.currentTarget.removeEventListener(Event.ENTER_FRAME,frameUpdate);		

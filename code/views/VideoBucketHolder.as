@@ -1,5 +1,6 @@
 ﻿package code.views
 {
+	import code.events.PlaySelectedVideoEvent;
 	import code.model.AppModel;
 	import code.views.HomeViewConstants;
 	import code.views.VideoBucketConstants;
@@ -20,11 +21,15 @@
 	{
 		private var videoBucket:VideoBucket;
 		private var objVideoPlayer:VideoPlayer;
-		private var filmsArr:Array=new Array();
+		private var that:VideoBucketHolder;
+		
+		private var previousButton:ScrollPanPrevious;
+		private var nextButton:ScrollPanNext;
+		private var objAppModel:AppModel = AppModel.getInstance();
 		
 		public function VideoBucketHolder()
 		{		
-			
+			that = this;
 		}		
 		
 		public function openSH2SnapTab(sh2SnapTab:Object):void
@@ -56,7 +61,7 @@
 			}
 		}
 		
-		private function attachVideoTiles(filmsArray):void
+		private function attachVideoTiles(filmsArray:Array):void
 		{
 			var startX:int=VideoBucketConstants.VIDEOTILE_X;
 			var startY:int=VideoBucketConstants.VIDEOTILE_Y;
@@ -69,7 +74,10 @@
 				videoBucket.y = startY;
 				videoBucket.name = i.toString();
 				videoBucket.videoTile.playBtn.buttonMode = true;
-				videoBucket.videoTile.playBtn.addEventListener(MouseEvent.CLICK,playButton_Handler);
+				videoBucket.videoTile.playBtn.addEventListener(MouseEvent.CLICK,playButton_Handler(filmsArray[i].videoURL));
+				/*dispatchEvent(new PlaySelectedVideoEvent(PlaySelectedVideoEvent.CLICK,filmsArray[i].videoURL));
+				videoBucket.videoTile.playBtn.addEventListener(PlaySelectedVideoEvent.CLICK,plClick);*/
+				
 				videoBucket.videoTile.durationText.text=filmsArray[i].duration;
 				videoBucket.videoTile.videoTitleText.text=filmsArray[i].videoTitle;
 				videoBucket.videoTile.summaryText.text=filmsArray[i].description;				
@@ -91,22 +99,64 @@
 					startY = VideoBucketConstants.VIDEOTILE_Y;
 				}		
 				VideoBucketConstants.VIDEOBUCKET_ARRAY.push(videoBucket);
-			}			
+			}		
+			trace("W="+this.width+"--H="+this.height)
+			previousButton = new ScrollPanPrevious();
+			nextButton = new ScrollPanNext();
+			
+			if(filmsArray.length>4)
+			{
+				this.addChild(previousButton);
+				previousButton.x = VideoBucketConstants.previousBtnX;
+				previousButton.y = VideoBucketConstants.previousBtnY;
+				//previousButton.visible = false;
+				
+				this.addChild(nextButton);
+				nextButton.x = VideoBucketConstants.nextBtnX;
+				nextButton.y = VideoBucketConstants.nextBtnY;	
+				
+				previousButton.addEventListener(MouseEvent.CLICK,scrollPaneButtonEvents);
+				nextButton.addEventListener(MouseEvent.CLICK,scrollPaneButtonEvents);
+			}
 		}
 		
+		private function scrollPaneButtonEvents(event:MouseEvent):void
+		{
+			switch(event.currentTarget)
+			{
+				case nextButton:
+					trace("Sp")
+					//this.x = this.x - 900;
+					break;
+				
+				case previousButton:
+					trace("SPP")
+					break;				
+			}
+		}
+				
 		private function imageLoaded(event:Event)
 		{
 			//videoBucket.videoTile.videoThumb.addChild(event.target.content);
 			trace("Loaded")
 		}
+		
+		//[AS]:Handling MoueEvent.CLICK callback by recieving a videoURL from clickevent
 
-		private function playButton_Handler(event:MouseEvent):void
+		private function playButton_Handler(videoURL:String):Function
 		{
-			var index:Number = Number(event.currentTarget.parent.parent.name)
-			var videoURL:String = AppVO.IMAGE_URL+filmsArr[index];
-			trace(index+"Clicked Video = "+filmsArr[0]);
-			objVideoPlayer.controlVideoPlayBack(false)
-		}
+			var func:Function = function(event:MouseEvent)
+			{
+				//trace(">>"+videoURL);
+				var videoPath:String = AppVO.IMAGE_URL+videoURL;
+				objVideoPlayer.controlVideoPlayBack(false,videoPath);		
+				objAppModel.homeViewRef.back2videoBtn_ClickHandler();		// Call for SH2Snap_Full animation play reverse
+			}			
+			/*you might want to consider adding these to a dictionary or array, 
+			so can remove the listeners to allow garbage collection*/
+			return func;
+		}		
+		
 		/*private function duplicateDisplayObject( displayObject:DisplayObject ):DisplayObject 
 		{
 			var class_name:String = getQualifiedClassName( displayObject );
