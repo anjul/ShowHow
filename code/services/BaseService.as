@@ -1,12 +1,10 @@
 package code.services
 {
 	import flash.events.Event;
-	import flash.events.IEventDispatcher;
-	import flash.events.EventDispatcher;
-	import flash.events.Event;
 	import flash.events.EventDispatcher;
 	import flash.events.IEventDispatcher;
 	import flash.events.IOErrorEvent;
+	import flash.events.ProgressEvent;
 	import flash.net.URLLoader;
 	import flash.net.URLRequest;
 	import flash.net.URLRequestMethod;
@@ -41,6 +39,7 @@ package code.services
 			
 			
 			//objHTTP.addEventListener(Event.COMPLETE, onResult);
+			objHTTP.addEventListener(ProgressEvent.PROGRESS,onProgress);
 			objHTTP.addEventListener(Event.COMPLETE, checkContent);
 			objHTTP.addEventListener(IOErrorEvent.IO_ERROR, onError);
 			
@@ -54,8 +53,12 @@ package code.services
 		
 		protected function checkContent(evt:Event):void
 		{
-			var oXML:XML = XML(evt.target.data);
+			var oXML:XML = XML(evt.target.data);			
 			onResult(evt);
+		}
+		
+		protected function onProgress(evt:ProgressEvent):void
+		{			
 		}
 		
 		protected function onResult(evt:Event):void

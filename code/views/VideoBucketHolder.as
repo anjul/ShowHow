@@ -27,6 +27,18 @@
 		private var nextButton:ScrollPanNext;
 		private var objAppModel:AppModel = AppModel.getInstance();
 		
+		private var locationObject0:Object=new Object();
+		private var locationObject1:Object=new Object();
+		private var locationObject2:Object=new Object();
+		private var locationObject3:Object=new Object();
+		private var outOfStageLeft:Object=new Object();		
+		private var outOfStageRight:Object=new Object();
+		
+		private var maxFrontTiles:int=4;
+		private var nextTileStartingPosition:int=0;
+		private var limitForNextTileSet:int=4
+		
+		
 		public function VideoBucketHolder()
 		{		
 			that = this;
@@ -35,6 +47,7 @@
 		public function openSH2SnapTab(sh2SnapTab:Object):void
 		{
 			objVideoPlayer=VideoPlayer.getInstance();
+			trace("Tab name:="+sh2SnapTab.name)
 			switch(sh2SnapTab.name)
 			{
 				case VideoBucketConstants.SMART_START:
@@ -55,6 +68,14 @@
 					attachVideoTiles(FilmConstants.advancedMediaArr);
 					break;
 				
+				case VideoBucketConstants.TAB_SMART_START:
+					attachVideoTiles(FilmConstants.smartStartMediaArr);
+					break;
+				
+				case VideoBucketConstants.TAB_MOST_VIEWED:
+					attachVideoTiles(FilmConstants.smartStartMediaArr);
+					break;
+			
 				default:
 					trace("False Tab name::Code Error in VideoBucketHolder.as in openSH2SnapTab method,");
 					break;
@@ -65,6 +86,10 @@
 		{
 			var startX:int=VideoBucketConstants.VIDEOTILE_X;
 			var startY:int=VideoBucketConstants.VIDEOTILE_Y;
+			
+			outOfStageLeft.sx=startX - 100;
+			outOfStageLeft.sy=startY;
+			
 			var loader:Loader;
 			var urlRequest:URLRequest;
 			for(var i:int=0;i<filmsArray.length;i++)
@@ -84,11 +109,11 @@
 			
 				/////////////////////////////////////////////////////////////////////////
 				//Need to load image into below mentioned movie clip::But right now it's not working need to fix.
-				/*urlRequest = new URLRequest();
-				urlRequest.url = AppVO.IMAGE_URL+filmsArray[i].image_url;
+				urlRequest = new URLRequest();
+				urlRequest.url = AppModel.BASE_URL+AppModel.player+AppModel.PID+AppModel.content+filmsArray[i].image_url;
 				loader = new Loader();
 				loader.load(urlRequest);
-				loader.contentLoaderInfo.addEventListener(Event.COMPLETE,imageLoaded);		*/		
+				loader.contentLoaderInfo.addEventListener(Event.COMPLETE,imageLoaded);				
 				/////////////////////////////////////////////////////////////////////////
 				this.addChild(videoBucket);
 				startY = (videoBucket.height/2)+ VideoBucketConstants.VGAP+startY;
@@ -97,19 +122,28 @@
 				{
 					startX = (videoBucket.width/2)+VideoBucketConstants.HGAP+startX;
 					startY = VideoBucketConstants.VIDEOTILE_Y;
-				}		
+				}				
+				if(i<maxFrontTiles)	// this condition will push the x y positon of videoTile in location0-location3 objects
+				{
+					this["locationObject"+i].sx = videoBucket.x;
+					this["locationObject"+i].sy = videoBucket.y;
+				}
 				VideoBucketConstants.VIDEOBUCKET_ARRAY.push(videoBucket);
 			}		
-			trace("W="+this.width+"--H="+this.height)
+				
+			outOfStageRight.sx = startX;
+			outOfStageRight.sy = startY;
+			
+			
 			previousButton = new ScrollPanPrevious();
 			nextButton = new ScrollPanNext();
-			
+									
 			if(filmsArray.length>4)
 			{
 				this.addChild(previousButton);
 				previousButton.x = VideoBucketConstants.previousBtnX;
 				previousButton.y = VideoBucketConstants.previousBtnY;
-				//previousButton.visible = false;
+				previousButton.visible = false;
 				
 				this.addChild(nextButton);
 				nextButton.x = VideoBucketConstants.nextBtnX;
@@ -117,6 +151,9 @@
 				
 				previousButton.addEventListener(MouseEvent.CLICK,scrollPaneButtonEvents);
 				nextButton.addEventListener(MouseEvent.CLICK,scrollPaneButtonEvents);
+				
+				limitForNextTileSet = limitForNextTileSet + maxFrontTiles;
+				nextTileStartingPosition = maxFrontTiles;
 			}
 		}
 		
@@ -125,8 +162,9 @@
 			switch(event.currentTarget)
 			{
 				case nextButton:
-					trace("Sp")
-					//this.x = this.x - 900;
+					//[AS]:: Commented as below mentioned logic needs to be rewritten
+					//showNextTileSet();
+//					trace("L="+VideoBucketConstants.VIDEOBUCKET_ARRAY.length+"--nextTileStartingPosition--"+nextTileStartingPosition)
 					break;
 				
 				case previousButton:
@@ -134,11 +172,46 @@
 					break;				
 			}
 		}
+		
+		private function showNextTileSet():void
+		{		
+			previousButton.visible=true;
+			var count:int=0;
+			
+			for(var i:int=nextTileStartingPosition;i<limitForNextTileSet;i++)
+			{
+				//VideoBucketConstants.VIDEOBUCKET_ARRAY[i-1].visible=false;
+				
+				VideoBucketConstants.VIDEOBUCKET_ARRAY[i].x = this["locationObject"+count].sx;
+				VideoBucketConstants.VIDEOBUCKET_ARRAY[i].y = this["locationObject"+count].sy;
+				
+				count++;
+				if(count>3){
+					count=0;}
+			}
+			limitForNextTileSet = maxFrontTiles+i;
+			
+//			nextTileStartingPosition = i;		
+			if(limitForNextTileSet<VideoBucketConstants.VIDEOBUCKET_ARRAY.length)
+			{
+				nextTileStartingPosition = i;				
+			}else{
+				if((limitForNextTileSet-VideoBucketConstants.VIDEOBUCKET_ARRAY.length)==1)
+				{
+					limitForNextTileSet=VideoBucketConstants.VIDEOBUCKET_ARRAY.length;
+					nextTileStartingPosition = i;	
+				}else{
+					nextTileStartingPosition = maxFrontTiles;
+					limitForNextTileSet = maxFrontTiles+4;
+					nextButton.visible=false;
+					trace("Limit Reached")}
+			}
+		}
 				
 		private function imageLoaded(event:Event)
 		{
-			//videoBucket.videoTile.videoThumb.addChild(event.target.content);
-			trace("Loaded")
+			var videoThumb = videoBucket.videoTile.videoThumb;
+			videoThumb.addChild(event.currentTarget.content);			
 		}
 		
 		//[AS]:Handling MoueEvent.CLICK callback by recieving a videoURL from clickevent
@@ -148,9 +221,9 @@
 			var func:Function = function(event:MouseEvent)
 			{
 				//trace(">>"+videoURL);
-				var videoPath:String = AppVO.IMAGE_URL+videoURL;
-				objVideoPlayer.controlVideoPlayBack(false,videoPath);		
-				objAppModel.homeViewRef.back2videoBtn_ClickHandler();		// Call for SH2Snap_Full animation play reverse
+				var videoPath:String = AppModel.BASE_URL+AppModel.player+AppModel.PID+AppModel.content+videoURL;
+//				objVideoPlayer.controlVideoPlayBack(false,videoPath);		
+				objAppModel.homeViewRef.back2videoBtn_ClickHandler(null,videoPath);		// Call for SH2Snap_Full animation play reverse
 			}			
 			/*you might want to consider adding these to a dictionary or array, 
 			so can remove the listeners to allow garbage collection*/

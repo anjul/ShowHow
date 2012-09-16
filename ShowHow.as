@@ -1,5 +1,6 @@
 package
 {
+	import code.events.AppEvents;
 	import code.model.AppModel;
 	import code.services.ServiceConstants;
 	import code.views.HomeView;
@@ -26,7 +27,7 @@ package
 		
 		public function ShowHow()
 		{
-			trace(">>>>"+this.loaderInfo.parameters.baseUrl)
+			//trace(">>>>"+this.loaderInfo.parameters.baseUrl)
 			loadFlashVars();	
 			
 		}
@@ -49,6 +50,8 @@ package
 			else
 			{
 				ServiceConstants.FULL_PATH = "http://www.showhow2.com/product/1/";
+				AppModel.BASE_URL = "http://www.showhow2.com/";
+				AppModel.PID = "1";
 				debugText.text = "No FlashVars recieved"+_filmId+_omniId+_baseUrl+_dataUrl+_productID
 				//throw new Error("No FlashVars recieved");
 			}
@@ -58,14 +61,28 @@ package
 		private function init():void
 		{
 			objAppModel.stageRef = this;
+			objAppModel.addEventListener(AppEvents.INIT_XML_DATA_LOADED,initXmlDataLoaded);
+			objAppModel.addEventListener(AppEvents.XML_DATA_LOAD_FAILURE,failToLoadXmlData);
+			
 			//objAppModel.loadXML(ServiceConstants.FILMS_LOCAL_XML_PATH); // First XML load call has sent
-			objAppModel.loadXML(ServiceConstants.FULL_PATH+ServiceConstants.FILMS_XML_PATH); // First XML load call has sent
+			objAppModel.loadXML(ServiceConstants.FULL_PATH+ServiceConstants.FILMS_XML_PATH); // First XML load call has sent			
+		}
+		
+		private function initXmlDataLoaded(event:AppEvents):void
+		{
+			preloadingClip.visible=false;
+			
 			objVideoPlayer=VideoPlayer.getInstance();
 			this.addChild(objVideoPlayer);
 			
 			homeView = new HomeView();
 			this.addChild(homeView);
 			objAppModel.homeViewRef = homeView;
+		}
+		
+		private function failToLoadXmlData(event:AppEvents):void
+		{
+			trace("XML Loading Failed")
 		}
 	}
 }

@@ -91,9 +91,10 @@ package code.views
 				throw new  Error("To instantiate this class use getInstance(), use of new is not allowed");
 			}else{
 				objAppModel.stageRef.stage.scaleMode	= StageScaleMode.NO_SCALE;
-				objAppModel.stageRef.stage.align		= StageAlign.TOP_LEFT;
-				initVideoPlayer();
-			}			
+				objAppModel.stageRef.stage.align		= StageAlign.TOP_LEFT;				
+			}	
+			initVideoPlayer();
+			trace("Def Vid="+AppModel.AUTOPLAY_VIDEO_URL)
 		}
 		
 		public static function getInstance():VideoPlayer
@@ -398,17 +399,19 @@ package code.views
 			// check's, if the flv has already begun
 			// to download. if so, resume playback, else
 			// load the file
+			trace("bolLoaded="+bolLoaded)
 			
 			if(str!=null)
 			{
 				strSource=str;
-				bolLoaded = false;
-				trace("NEW VIDEO CLICKED")
+				bolLoaded = false;				
 			}
-			if(!bolLoaded) {
-				trace("StrSource="+strSource)
+			
+			if(!bolLoaded) 
+			{
 				nsStream.play(strSource);
 				bolLoaded = true;
+				trace("New Video StrSource="+str)
 			}
 			else{
 				nsStream.resume();
@@ -548,16 +551,35 @@ package code.views
 			switch (event.info.code)
 			{
 				// trace a messeage when the stream is not found
-				case "NetStream.Play.StreamNotFound":
-					trace("Stream not found: " + strSource);
+				case "NetConnection.Connect.Success":
+					trace(event.info.code)
 					break;
-				// when the video reaches its end, we check if there are
-				// more video left or stop the player
+				
+				case "NetStream.Connect.Closed":
+					trace(event.info.code)
+					break;
+				
+				case "NetStream.Play.Start":
+					trace(event.info.code)
+					break;
+				
+				case "NetStream.Play.StreamNotFound":
+						trace("Stream not found: " + strSource);		// when the video reaches its end, we check if there are  more video left or stop the player
+					break;
+				
+				
 				case "NetStream.Play.Stop":
 					/*if(intActiveVid + 1 < xmlPlaylist..vid.length())
 						playNext();
 					else*/
+					trace(event.info.code)
 						stopVideoPlayer();
+					break;
+				
+				case "NetStream.Buffer.Full":
+					break;
+				
+				case "NetStream.Buffer.Empty":
 					break;
 			}
 		}
@@ -694,7 +716,7 @@ package code.views
 			//xmlPlaylist = new XML(urlLoader.data);
 			
 			// set source of the first video but don't play it
-			playVid(0, false)
+			playVid(0)
 			
 			// show controls
 			objAppModel.stageRef.mcVideoControls.visible = true;
@@ -711,7 +733,7 @@ package code.views
 				
 				// switch button visibility
 				objAppModel.stageRef.mcVideoControls.btnPause.visible= true;
-				objAppModel.stageRef.btnPlay.visible = false;
+				objAppModel.stageRef.mcVideoControls.btnPlay.visible = false; 
 			}
 			//playClicked();
 			// show video display
