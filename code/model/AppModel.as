@@ -140,7 +140,7 @@
 						tagsVO = new TagsVO();
 						tagsVO.label = tagXML.tag.label[i].toString();
 						tagsVO.keyword = tagXML.tag.keyword[i].toString();
-						tagsVO.count = int(tagXML.tag.count[i])		
+						tagsVO.count = tagXML.tag.count[i].toString();	
 							
 						tagsArray.push(tagsVO);
 					}

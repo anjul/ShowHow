@@ -346,6 +346,12 @@
 			 objAppModel.stageRef.addChild(HomeViewConstants.welcomeMC);
 			 HomeViewConstants.welcomeMC.x = welcomeX;
 			 HomeViewConstants.welcomeMC.y = welcomeY;
+			 attachTagCloud();
+		 }
+		 
+		 private function attachTagCloud():void
+		 {
+			 var tagCloud:TagCloud = new TagCloud();
 		 }
 		 
 		 private function attachHomeBtn():void

@@ -113,7 +113,7 @@
 				urlRequest.url = AppModel.BASE_URL+AppModel.player+AppModel.PID+AppModel.content+filmsArray[i].image_url;
 				loader = new Loader();
 				loader.load(urlRequest);
-				loader.contentLoaderInfo.addEventListener(Event.COMPLETE,imageLoaded);				
+				loader.contentLoaderInfo.addEventListener(Event.COMPLETE,imageLoaded(videoBucket.videoTile.videoThumb));				
 				/////////////////////////////////////////////////////////////////////////
 				this.addChild(videoBucket);
 				startY = (videoBucket.height/2)+ VideoBucketConstants.VGAP+startY;
@@ -208,10 +208,13 @@
 			}
 		}
 				
-		private function imageLoaded(event:Event)
+		private function imageLoaded(imageHolder:MovieClip):Function
 		{
-			var videoThumb = videoBucket.videoTile.videoThumb;
-			videoThumb.addChild(event.currentTarget.content);			
+			var fun:Function = function(event:Event)
+			{
+				imageHolder.addChild(event.currentTarget.content);				
+			}		
+			return fun;
 		}
 		
 		//[AS]:Handling MoueEvent.CLICK callback by recieving a videoURL from clickevent
