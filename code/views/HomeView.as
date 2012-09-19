@@ -346,6 +346,7 @@
 			 objAppModel.stageRef.addChild(HomeViewConstants.welcomeMC);
 			 HomeViewConstants.welcomeMC.x = welcomeX;
 			 HomeViewConstants.welcomeMC.y = welcomeY;
+			 HomeViewConstants.welcomeMC.full_mc.productName.text = "Complete " +objAppModel.getProductName()+ " ShowHow2";
 			 attachTagCloud();
 		 }
 		 

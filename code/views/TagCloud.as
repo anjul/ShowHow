@@ -33,26 +33,20 @@ package code.views
 			{		
 				cloudMenuMc = new  CloudMenu_mc();	
 				refTagCloudMc.addChild(cloudMenuMc);
-				
+				cloudMenuMc.tempText = AppModel.tagsArray[i].label;
 				var fontSize:String =  AppModel.tagsArray[i].count;
-				
-				var tf:TextFormat = new TextFormat();
-				tf.font = 'verdana';
-				tf.color ='0xFF000000';
-				tf.size = fontSize;
-				
-				/*var style:StyleSheet = new StyleSheet();
-				style.setStyle("body",{fontFamily:'Arial'});			
-				style.setStyle("link",{fontSize:fontSize,color:"#FFFFFF"});
-				style.setStyle("over",{fontSize:fontSize,textDecoration:"underline",color:"#FF9C00"});*/
+							
+				var styles:StyleSheet = new StyleSheet();
+				styles.setStyle("body",{fontFamily:'Arial'});			
+				styles.setStyle("link",{fontSize:fontSize});//,color:"#FFFFFF"});
+				styles.setStyle("over",{fontSize:fontSize,textDecoration:"underline",color:"#FF9C00"});
 							
 				cloudMenuMc.label_txt.autoSize = TextFieldAutoSize.LEFT;
 				cloudMenuMc.label_txt.multiline = false;
 				cloudMenuMc.label_txt.wordWrap = false;
-				cloudMenuMc.label_txt.selectable = true;	
-				cloudMenuMc.label_txt.defaultTextFormat = tf;
-//				cloudMenuMc.label_txt.styleSheet = style;
-				cloudMenuMc.label_txt.htmlText = "<link>"+ AppModel.tagsArray[i].label+"</link>";
+				cloudMenuMc.label_txt.selectable = true;			
+				cloudMenuMc.label_txt.styleSheet = styles;
+				cloudMenuMc.label_txt.htmlText = "<link>"+AppModel.tagsArray[i].label+"</link>";
 				
 				cloudMenuMc.x = xPos + 5;
 				cloudMenuMc.y = yPos;			
@@ -76,7 +70,9 @@ package code.views
 				
 				cloudMenuMc.buttonMode = true;
 				
-				cloudMenuMc.addEventListener(MouseEvent.CLICK,onTagClicked);
+				cloudMenuMc.addEventListener(MouseEvent.CLICK,tagEvents);
+				cloudMenuMc.addEventListener(MouseEvent.ROLL_OVER,tagEvents);
+				cloudMenuMc.addEventListener(MouseEvent.ROLL_OUT,tagEvents);
 				cloudMenuMc.mouseChildren=false;
 				
 				/*mc.onRollOver = function()
@@ -111,9 +107,20 @@ package code.views
 			return [];
 		}
 		
-		private function onTagClicked(event:MouseEvent):void
+		private function tagEvents(event:MouseEvent):void
 		{
-			trace("Tag Clicked")
+			switch(event.type)
+			{
+				case 'click':
+					break;
+				case 'rollOver':
+					event.currentTarget.label_txt.htmlText = "<over>"+event.currentTarget.tempText+"</over>"
+					break;
+				case 'rollOut':
+					event.currentTarget.label_txt.htmlText = "<link>"+event.currentTarget.tempText+"</link>"
+					break;
+			}
+			
 		}
 	}
 }
