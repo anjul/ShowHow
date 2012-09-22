@@ -10,6 +10,7 @@ package code.services
 		
 		public static const TAGS_XML:String="tags";
 		public static const TAGS_XML_PATH:String="/tags/";
+		public static const TAG_XML_PATH:String="/tag/";
 		
 		public static const TEXT_XML:String="main";
 		public static const TEXT_XML_PATH:String="/text/";

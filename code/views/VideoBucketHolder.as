@@ -36,7 +36,9 @@
 		
 		private var maxFrontTiles:int=4;
 		private var nextTileStartingPosition:int=0;
-		private var limitForNextTileSet:int=4
+		private var limitForNextTileSet:int=4;
+		
+		private var tabRef:Object;
 		
 		
 		public function VideoBucketHolder()
@@ -52,7 +54,7 @@
 			{
 				case VideoBucketConstants.SMART_START:
 					//var myDuplicate:MovieClip = duplicateDisplayObject( videoBucket ) as MovieClip;
-					attachVideoTiles(FilmConstants.smartStartMediaArr);
+					attachVideoTiles(FilmConstants.smartStartMediaArr);					
 					break;
 				
 				case VideoBucketConstants.BEGINNER:
@@ -63,8 +65,7 @@
 					attachVideoTiles(FilmConstants.intermediateMediaArr);
 					break;
 				
-				case VideoBucketConstants.ADVANCED:
-					trace("Adv="+FilmConstants.advancedMediaArr.length);
+				case VideoBucketConstants.ADVANCED:					
 					attachVideoTiles(FilmConstants.advancedMediaArr);
 					break;
 				
@@ -74,6 +75,11 @@
 				
 				case VideoBucketConstants.TAB_MOST_VIEWED:
 					attachVideoTiles(FilmConstants.smartStartMediaArr);
+					break;
+				
+				case VideoBucketConstants.TAB_TAG_CLOUD:
+					tabRef = sh2SnapTab;
+					attachVideoTiles(FilmConstants.tagMediaArray);
 					break;
 			
 				default:
@@ -226,7 +232,7 @@
 				//trace(">>"+videoURL);
 				var videoPath:String = AppModel.BASE_URL+AppModel.player+AppModel.PID+AppModel.content+videoURL;
 //				objVideoPlayer.controlVideoPlayBack(false,videoPath);		
-				objAppModel.homeViewRef.back2videoBtn_ClickHandler(null,videoPath);		// Call for SH2Snap_Full animation play reverse
+				objAppModel.homeViewRef.back2videoBtn_ClickHandler(null,videoPath,tabRef);		// Call for SH2Snap_Full animation play reverse
 			}			
 			/*you might want to consider adding these to a dictionary or array, 
 			so can remove the listeners to allow garbage collection*/

@@ -14,6 +14,8 @@ package code.views
 		public static const TAB_PLAYLIST:String="tabPlaylist";
 		public static const TAB_MAP:String="tabMap";
 		
+		public static const TAB_TAG_CLOUD:String="tagCloud";
+		
 		public static const VIDEOTILE_X:int = 25;
 		public static const VIDEOTILE_Y:int = 70;
 		public static const HGAP:int = 0;
@@ -25,7 +27,7 @@ package code.views
 		public static const previousBtnY:int=120;
 		
 		public static const videoBucketX:int=30;
-		public static const videoBucketY:int=70;
+		public static const videoBucketY:int=55;
 		
 	}
 }

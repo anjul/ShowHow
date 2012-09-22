@@ -1,9 +1,13 @@
 package code.views
 {
+	import code.events.AppEvents;
 	import code.model.AppModel;
+	import code.model.TagCloudModel;
+	import code.services.ServiceConstants;
 	import code.views.HomeViewConstants;
 	
 	import flash.display.MovieClip;
+	import flash.events.Event;
 	import flash.events.MouseEvent;
 	import flash.text.StyleSheet;
 	import flash.text.TextField;
@@ -19,8 +23,14 @@ package code.views
 		private var yPos:int = 0;
 		private var maxWidth:int = 0;
 		private var maxHeight:int = 0;
+		private var tagFullX:int = 0;
+		private var tagFullY:int = 73;
+		
 		private var rowList:Array = [];	
-		private var cloudMenuMc:CloudMenu_mc;		
+		private var requestedVideoURL:String;
+		private var cloudMenuMc:CloudMenu_mc;	
+		private var objVideoPlayer:VideoPlayer=VideoPlayer.getInstance();
+		private var objTaCloudModel:TagCloudModel=TagCloudModel.getInstance();
 			
 		public function TagCloud()
 		{
@@ -38,7 +48,7 @@ package code.views
 							
 				var styles:StyleSheet = new StyleSheet();
 				styles.setStyle("body",{fontFamily:'Arial'});			
-				styles.setStyle("link",{fontSize:fontSize});//,color:"#FFFFFF"});
+				styles.setStyle("link",{fontSize:fontSize});
 				styles.setStyle("over",{fontSize:fontSize,textDecoration:"underline",color:"#FF9C00"});
 							
 				cloudMenuMc.label_txt.autoSize = TextFieldAutoSize.LEFT;
@@ -75,28 +85,18 @@ package code.views
 				cloudMenuMc.addEventListener(MouseEvent.ROLL_OUT,tagEvents);
 				cloudMenuMc.mouseChildren=false;
 				
-				/*mc.onRollOver = function()
-				{				
-					this.label_txt.htmlText = "<over>" + this["TEXT"] + "</over>";
-				}
-				
-				mc.onRollOut = mc.onReleaseOutside = function() 
-				{			
-					this.label_txt.htmlText = "<link>" + this["TEXT"] + "</link>";
-				}			
-				
-				mc.onRelease = function() 
-				{			
-					this._this.showHideTag(this.keyword);
-				}*/
-				
 				rowList.push(cloudMenuMc);	
+				objTaCloudModel.addEventListener(AppEvents.INIT_XML_DATA_LOADED,xmlDataLoaded);
+				objTaCloudModel.addEventListener(AppEvents.XML_DATA_LOAD_FAILURE,xmlDataLoadFailure);
 			}
+			
+			HomeViewConstants.smartStartMC.tag_full.back2videoBtn_mc.buttonMode=true;
+			HomeViewConstants.smartStartMC.tag_full.back2videoBtn_mc.addEventListener(MouseEvent.CLICK,backButtonHandler);
 			
 			yPos += maxHeight;
 			rowList = AdjustRow(rowList, yPos);
 		}
-		
+				
 		private function AdjustRow(rowList:Array, maxHeight:Number):Array
 		{		
 			for (var i = 0; i < rowList.length; i++)
@@ -111,16 +111,53 @@ package code.views
 		{
 			switch(event.type)
 			{
-				case 'click':
-					break;
+				case 'click':					
+					objVideoPlayer.controlVideoPlayBack(false);	// Pausing Video Player
+					HomeViewConstants.smartStartMC.tag_full.gotoAndPlay(2);
+					var tagName:String = event.currentTarget.tempText;					
+					objTaCloudModel.loadXML(ServiceConstants.FULL_PATH+ServiceConstants.TAG_XML_PATH+tagName)
+					
+				break;
 				case 'rollOver':
-					event.currentTarget.label_txt.htmlText = "<over>"+event.currentTarget.tempText+"</over>"
-					break;
+					event.currentTarget.label_txt.htmlText = "<over>"+event.currentTarget.tempText+"</over>";
+				break;
 				case 'rollOut':
-					event.currentTarget.label_txt.htmlText = "<link>"+event.currentTarget.tempText+"</link>"
-					break;
+					event.currentTarget.label_txt.htmlText = "<link>"+event.currentTarget.tempText+"</link>";
+				break;
+			}			
+		}
+		
+		private function xmlDataLoaded(event:AppEvents):void
+		{
+			var obj:Object = new Object();
+			obj.name = "tagCloud";
+			obj.tag_full = HomeViewConstants.smartStartMC.tag_full;
+			objAppModel.homeViewRef.attachVideoBucket(obj)
+		}
+		
+		private function xmlDataLoadFailure(event:AppEvents):void
+		{
+			trace("Requested Cloud data load faliure");
+		}
+		
+		private function backButtonHandler(event:MouseEvent):void
+		{			
+			HomeViewConstants.smartStartMC.tag_full.addEventListener(Event.ENTER_FRAME,frameUpdate)
+		}
+		
+		private function frameUpdate(event:Event):void
+		{		
+			event.currentTarget.prevFrame();
+			if(event.currentTarget.currentFrame==1)
+			{
+				event.currentTarget.removeEventListener(Event.ENTER_FRAME,frameUpdate);		
+				objVideoPlayer.playClicked(null,requestedVideoURL);
+				if(objAppModel.homeViewRef.contains(HomeViewConstants.refVideoBucket))
+				{
+					objAppModel.homeViewRef.removeChild(HomeViewConstants.refVideoBucket)
+				}
+				HomeViewConstants.refVideoBucket=null;
 			}
-			
 		}
 	}
 }

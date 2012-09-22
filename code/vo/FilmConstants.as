@@ -6,6 +6,7 @@ package code.vo
 		public static var beginnerMediaArr:Array=new Array();
 		public static var intermediateMediaArr:Array=new Array();
 		public static var advancedMediaArr:Array=new Array();
+		public static var tagMediaArray:Array=new Array();
 				
 		//public static var objResult:Object=new Object();
 	

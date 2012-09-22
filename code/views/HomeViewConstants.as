@@ -1,5 +1,6 @@
 package code.views
 {
+	import flash.display.DisplayObject;
 	import flash.display.MovieClip;
 	
 	public class HomeViewConstants
@@ -15,5 +16,6 @@ package code.views
 		public static const controlsBtn:controlsBtn_MC=new controlsBtn_MC();
 		public static const SubTitleBtn:SubTitleBtn_MC=new SubTitleBtn_MC();
 		public static const Preferences:PreferencesBtn_MC=new PreferencesBtn_MC();
+		public static var refVideoBucket:DisplayObject;
 	}
 }

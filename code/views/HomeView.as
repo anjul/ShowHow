@@ -123,7 +123,7 @@
 		 
 		 private function attachSmartStartMC():void
 		 {
-			trace(HomeViewConstants.smartStartMC.tabSh2snap_full)
+			//trace(HomeViewConstants.smartStartMC.tabSh2snap_full)
 			 objAppModel.stageRef.addChild(HomeViewConstants.smartStartMC);
 			 useButtonMode(true);
 			 HomeViewConstants.smartStartMC.x = smartStartX;
@@ -210,13 +210,13 @@
 					{					
 						case VideoBucketConstants.TAB_SMART_START:							
 							objVideoPlayer.controlVideoPlayBack(false);		// Pausing the video
-							tabFullMC.play()
+							tabFullMC.play();							
 							attachVideoBucket(event.currentTarget);
 						break;
 						
 						case VideoBucketConstants.TAB_SH2_SNAP:							
 							objVideoPlayer.controlVideoPlayBack(false);		// Pausing the video
-							tabFullMC.play()
+							tabFullMC.play();
 							//attachVideoBucket(event.currentTarget);
 						break;
 						
@@ -292,15 +292,11 @@
 			 target.gotoAndStop(2);
 		 }
 		 
-		private function attachVideoBucket(tabObject:Object):void
+		public function attachVideoBucket(tabObject:Object):void
 		 {
-			 // Before adding a child need to check if it's already existed or not
-		
-			//if(videoBucket==null)
+			 // Before adding a child need to check if it's already existed or not			
 			if(videoBucket==null)
 			{
-//				this.removeChild(videoBucket);
-//				videoBucket = null;
 				videoBucket = new VideoBucketHolder();
 				VideoBucketConstants.VIDEOBUCKET_ARRAY= [];						
 				videoBucket.openSH2SnapTab(tabObject);
@@ -310,24 +306,24 @@
 				videoBucket.openSH2SnapTab(tabObject);
 				trace("VideoBucket Not Flushed")
 			}			
-			this.addChild(videoBucket);
-			
+			this.addChild(videoBucket);		
+			HomeViewConstants.refVideoBucket = videoBucket;
 			videoBucket.x = VideoBucketConstants.videoBucketX;
 			videoBucket.y = VideoBucketConstants.videoBucketY;		
 		 }
 		 
-		public function back2videoBtn_ClickHandler(event:MouseEvent=null,videoURL=null):void
+		public function back2videoBtn_ClickHandler(event:MouseEvent=null,videoURL=null,obj=null):void
 		{		
 			//event.currentTarget.parent.addEventListener(Event.ENTER_FRAME,frameUpdate);
 			if(videoURL!=null)
 				requestedVideoURL = videoURL;
 			
-			tabFullMC.addEventListener(Event.ENTER_FRAME,frameUpdate);		
-			
-			if(this.contains(videoBucket))
+			if(obj!=null)
 			{
-				this.removeChild(videoBucket)
-			}			
+				tabFullMC=obj.tag_full;
+			}
+			
+			tabFullMC.addEventListener(Event.ENTER_FRAME,frameUpdate);
 		}
 				 
 		 private function frameUpdate(event:Event):void
@@ -337,6 +333,10 @@
 			 {
 				 event.currentTarget.removeEventListener(Event.ENTER_FRAME,frameUpdate);		
 				 objVideoPlayer.playClicked(null,requestedVideoURL);
+				 if(this.contains(videoBucket))
+				 {
+					 this.removeChild(videoBucket)
+				 }
 				 videoBucket=null;
 			 }
 		 }

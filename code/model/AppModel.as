@@ -48,6 +48,7 @@
 		private var tagsVO:TagsVO;
 		private var textVO:TextVO;
 		private var productName:String;	
+		public var count=0;
 			
 		public function AppModel(singletonEnf:SingletonEnforcer)
 		{
