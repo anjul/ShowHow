@@ -1,6 +1,7 @@
 ﻿package code.views
 {
 	import code.model.AppModel;
+	import code.views.Finder;
 	import code.views.HomeViewConstants;
 	import code.vo.AppVO;
 	import code.vo.FilmConstants;
@@ -13,6 +14,7 @@
 	import flash.events.MouseEvent;
 	import flash.events.ProgressEvent;
 	import flash.net.URLRequest;
+	import flash.net.navigateToURL;
 
 	public class HomeView extends MovieClip
 	{
@@ -48,9 +50,9 @@
 		private var objVideoPlayer:VideoPlayer;
 		private var tabFullMC;
 		
-		private var textVO:TextVO;
-		
+		private var textVO:TextVO;		
 		private var requestedVideoURL:String;
+		private var finder:Finder;
 		
 		public function HomeView()
 		{
@@ -119,6 +121,7 @@
 			 objAppModel.stageRef.addChild(HomeViewConstants.finderMc);
 			 HomeViewConstants.finderMc.x = finderX;
 			 HomeViewConstants.finderMc.y = finderY;
+			 finder = new Finder(HomeViewConstants.finderMc);
 		 }
 		 
 		 private function attachSmartStartMC():void
@@ -210,38 +213,41 @@
 					{					
 						case VideoBucketConstants.TAB_SMART_START:							
 							objVideoPlayer.controlVideoPlayBack(false);		// Pausing the video
-							tabFullMC.play();							
+							tabFullMC.play();				
+							tabFullMC.mouseChildren=true;
 							attachVideoBucket(event.currentTarget);
 						break;
 						
 						case VideoBucketConstants.TAB_SH2_SNAP:							
 							objVideoPlayer.controlVideoPlayBack(false);		// Pausing the video
 							tabFullMC.play();
-							//attachVideoBucket(event.currentTarget);
+							tabFullMC.mouseChildren=true;
 						break;
 						
 						case VideoBucketConstants.TAB_MOST_VIEWED:							
 							objVideoPlayer.controlVideoPlayBack(false);		// Pausing the video
 							tabFullMC.play()
+							tabFullMC.mouseChildren=true;
 							attachVideoBucket(event.currentTarget);
 						break;
 						
 						case VideoBucketConstants.TAB_PLAYLIST:							
 							/*objVideoPlayer.controlVideoPlayBack(false);		// Pausing the video
 							tabFullMC.play()
+							tabFullMC.mouseChildren=true;
 							attachVideoBucket(event.currentTarget);*/
 						break;
 						
 						case VideoBucketConstants.TAB_MAP:							
 							/*objVideoPlayer.controlVideoPlayBack(false);		// Pausing the video
 							tabFullMC.play()
+							tabFullMC.mouseChildren=true;
 							attachVideoBucket(event.currentTarget);*/
 							break;
 					}
 					break;
 			}			
 		 }
-		 
 		 
 		 private function sh2SnapButtonEvents(event:MouseEvent):void
 		 {			
@@ -295,8 +301,9 @@
 		public function attachVideoBucket(tabObject:Object):void
 		 {
 			 // Before adding a child need to check if it's already existed or not			
-			if(videoBucket==null)
+			if(this.contains(videoBucket))//==null)
 			{
+				this.removeChild(videoBucket);
 				videoBucket = new VideoBucketHolder();
 				VideoBucketConstants.VIDEOBUCKET_ARRAY= [];						
 				videoBucket.openSH2SnapTab(tabObject);
@@ -315,6 +322,7 @@
 		public function back2videoBtn_ClickHandler(event:MouseEvent=null,videoURL=null,obj=null):void
 		{		
 			//event.currentTarget.parent.addEventListener(Event.ENTER_FRAME,frameUpdate);
+			
 			if(videoURL!=null)
 				requestedVideoURL = videoURL;
 			
@@ -322,8 +330,14 @@
 			{
 				tabFullMC=obj.tag_full;
 			}
-			
 			tabFullMC.addEventListener(Event.ENTER_FRAME,frameUpdate);
+			tabFullMC.mouseChildren=false;
+			
+			if(this.contains(videoBucket))
+			{
+				this.removeChild(videoBucket)
+			}
+//			videoBucket=null;
 		}
 				 
 		 private function frameUpdate(event:Event):void
@@ -332,13 +346,14 @@
 			 if(event.currentTarget.currentFrame==1)
 			 {
 				 event.currentTarget.removeEventListener(Event.ENTER_FRAME,frameUpdate);		
-				 objVideoPlayer.playClicked(null,requestedVideoURL);
-				 if(this.contains(videoBucket))
-				 {
-					 this.removeChild(videoBucket)
-				 }
-				 videoBucket=null;
+				 objVideoPlayer.playClicked(null,requestedVideoURL);				
 			 }
+			 /*if(VideoBucketConstants.scrollBtnRef[0]!=null && VideoBucketConstants.scrollBtnRef[1]!=null)
+			 {
+				 
+				 VideoBucketConstants.scrollBtnRef[0].visible=false
+				 VideoBucketConstants.scrollBtnRef[1].visible=false	
+			 }*/
 		 }
 		 
 		 private function attachWelcomeMC():void
@@ -400,7 +415,8 @@
 					 HomeViewConstants.showHowLogo.addChild(shLogoLoader);
 					 HomeViewConstants.showHowLogo.x = showHowLogoX;
 					 HomeViewConstants.showHowLogo.y = showHowLogoY;
-					 HomeViewConstants.showHowLogo.buttonMode=true;					 
+					 HomeViewConstants.showHowLogo.buttonMode=true;		
+					 HomeViewConstants.showHowLogo.addEventListener(MouseEvent.CLICK,onShowHowLogoClick);
 					 break;
 				 
 				 case 'ioError':
@@ -423,6 +439,13 @@
 					 trace("Desired Event Not Found");
 					 break;
 			 }
+		 }
+		 
+		 private function onShowHowLogoClick(event:MouseEvent):void
+		 {
+			 var urlReq:URLRequest = new URLRequest();
+			 urlReq.url= AppVO.BASEURL;
+			 navigateToURL(urlReq,"_self");
 		 }
 	} 
 }

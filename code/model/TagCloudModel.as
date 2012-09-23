@@ -38,6 +38,7 @@ package code.model
 		{
 			super.onResult(evt);
 			var mediaXML:XML = XML(evt.target.data);
+			FilmConstants.tagMediaArray = [];
 			
 			for(var index:uint=0;index<mediaXML.chapterlist.chapter.length();index++)
 			{

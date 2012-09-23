@@ -94,7 +94,7 @@ package code.views
 				objAppModel.stageRef.stage.align		= StageAlign.TOP_LEFT;				
 			}	
 			initVideoPlayer();
-			trace("Def Vid="+AppModel.AUTOPLAY_VIDEO_URL)
+			//trace("Def Vid="+AppModel.AUTOPLAY_VIDEO_URL)
 		}
 		
 		public static function getInstance():VideoPlayer
@@ -105,10 +105,6 @@ package code.views
 			}
 			return objVideoPlayer;
 		}
-		
-		// ###############################
-		// ############# FUNCTIONS
-		// ###############################
 		
 		// sets up the player
 		function initVideoPlayer():void {
@@ -501,12 +497,13 @@ package code.views
 				objAppModel.stageRef.mcVideoControls.mcProgressScrubber.x = nsStream.time * 280 / objInfo.duration; 
 			
 			// set time and duration label
-			objAppModel.stageRef.mcVideoControls.lblTimeDuration.htmlText		= "<font color='#000000'>" + formatTime(nsStream.time) + "</font> / " + formatTime(objInfo.duration);
+			//objAppModel.stageRef.mcVideoControls.lblTimeDuration.htmlText		= "<font color='#000000'>" + formatTime(nsStream.time) + "</font> / " + formatTime(objInfo.duration);
+			objAppModel.stageRef.mcVideoControls.lblTimeDuration.htmlText		= "<font color='#999999'>" +"00:" +formatTime(nsStream.time) + "</font>" +" <br>"+"00:"+formatTime(objInfo.duration);
 			
 			// update the width from the progress bar. the grey one displays
 			// the loading progress
 			objAppModel.stageRef.mcVideoControls.mcProgressFill.mcFillRed.width	= objAppModel.stageRef.mcVideoControls.mcProgressScrubber.x + 5;
-			objAppModel.stageRef.mcVideoControls.mcProgressFill.mcFillGrey.width	= nsStream.bytesLoaded * 460 / nsStream.bytesTotal;
+			objAppModel.stageRef.mcVideoControls.mcProgressFill.mcFillGrey.width	= nsStream.bytesLoaded * 281 / nsStream.bytesTotal;
 			
 			// update volume and the red fill width when user is scrubbing
 			if(bolVolumeScrub) {
@@ -547,7 +544,7 @@ package code.views
 		
 		function netStatusHandler(event:NetStatusEvent):void {
 			// handles net status events
-			trace(event.info.code)
+			//trace(event.info.code)
 			switch (event.info.code)
 			{
 				// trace a messeage when the stream is not found
@@ -572,7 +569,7 @@ package code.views
 					/*if(intActiveVid + 1 < xmlPlaylist..vid.length())
 						playNext();
 					else*/
-					trace(event.info.code)
+					//trace(event.info.code)
 						stopVideoPlayer();
 					break;
 				

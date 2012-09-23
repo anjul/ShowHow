@@ -16,18 +16,21 @@ package code.views
 		
 		public static const TAB_TAG_CLOUD:String="tagCloud";
 		
-		public static const VIDEOTILE_X:int = 25;
-		public static const VIDEOTILE_Y:int = 70;
-		public static const HGAP:int = 0;
+		public static const FINDER:String="finder";
+		
+		public static const VIDEOTILE_X:int = 60;
+		public static const VIDEOTILE_Y:int = 48;
+		public static const HGAP:int = -20;
 		public static const VGAP:int = 0;
 				
-		public static const nextBtnX:int=900;
-		public static const nextBtnY:int=120;
-		public static const previousBtnX:int=0;
-		public static const previousBtnY:int=120;
+		public static const nextBtnX:int=920;
+		public static const nextBtnY:int=100;
+		public static const previousBtnX:int=23;
+		public static const previousBtnY:int=100;
 		
-		public static const videoBucketX:int=30;
-		public static const videoBucketY:int=55;
+		public static const videoBucketX:int=0;
+		public static const videoBucketY:int=83;
+		public static var scrollBtnRef:Array=[];
 		
 	}
 }

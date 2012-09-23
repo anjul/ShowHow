@@ -30,7 +30,7 @@ package code.views
 		private var requestedVideoURL:String;
 		private var cloudMenuMc:CloudMenu_mc;	
 		private var objVideoPlayer:VideoPlayer=VideoPlayer.getInstance();
-		private var objTaCloudModel:TagCloudModel=TagCloudModel.getInstance();
+		private var objTagCloudModel:TagCloudModel=TagCloudModel.getInstance();
 			
 		public function TagCloud()
 		{
@@ -86,12 +86,12 @@ package code.views
 				cloudMenuMc.mouseChildren=false;
 				
 				rowList.push(cloudMenuMc);	
-				objTaCloudModel.addEventListener(AppEvents.INIT_XML_DATA_LOADED,xmlDataLoaded);
-				objTaCloudModel.addEventListener(AppEvents.XML_DATA_LOAD_FAILURE,xmlDataLoadFailure);
+				objTagCloudModel.addEventListener(AppEvents.INIT_XML_DATA_LOADED,xmlDataLoaded);
+				objTagCloudModel.addEventListener(AppEvents.XML_DATA_LOAD_FAILURE,xmlDataLoadFailure);
 			}
 			
 			HomeViewConstants.smartStartMC.tag_full.back2videoBtn_mc.buttonMode=true;
-			HomeViewConstants.smartStartMC.tag_full.back2videoBtn_mc.addEventListener(MouseEvent.CLICK,backButtonHandler);
+			HomeViewConstants.smartStartMC.tag_full.back2videoBtn_mc.addEventListener(MouseEvent.CLICK,backButtonHandler);			
 			
 			yPos += maxHeight;
 			rowList = AdjustRow(rowList, yPos);
@@ -114,8 +114,9 @@ package code.views
 				case 'click':					
 					objVideoPlayer.controlVideoPlayBack(false);	// Pausing Video Player
 					HomeViewConstants.smartStartMC.tag_full.gotoAndPlay(2);
+					HomeViewConstants.smartStartMC.tag_full.mouseChildren=true;
 					var tagName:String = event.currentTarget.tempText;					
-					objTaCloudModel.loadXML(ServiceConstants.FULL_PATH+ServiceConstants.TAG_XML_PATH+tagName)
+					objTagCloudModel.loadXML(ServiceConstants.FULL_PATH+ServiceConstants.TAG_XML_PATH+tagName)
 					
 				break;
 				case 'rollOver':
@@ -143,6 +144,11 @@ package code.views
 		private function backButtonHandler(event:MouseEvent):void
 		{			
 			HomeViewConstants.smartStartMC.tag_full.addEventListener(Event.ENTER_FRAME,frameUpdate)
+			if(objAppModel.homeViewRef.contains(HomeViewConstants.refVideoBucket))
+			{
+				objAppModel.homeViewRef.removeChild(HomeViewConstants.refVideoBucket)
+			}
+			HomeViewConstants.refVideoBucket=null;
 		}
 		
 		private function frameUpdate(event:Event):void
@@ -152,11 +158,7 @@ package code.views
 			{
 				event.currentTarget.removeEventListener(Event.ENTER_FRAME,frameUpdate);		
 				objVideoPlayer.playClicked(null,requestedVideoURL);
-				if(objAppModel.homeViewRef.contains(HomeViewConstants.refVideoBucket))
-				{
-					objAppModel.homeViewRef.removeChild(HomeViewConstants.refVideoBucket)
-				}
-				HomeViewConstants.refVideoBucket=null;
+				
 			}
 		}
 	}
