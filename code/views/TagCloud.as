@@ -102,8 +102,7 @@ package code.views
 			for (var i = 0; i < rowList.length; i++)
 			{
 				rowList[i]._y = maxHeight - rowList[i]._height;
-			}
-			
+			}			
 			return [];
 		}
 		
@@ -116,8 +115,7 @@ package code.views
 					HomeViewConstants.smartStartMC.tag_full.gotoAndPlay(2);
 					HomeViewConstants.smartStartMC.tag_full.mouseChildren=true;
 					var tagName:String = event.currentTarget.tempText;					
-					objTagCloudModel.loadXML(ServiceConstants.FULL_PATH+ServiceConstants.TAG_XML_PATH+tagName)
-					
+					objTagCloudModel.loadXML(ServiceConstants.FULL_PATH+ServiceConstants.TAG_XML_PATH+tagName);					
 				break;
 				case 'rollOver':
 					event.currentTarget.label_txt.htmlText = "<over>"+event.currentTarget.tempText+"</over>";
@@ -148,7 +146,13 @@ package code.views
 			{
 				objAppModel.homeViewRef.removeChild(HomeViewConstants.refVideoBucket)
 			}
+			HomeViewConstants.smartStartMC.tag_full.totalResultTxt.text=HomeViewConstants.smartStartMC.tag_full.currentPageTxt.text="";
 			HomeViewConstants.refVideoBucket=null;
+			if(VideoBucketConstants.scrollBtnRef[0]!=null && VideoBucketConstants.scrollBtnRef[1]!=null)
+			{
+				VideoBucketConstants.scrollBtnRef[0].visible=false
+				VideoBucketConstants.scrollBtnRef[1].visible=false
+			}
 		}
 		
 		private function frameUpdate(event:Event):void
@@ -158,7 +162,6 @@ package code.views
 			{
 				event.currentTarget.removeEventListener(Event.ENTER_FRAME,frameUpdate);		
 				objVideoPlayer.playClicked(null,requestedVideoURL);
-				
 			}
 		}
 	}

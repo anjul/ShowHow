@@ -1,6 +1,5 @@
 ﻿package code.views
 {
-	import code.events.PlaySelectedVideoEvent;
 	import code.model.AppModel;
 	import code.views.HomeViewConstants;
 	import code.views.VideoBucketConstants;
@@ -28,11 +27,11 @@
 		private var objAppModel:AppModel = AppModel.getInstance();
 		
 		private var maxFrontTiles:int=4;
-//		private var totalXmlLength:int=0
+		private var totalXmlLength:int=0
 		
-//		private var nxt:int=0
-		private var tabRef:Object;
-		
+		private var nxt:int=0;
+		private var resultCount:int = 0;
+		private var fullTabRef:Object;		
 		
 		public function VideoBucketHolder()
 		{		
@@ -46,64 +45,67 @@
 		public function openSH2SnapTab(tab:Object):void
 		{
 			objVideoPlayer=VideoPlayer.getInstance();
-			/*if(VideoBucketConstants.scrollBtnRef[0]!=null&&VideoBucketConstants.scrollBtnRef[1]!=null)
-			{
-				VideoBucketConstants.scrollBtnRef[0].parent.removeChild(VideoBucketConstants.scrollBtnRef[0]);
-				VideoBucketConstants.scrollBtnRef[1].parent.removeChild(VideoBucketConstants.scrollBtnRef[1])
-			}*/
 			trace("Tab name:="+tab.name)
-//			nxt=0
 			switch(tab.name)
 			{
 				case VideoBucketConstants.SMART_START:
 					//var myDuplicate:MovieClip = duplicateDisplayObject( videoBucket ) as MovieClip;
+						
+					fullTabRef = tab.parent;
 					attachVideoTiles(FilmConstants.smartStartMediaArr);	
-//					totalXmlLength=FilmConstants.smartStartMediaArr.length
+					totalXmlLength=FilmConstants.smartStartMediaArr.length
 					break;
 				
 				case VideoBucketConstants.BEGINNER:
+					fullTabRef = tab.parent;					
 					attachVideoTiles(FilmConstants.beginnerMediaArr);
-//					totalXmlLength=FilmConstants.beginnerMediaArr.length
+					totalXmlLength=FilmConstants.beginnerMediaArr.length
 					break;
 				
 				case VideoBucketConstants.INTERMEDIATE:
+					fullTabRef = tab.parent;
 					attachVideoTiles(FilmConstants.intermediateMediaArr);
-//					totalXmlLength=FilmConstants.intermediateMediaArr.length
+					totalXmlLength=FilmConstants.intermediateMediaArr.length
 					break;
 				
-				case VideoBucketConstants.ADVANCED:					
+				case VideoBucketConstants.ADVANCED:	
+					fullTabRef = tab.parent;
 					attachVideoTiles(FilmConstants.advancedMediaArr);
-//					totalXmlLength=FilmConstants.advancedMediaArr.length
+					totalXmlLength=FilmConstants.advancedMediaArr.length
 					break;
 				
 				case VideoBucketConstants.TAB_SMART_START:
+					fullTabRef = tab.parent[tab.name+"_full"];
 					attachVideoTiles(FilmConstants.smartStartMediaArr);
-//					totalXmlLength=FilmConstants.smartStartMediaArr.length
+					totalXmlLength=FilmConstants.smartStartMediaArr.length
 					break;
 				
 				case VideoBucketConstants.TAB_MOST_VIEWED:
+					fullTabRef = tab.parent[tab.name+"_full"];
 					attachVideoTiles(FilmConstants.smartStartMediaArr);
-//					totalXmlLength=FilmConstants.smartStartMediaArr.length
+					totalXmlLength=FilmConstants.smartStartMediaArr.length
 					break;
 				
 				case VideoBucketConstants.TAB_TAG_CLOUD:
-					tabRef = tab;
+					fullTabRef = tab.tag_full
 					attachVideoTiles(FilmConstants.tagMediaArray);
-//					totalXmlLength=FilmConstants.tagMediaArray.length
+					totalXmlLength=FilmConstants.tagMediaArray.length;					
 					break;
 				
 				case VideoBucketConstants.FINDER:
-					tabRef = tab;
+					fullTabRef = tab.tag_full;
 					attachVideoTiles(FilmConstants.finderMediaArray);
-					//totalXmlLength=FilmConstants.tagMediaArray.length
-					break;
-				
+					totalXmlLength=FilmConstants.finderMediaArray.length
+					break;				
 			
 				default:
 					trace("False Tab name::Code Error in VideoBucketHolder.as in openSH2SnapTab method,");
 					break;
-			}
-//			totalXmlLength=totalXmlLength/4
+			}				
+			resultCount = totalXmlLength;
+			totalXmlLength=Math.ceil(totalXmlLength/4);
+			nxt =1;
+			objAppModel.homeViewRef.updatePagination(resultCount,1,totalXmlLength,fullTabRef);
 		}
 		
 		private function attachVideoTiles(filmsArray:Array):void
@@ -119,7 +121,10 @@
 				videoBucket.y = startY;
 				videoBucket.name = i.toString();
 				videoBucket.videoTile.playBtn.buttonMode = true;
-				videoBucket.videoTile.playBtn.addEventListener(MouseEvent.CLICK,playButton_Handler(filmsArray[i].videoURL));
+				videoBucket.videoTile.playBtn.videoURL = filmsArray[i].videoURL;
+				videoBucket.videoTile.playBtn.chapterID = filmsArray[i].chapterID;
+//				videoBucket.videoTile.playBtn.addEventListener(MouseEvent.CLICK,playButton_Handler(filmsArray[i].videoURL));
+				videoBucket.videoTile.playBtn.addEventListener(MouseEvent.CLICK,playButton_Handler);
 				
 				videoBucket.videoTile.durationText.text=filmsArray[i].duration;
 				videoBucket.videoTile.videoTitleText.text=filmsArray[i].videoTitle;
@@ -132,84 +137,91 @@
 				loader.contentLoaderInfo.addEventListener(Event.COMPLETE,imageLoaded(videoBucket.videoTile.videoThumb));				
 				
 				this.addChild(videoBucket);
-//				startY = (videoBucket.videoTile.height+13)+ VideoBucketConstants.VGAP+startY;
-				startY = (videoBucket.height/2)+ VideoBucketConstants.VGAP+startY;
+				startY = (videoBucket.videoTile.height+13)+ VideoBucketConstants.VGAP+startY;
+				//startY = (videoBucket.height/2)+ VideoBucketConstants.VGAP+startY;
 				
 				if(i%2==1)
 				{
-//					startX = (videoBucket.videoTile.width+94)+VideoBucketConstants.HGAP+startX;
-					startX = (videoBucket.width/2)+VideoBucketConstants.HGAP+startX;
+					startX = (videoBucket.videoTile.width+105)+VideoBucketConstants.HGAP+startX;
+					//startX = (videoBucket.width/2)+VideoBucketConstants.HGAP+startX;
 					startY = VideoBucketConstants.VIDEOTILE_Y;
 				}	
-				VideoBucketConstants.VIDEOBUCKET_ARRAY.push(videoBucket);
-			}					
+				//VideoBucketConstants.VIDEOBUCKET_ARRAY.push(videoBucket);
+			}
 			
-			previousButton = new ScrollPanPrevious();
-			nextButton = new ScrollPanNext();
-			
-			/*VideoBucketConstants.scrollBtnRef[0]=previousButton;
-			VideoBucketConstants.scrollBtnRef[1]=nextButton;*/
-	
-			
+			// Below condition is remove reference of scroll pane buttons if already attached.
 			if(filmsArray.length>4)
 			{
-				this.addChild(previousButton);
+				if(VideoBucketConstants.scrollBtnRef.length>0)
+				{
+					for(var j:int=0;j<VideoBucketConstants.scrollBtnRef.length;j++)
+					{
+						VideoBucketConstants.scrollBtnRef[j].parent.removeChild(VideoBucketConstants.scrollBtnRef[j]);
+						VideoBucketConstants.scrollBtnRef[j]=null;
+					}
+				}
+				previousButton = new ScrollPanPrevious();
+				objAppModel.stageRef.addChild(previousButton);
+				nextButton = new ScrollPanNext();
+				objAppModel.stageRef.addChild(nextButton);
+				
 				previousButton.x = VideoBucketConstants.previousBtnX;
 				previousButton.y = VideoBucketConstants.previousBtnY;
-				previousButton.visible=false		
+				previousButton.visible=false;				
 				
-				this.addChild(nextButton);
 				nextButton.x = VideoBucketConstants.nextBtnX;
 				nextButton.y = VideoBucketConstants.nextBtnY;	
 				
 				previousButton.addEventListener(MouseEvent.CLICK,scrollPaneButtonEvents);
 				nextButton.addEventListener(MouseEvent.CLICK,scrollPaneButtonEvents);
+				
+				VideoBucketConstants.scrollBtnRef[0]=previousButton;
+				VideoBucketConstants.scrollBtnRef[1]=nextButton;
 			}
 		}
 		
 		private function scrollPaneButtonEvents(event:MouseEvent):void
-		{
+		{			
 			switch(event.currentTarget)
 			{
 				case nextButton:
-					/*nxt++
-					trace("totalXmlLength+"+totalXmlLength+"nxt----"+nxt)
-					if(nxt<=totalXmlLength){
+					nxt++;
+					//trace("totalXmlLength+"+totalXmlLength+"nxt----"+nxt)
+					if(nxt<=totalXmlLength)
+					{
 						previousButton.visible=true		
-						this.x = this.x - 940
-						if(nxt==totalXmlLength){
+						this.x = this.x - 922;
+						objAppModel.homeViewRef.updatePagination(resultCount,nxt,totalXmlLength,fullTabRef);
+						if(nxt==totalXmlLength)
+						{
 							nextButton.visible=false
 							previousButton.visible=true		
 						}
-						
-						
-					}else{
-						nextButton.visible=false
-						
-					}*/
-					trace("Sp")
-					break;
+					}
+					else
+					{
+						nextButton.visible=false;
+					}
+				break;
 				
-				case previousButton:
-					trace("SPP")
-					/*nxt--
-					if(nxt>=0){
-						this.x = this.x + 940;
-						nextButton.visible=true
-						if(nxt==0){
+				case previousButton:					
+					nxt--;
+					if(nxt>=1)
+					{
+						this.x = this.x + 922;
+						nextButton.visible=true;
+						objAppModel.homeViewRef.updatePagination(resultCount,nxt,totalXmlLength,fullTabRef);
+						if(nxt==1)
+						{
 							previousButton.visible=false
 							nextButton.visible=true
-						}
-						
-						
-					}else{
-						previousButton.visible=false
-						
-					}*/
-					trace("Sp")
-					break;		
-				//this.x = this.x + 912;
-				//break;				
+						}						
+					}
+					else
+					{
+						previousButton.visible=false;
+					}
+				break;					
 			}
 		}
 				
@@ -223,19 +235,23 @@
 		}
 		
 		//[AS]:Handling MoueEvent.CLICK callback by recieving a videoURL from clickevent
+		
+		private function playButton_Handler(event:MouseEvent):void
+		{
+			var videoPath:String = AppModel.BASE_URL+AppModel.player+AppModel.PID+AppModel.content+event.currentTarget.videoURL;	
+			objAppModel.homeViewRef.back2videoBtn_ClickHandler(null,videoPath,fullTabRef,event.currentTarget.chapterID);		// Call for SH2Snap_Full animation play reverse
+		}	
 
-		private function playButton_Handler(videoURL:String):Function
+		/*private function playButton_Handler(videoURL:String):Function
 		{
 			var func:Function = function(event:MouseEvent)
 			{
 				//trace(">>"+videoURL);
 				var videoPath:String = AppModel.BASE_URL+AppModel.player+AppModel.PID+AppModel.content+videoURL;	
-				objAppModel.homeViewRef.back2videoBtn_ClickHandler(null,videoPath,tabRef);		// Call for SH2Snap_Full animation play reverse
+				objAppModel.homeViewRef.back2videoBtn_ClickHandler(null,videoPath,fullTabRef);		// Call for SH2Snap_Full animation play reverse
 			}			
-			/*you might want to consider adding these to a dictionary or array, 
-			so can remove the listeners to allow garbage collection*/
 			return func;
-		}		
+		}	*/	
 		
 		/*private function duplicateDisplayObject( displayObject:DisplayObject ):DisplayObject 
 		{

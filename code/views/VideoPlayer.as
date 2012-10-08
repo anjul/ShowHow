@@ -1,5 +1,6 @@
-package code.views
+﻿package code.views
 {
+	import code.events.AppEvents;
 	import code.model.AppModel;
 	import code.views.HomeViewConstants;
 	
@@ -77,6 +78,7 @@ package code.views
 		var urlRequest:URLRequest;
 		// playlist xml
 		var xmlPlaylist:XML;
+		private var loopOver:Boolean = false;
 		
 		//////
 		private var checkClicked:Boolean = true;
@@ -133,8 +135,8 @@ package code.views
 			objAppModel.stageRef.mcVideoControls.btnPause.addEventListener(MouseEvent.CLICK, pauseClicked);
 			objAppModel.stageRef.mcVideoControls.btnPlay.addEventListener(MouseEvent.CLICK, playClicked);
 			objAppModel.stageRef.mcVideoControls.btnStop.addEventListener(MouseEvent.CLICK, stopClicked);
-			objAppModel.stageRef.mcVideoControls.btnNext.addEventListener(MouseEvent.CLICK, playNext);
-			objAppModel.stageRef.mcVideoControls.btnPrevious.addEventListener(MouseEvent.CLICK, playPrevious);
+			//objAppModel.stageRef.mcVideoControls.btnNext.addEventListener(MouseEvent.CLICK, playNext);
+			//objAppModel.stageRef.mcVideoControls.btnPrevious.addEventListener(MouseEvent.CLICK, playPrevious);
 			objAppModel.stageRef.mcVideoControls.btnMute.addEventListener(MouseEvent.CLICK, muteClicked);
 			objAppModel.stageRef.mcVideoControls.btnUnmute.addEventListener(MouseEvent.CLICK, unmuteClicked);
 			//[AS]:: Fullscreen Buttons are off as of now.
@@ -183,11 +185,7 @@ package code.views
 			ncConnection = new NetConnection();
 			ncConnection.addEventListener(NetStatusEvent.NET_STATUS, netStatusHandler);
 			ncConnection.connect(null);
-			
-			// create a new netstream with the net connection, add event
-			// listener, set client to this for handling meta data and
-			// set the buffer time to the value from the constant
-			
+		
 			var customClient:Object = new Object();
 			customClient.onMetaData = onMetaData;
 			
@@ -216,16 +214,6 @@ package code.views
 			objAppModel.stageRef.mcVideoControls.mcVolumeFill.mcFillRed.width = objAppModel.stageRef.mcVideoControls.mcVolumeScrubber.x - 371 + 53;
 			setVolume(tmpVolume);
 			
-			// create new request for loading the playlist xml, add an event listener
-			// and load it
-			
-			//[AS]:: Commented as no need
-			/*trace(strSource+"AutoPlay//"+AppModel.AUTOPLAY_VIDEO_URL)
-			urlRequest = new URLRequest(strSource);
-			urlLoader = new URLLoader();
-			urlLoader.addEventListener(Event.COMPLETE, playlistLoaded);
-			urlLoader.load(urlRequest); */
-			
 			playlistLoaded();		// Call to video palyer to play default video
 			
 			TweenLite.to(objAppModel.stageRef.videoControlMain.videoControls_mc,0,{alpha:0});
@@ -233,7 +221,7 @@ package code.views
 			
 			TweenLite.to(HomeViewConstants.smartStartMC.videoprefMain_mc,0, {alpha:0});
 			HomeViewConstants.smartStartMC.videoprefMain_mc.visible=false
-			
+			vptabSubtext()	
 		}
 		private function vptabControls(event:MouseEvent):void
 		{			
@@ -330,7 +318,7 @@ package code.views
 		
 		/////////////////////////////////////////////start----subtext btn///////////////////////////////////////
 		var vptabSubtextcliked:Boolean=true
-			
+		
 		function vptabSubtext():void{		
 			if(  vptabSubtextcliked==true){
 				vptabSubtextcliked=false
@@ -566,11 +554,13 @@ package code.views
 				
 				
 				case "NetStream.Play.Stop":
-					/*if(intActiveVid + 1 < xmlPlaylist..vid.length())
-						playNext();
-					else*/
-					//trace(event.info.code)
+					trace(event.info.code)
+					if(loopOver)
+					{
+						dispatchEvent(new AppEvents(AppEvents.PLAY_NEXT_VIDEO));
+					}else{
 						stopVideoPlayer();
+					}
 					break;
 				
 				case "NetStream.Buffer.Full":
@@ -667,16 +657,6 @@ package code.views
 				//[AS]:: Mangae Depth Between VideoDisplay and McVideoControls
 				//objAppModel.stageRef.mcVideoControls.swapChildren(objAppModel.stageRef.vidDisplay);
 				
-				
-				//Code Commented by [AS]
-				// size up video display
-				/*objAppModel.stageRef.vidDisplay.height 	= Capabilities.screenResolutionY	//(Capabilities.screenResolutionY - 33);
-				objAppModel.stageRef.vidDisplay.width 	= objAppModel.stageRef.vidDisplay.height * 4 / 3;*/
-				//objAppModel.stageRef.vidDisplay.x		= (Capabilities.screenResolutionX - objAppModel.stageRef.vidDisplay.width) / 2;
-				
-				//objAppModel.stageRef.vidDisplay.x		= (stage.fullScreenWidth - objAppModel.stageRef.vidDisplay.width) / 2;
-				//objAppModel.stageRef.vidDisplay.y		= (stage.fullScreenHeight- objAppModel.stageRef.vidDisplay.height ) / 2;
-				
 				// [AS:3/09/12]Visiblitity off for HomeView Static assets
 				HomeViewConstants.finderMc.visible =false;
 				HomeViewConstants.homeBtn.visible =false;
@@ -749,8 +729,15 @@ package code.views
 		function playNext(e:MouseEvent = null):void {
 			// check if there are video left to play and play them
 			if(intActiveVid + 1 < xmlPlaylist..vid.length())
-				playVid(intActiveVid + 1);
-			
+				playVid(intActiveVid + 1);			
+		}
+		
+		public function doPlayNext(videourl:String,loop:Boolean):void 
+		{
+			// Configured to Play continuesly next video
+			loopOver  = loop;
+			strSource = videourl;
+			playVid();			
 		}
 		
 		function playPrevious(e:MouseEvent = null):void {

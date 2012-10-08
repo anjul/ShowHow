@@ -42,6 +42,8 @@
     </cuepoint>
       </cuelist>
   <htmltext>
-    <![CDATA[<p class='headingText'><b>INTRODUCTION TO iPod SHUFFLE</b> </p><br><br><p class='bodyText'>Hello!!! I'm Amy... <br><br>This is Apple's display-less and smallest iPod - the new 2nd generation 1GB iPod Shuffle.<br><br>A 2GB model is also available. <br><br>The 1 GB model holds up to 16 hours of music, while the 2 GB model stores up to 32 hours of music.<br><br>Apple introduced this matchbox-sized, badge-like digital music player in early 2005.<br><br>This breakthrough gadget was designed around iPod's legendary shuffle feature.</p>]]>
-  </htmltext>
+	<![CDATA[
+		<p class='headingText'><b>INTRODUCTION TO iPod SHUFFLE</b> </p><br><br><p class='bodyText'>Hello!!! I'm Amy... <br><br>This is Apple's display-less and smallest iPod - the new 2nd generation 1GB iPod Shuffle.<br><br>A 2GB model is also available. <br><br>The 1 GB model holds up to 16 hours of music, while the 2 GB model stores up to 32 hours of music.<br><br>Apple introduced this matchbox-sized, badge-like digital music player in early 2005.<br><br>This breakthrough gadget was designed around iPod's legendary shuffle feature.</p>
+	]]>
+</htmltext>
 </metadata>

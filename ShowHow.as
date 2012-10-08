@@ -49,9 +49,10 @@ package
 			}
 			else
 			{
-				ServiceConstants.FULL_PATH = "http://www.showhow2.com/product/1/";
-				AppModel.BASE_URL = "http://www.showhow2.com/";
 				AppModel.PID = "1";
+				ServiceConstants.FULL_PATH = "http://www.showhow2.com/product/"+AppModel.PID+"/";
+				AppModel.BASE_URL = "http://www.showhow2.com/";
+				
 				debugText.text = "No FlashVars recieved"+_filmId+_omniId+_baseUrl+_dataUrl+_productID
 				//throw new Error("No FlashVars recieved");
 			}

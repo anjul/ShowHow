@@ -17,6 +17,9 @@ package code.services
 		public static const TEXT_XML:String="main";
 		public static const TEXT_XML_PATH:String="/text/";
 		
+		public static const METADATA_XML:String="metadata";
+		public static const METADATA_XML_PATH:String="/metadata/";
+		
 		public static const FILMS_LOCAL_XML_PATH="assets/xmlData/films.xml"
 		public static var FULL_PATH:String;
 	}

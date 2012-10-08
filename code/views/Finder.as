@@ -88,7 +88,7 @@ package code.views
 			{
 				objAppModel.homeViewRef.removeChild(HomeViewConstants.refVideoBucket)
 			}
-			HomeViewConstants.refVideoBucket=null;
+			HomeViewConstants.refVideoBucket=null;			
 		}
 		
 		private function frameUpdate(event:Event):void

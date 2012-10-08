@@ -38,6 +38,8 @@
 		private var homeBtnY:uint = omniY+7;
 		private var showHowLogoX:int = -10;
 		private var showHowLogoY:uint = omniY-5;
+		private var transcriptWindowX:int = finderX+4;
+		private var transcriptWindowY:int = smartStartY+46;
 	
 		private var finderMc:Finder_MC;
 		private var smartStartMC:SmartStart_MC;
@@ -53,6 +55,8 @@
 		private var textVO:TextVO;		
 		private var requestedVideoURL:String;
 		private var finder:Finder;
+		private var transcriptView:TranscriptView;
+		private var currentChapterID:String;
 		
 		public function HomeView()
 		{
@@ -60,11 +64,13 @@
 			textVO = new TextVO();
 			omniUrl = AppVO.BASEURL+AppVO.OMNI_SWF;
 			attachShowHowLogo();
-			loadOmniSwf();	
+			loadOmniSwf();			
 			attachWelcomeMC();
+			attachTranscriptWindow();
 			attachSmartStartMC();
 			attachFinderMC();		
-			attachHomeBtn();		
+			attachHomeBtn();
+			
 			videoBucket = new VideoBucketHolder();
 			objVideoPlayer = VideoPlayer.getInstance();
 		}
@@ -103,7 +109,7 @@
 					 HomeViewConstants.omniHolder.addChild(loader);
 					 objAppModel.stageRef.addChild(HomeViewConstants.omniHolder);
 					 HomeViewConstants.omniHolder.x=omniX;
-					 HomeViewConstants.omniHolder.y=omniY;
+					 HomeViewConstants.omniHolder.y=omniY;					 
 					 break;
 				 
 				 case 'ioError':
@@ -221,7 +227,8 @@
 						case VideoBucketConstants.TAB_SH2_SNAP:							
 							objVideoPlayer.controlVideoPlayBack(false);		// Pausing the video
 							tabFullMC.play();
-							tabFullMC.mouseChildren=true;
+							tabFullMC.addEventListener(Event.ENTER_FRAME,startFrameAnimation);
+							tabFullMC.mouseChildren=false;
 						break;
 						
 						case VideoBucketConstants.TAB_MOST_VIEWED:							
@@ -247,6 +254,14 @@
 					}
 					break;
 			}			
+		 }
+		 
+		 private function startFrameAnimation(event:Event):void
+		 {
+			 if(HomeViewConstants.smartStartMC.tabSh2snap_full.back2videoBtn_mc.alpha==1)
+			 {
+				 tabFullMC.mouseChildren=true;
+			 }
 		 }
 		 
 		 private function sh2SnapButtonEvents(event:MouseEvent):void
@@ -280,7 +295,7 @@
 				 case "click":		
 					 	checkClicked = true;
 						disableSH2snapFullBtnSates(event.currentTarget);
-						event.target.gotoAndStop(2);
+						event.currentTarget.gotoAndStop(2);
 						attachVideoBucket(event.currentTarget); // Need to use whenever  videoBucket need to attach
 					 break;
 			 }			
@@ -299,61 +314,72 @@
 		 }
 		 
 		public function attachVideoBucket(tabObject:Object):void
-		 {
+		{
 			 // Before adding a child need to check if it's already existed or not			
-			if(this.contains(videoBucket))//==null)
+			if(this.contains(videoBucket))
 			{
 				this.removeChild(videoBucket);
 				videoBucket = new VideoBucketHolder();
 				VideoBucketConstants.VIDEOBUCKET_ARRAY= [];						
 				videoBucket.openSH2SnapTab(tabObject);
-				trace("VideoBucket  Flushed")
+				//trace("VideoBucket  Flushed")
 			}
 			else{				
 				videoBucket.openSH2SnapTab(tabObject);
-				trace("VideoBucket Not Flushed")
+				//trace("VideoBucket Not Flushed")
 			}			
 			this.addChild(videoBucket);		
 			HomeViewConstants.refVideoBucket = videoBucket;
 			videoBucket.x = VideoBucketConstants.videoBucketX;
 			videoBucket.y = VideoBucketConstants.videoBucketY;		
-		 }
+		}
 		 
-		public function back2videoBtn_ClickHandler(event:MouseEvent=null,videoURL=null,obj=null):void
-		{		
-			//event.currentTarget.parent.addEventListener(Event.ENTER_FRAME,frameUpdate);
-			
+		public function back2videoBtn_ClickHandler(event:MouseEvent=null,videoURL=null,obj=null,chapterID:String=null):void
+		{					
 			if(videoURL!=null)
 				requestedVideoURL = videoURL;
 			
 			if(obj!=null)
-			{
-				tabFullMC=obj.tag_full;
-			}
-			tabFullMC.addEventListener(Event.ENTER_FRAME,frameUpdate);
-			tabFullMC.mouseChildren=false;
+				tabFullMC=obj;
+			
+			if(tabFullMC.name!=VideoBucketConstants.TAB_SH2_SNAP)
+				tabFullMC.totalResultTxt.text=tabFullMC.currentPageTxt.text="";
+
+			currentChapterID = chapterID;
+			
+			tabFullMC.addEventListener(Event.ENTER_FRAME,frameUpdate);			
 			
 			if(this.contains(videoBucket))
 			{
 				this.removeChild(videoBucket)
+				if(VideoBucketConstants.scrollBtnRef[0]!=null && VideoBucketConstants.scrollBtnRef[1]!=null)
+				{
+					VideoBucketConstants.scrollBtnRef[0].visible=false
+					VideoBucketConstants.scrollBtnRef[1].visible=false
+				}
 			}
-//			videoBucket=null;
 		}
 				 
 		 private function frameUpdate(event:Event):void
-		 {		
+		 {	
+			 tabFullMC.mouseChildren=false;
 			 event.currentTarget.prevFrame();
 			 if(event.currentTarget.currentFrame==1)
 			 {
 				 event.currentTarget.removeEventListener(Event.ENTER_FRAME,frameUpdate);		
-				 objVideoPlayer.playClicked(null,requestedVideoURL);				
+				 objVideoPlayer.playClicked(null,requestedVideoURL);			
+				 tabFullMC.mouseChildren=true;
+				 if(currentChapterID!=null)
+				 	displayTranscriptWindow();
 			 }
-			 /*if(VideoBucketConstants.scrollBtnRef[0]!=null && VideoBucketConstants.scrollBtnRef[1]!=null)
-			 {
-				 
-				 VideoBucketConstants.scrollBtnRef[0].visible=false
-				 VideoBucketConstants.scrollBtnRef[1].visible=false	
-			 }*/
+		 }
+		 
+		 private function displayTranscriptWindow():void
+		 {
+			 var htmlStr:String = objAppModel.getHtmlText(currentChapterID);
+			 //trace(">>"+htmlStr);
+			 transcriptView.visible = true;
+			 transcriptView.loadHtmlText(htmlStr);
 		 }
 		 
 		 private function attachWelcomeMC():void
@@ -362,7 +388,30 @@
 			 HomeViewConstants.welcomeMC.x = welcomeX;
 			 HomeViewConstants.welcomeMC.y = welcomeY;
 			 HomeViewConstants.welcomeMC.full_mc.productName.text = "Complete " +objAppModel.getProductName()+ " ShowHow2";
+			 HomeViewConstants.welcomeMC.full_mc.addEventListener(MouseEvent.CLICK,attachEvents);
+			 HomeViewConstants.welcomeMC.full_mc.addEventListener(MouseEvent.ROLL_OVER,attachEvents);
+			 HomeViewConstants.welcomeMC.full_mc.addEventListener(MouseEvent.ROLL_OUT,attachEvents);
+			 HomeViewConstants.welcomeMC.full_mc.buttonMode = true;
 			 attachTagCloud();
+		 }
+		 
+		 private function attachEvents(event:MouseEvent):void
+		 {
+			 switch(event.type)
+			 {
+				 case "rollOver":					
+					event.currentTarget.gotoAndStop(2);
+					break;
+				 
+				 case "rollOut":	
+					 event.currentTarget.gotoAndStop(1);
+					 break;
+				 
+				 case "click":		
+					 transcriptView.visible = true;
+					 transcriptView.playVideo();
+					 break;
+			 }
 		 }
 		 
 		 private function attachTagCloud():void
@@ -382,6 +431,15 @@
 			 HomeViewConstants.homeBtn.addEventListener(MouseEvent.CLICK,showHowLogoEventHandler);
 			 HomeViewConstants.homeBtn.addEventListener(MouseEvent.ROLL_OVER,showHowLogoEventHandler);
 			 HomeViewConstants.homeBtn.addEventListener(MouseEvent.ROLL_OUT,showHowLogoEventHandler);
+		 }
+		 
+		 private function attachTranscriptWindow():void
+		 {
+			 transcriptView = new TranscriptView();
+			 objAppModel.stageRef.addChild(transcriptView);
+			 transcriptView.x = transcriptWindowX;
+			 transcriptView.y = transcriptWindowY;			
+			 transcriptView.visible=false;
 		 }
 		 
 		 private function attachShowHowLogo():void
@@ -425,6 +483,7 @@
 				 
 				 case 'click':					 
 					 HomeViewConstants.homeBtn.gotoAndStop(5);
+					 resetAll();
 					 break;
 				 
 				 case 'rollOut':					 
@@ -446,6 +505,26 @@
 			 var urlReq:URLRequest = new URLRequest();
 			 urlReq.url= AppVO.BASEURL;
 			 navigateToURL(urlReq,"_self");
+		 }
+		 
+		 public function updatePagination(totalResultCount:int,currentPageCount:int,totalPages:int,fullTabRef:Object=null):void
+		 {
+			 if(fullTabRef.tag_full!=null)
+			 {
+				 fullTabRef.tag_full.totalResultTxt.text = "Total Result: "+totalResultCount;
+				 fullTabRef.tag_full.currentPageTxt.text = "Result Page "+currentPageCount+" of "+totalPages;
+			 }
+			 else
+			 {				 
+				// var ref:Object=fullTabRef.parent[fullTabRef.name+"_full"];				 
+				 fullTabRef.totalResultTxt.text = "Total Result: "+totalResultCount;
+				 fullTabRef.currentPageTxt.text = "Result Page "+currentPageCount+" of "+totalPages;
+			 }
+		 }
+		 
+		 private function resetAll():void
+		 {
+			// back2videoBtn_ClickHandler();
 		 }
 	} 
 }

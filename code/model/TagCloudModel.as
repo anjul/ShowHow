@@ -43,6 +43,7 @@ package code.model
 			for(var index:uint=0;index<mediaXML.chapterlist.chapter.length();index++)
 			{
 				var filmVO:FilmVO = new FilmVO();
+				filmVO.chapterID = mediaXML.chapterlist.chapter.@id[index].toString();
 				filmVO.videoTitle = mediaXML.chapterlist.chapter.result[index].title.toString();
 				filmVO.description = mediaXML.chapterlist.chapter.result[index].description.toString();
 				filmVO.image_url = mediaXML.chapterlist.chapter.result[index].image.@url.toString();
