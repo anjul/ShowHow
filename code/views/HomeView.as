@@ -46,6 +46,7 @@
 		private var welcomeMC:Welcome_MC;
 		private var homeBtn:HomeBtn_MC;
 		private var showHowLogo:MovieClip;
+		private var fullTranscript:FullTranscriptWindow;
 		private var checkClicked:Boolean = true;
 		
 		private var videoBucket:VideoBucketHolder;
@@ -65,9 +66,10 @@
 			omniUrl = AppVO.BASEURL+AppVO.OMNI_SWF;
 			attachShowHowLogo();
 			loadOmniSwf();			
-			attachWelcomeMC();
+			attachWelcomeMC();	
 			attachTranscriptWindow();
-			attachSmartStartMC();
+			attachSmartStartMC();	
+			attachFullTranscriptWindow();
 			attachFinderMC();		
 			attachHomeBtn();
 			
@@ -177,7 +179,25 @@
 			 HomeViewConstants.smartStartMC.tabSh2snap_full.SH2snapFullBtn2.addEventListener(MouseEvent.ROLL_OUT,sh2SnapButtonEvents);
 			 HomeViewConstants.smartStartMC.tabSh2snap_full.SH2snapFullBtn3.addEventListener(MouseEvent.ROLL_OUT,sh2SnapButtonEvents);
 			 HomeViewConstants.smartStartMC.tabSh2snap_full.SH2snapFullBtn4.addEventListener(MouseEvent.ROLL_OUT,sh2SnapButtonEvents);
-		 }		 
+		 }
+		 
+		 private function attachFullTranscriptWindow():void
+		 {
+			 fullTranscript = new FullTranscriptWindow();
+			 fullTranscript.x = 0;
+			 fullTranscript.y = 68;			 
+			 this.addChild(fullTranscript);
+			 fullTranscript.visible = false;
+		 }
+		 
+		 public function displayWindow(display:Boolean):void
+		 {
+			 if(display)
+			 {				 
+				 fullTranscript.visible = true;
+				 transcriptView.displayFullTranscriptWindow(fullTranscript);
+			 } 
+		 }
 		 
 		 private function useButtonMode(bool:Boolean):void
 		 {

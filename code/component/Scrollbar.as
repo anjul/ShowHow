@@ -88,8 +88,7 @@ package code.component
 			
 			setMask(); 
 			this.x = targetMC.x+targetMC.width + 5;
-			this.y = targetMC.y+5;
-			
+			this.y = targetMC.y+5;			
 		}
 		
 		// Set mask for the content 

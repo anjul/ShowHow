@@ -131,7 +131,7 @@
 				videoBucket.videoTile.summaryText.text=filmsArray[i].description;				
 			
 				urlRequest = new URLRequest();
-				urlRequest.url = AppModel.BASE_URL+AppModel.player+AppModel.PID+AppModel.content+filmsArray[i].image_url;
+				urlRequest.url = objAppModel.baseURL+objAppModel.player+objAppModel.pid+objAppModel.content+filmsArray[i].image_url;
 				loader = new Loader();
 				loader.load(urlRequest);
 				loader.contentLoaderInfo.addEventListener(Event.COMPLETE,imageLoaded(videoBucket.videoTile.videoThumb));				
@@ -238,20 +238,9 @@
 		
 		private function playButton_Handler(event:MouseEvent):void
 		{
-			var videoPath:String = AppModel.BASE_URL+AppModel.player+AppModel.PID+AppModel.content+event.currentTarget.videoURL;	
+			var videoPath:String = objAppModel.baseURL+objAppModel.player+objAppModel.pid+objAppModel.content+event.currentTarget.videoURL;	
 			objAppModel.homeViewRef.back2videoBtn_ClickHandler(null,videoPath,fullTabRef,event.currentTarget.chapterID);		// Call for SH2Snap_Full animation play reverse
 		}	
-
-		/*private function playButton_Handler(videoURL:String):Function
-		{
-			var func:Function = function(event:MouseEvent)
-			{
-				//trace(">>"+videoURL);
-				var videoPath:String = AppModel.BASE_URL+AppModel.player+AppModel.PID+AppModel.content+videoURL;	
-				objAppModel.homeViewRef.back2videoBtn_ClickHandler(null,videoPath,fullTabRef);		// Call for SH2Snap_Full animation play reverse
-			}			
-			return func;
-		}	*/	
 		
 		/*private function duplicateDisplayObject( displayObject:DisplayObject ):DisplayObject 
 		{

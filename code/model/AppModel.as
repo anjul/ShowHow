@@ -34,12 +34,12 @@
 		private var currentServiceID:String="mediaelements";
 		public  var homeViewRef:HomeView;
 		
-		public static var AUTOPLAY_VIDEO_URL:String;
-		public static var player:String="player/"
-		public static var content:String="/content/"		
-		public static var BASE_URL:String;
-		public static var PID:String;
-		public static var tagsArray:Array=[];
+		public var autoPlayVideoURL:String;
+		public var player:String="player/"
+		public var content:String="/content/"		
+		public var baseURL:String;
+		public var pid:String;
+		public var tagsArray:Array=[];
 		public var textArray:Array=[];
 		public var metadataArray:Array=[];
 		
@@ -100,7 +100,7 @@
 			{				
 				case ServiceConstants.FILMS_XML:
 					mediaXML = oXML.copy();
-					AppModel.AUTOPLAY_VIDEO_URL = AppModel.BASE_URL+AppModel.player+AppModel.PID+AppModel.content+mediaXML.teaser.@url.toString();
+					autoPlayVideoURL = baseURL+player+pid+content+mediaXML.teaser.@url.toString();
 					
 					for(i=0;i<mediaXML.chapterlist.chapter.length();i++)
 					{

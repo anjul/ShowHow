@@ -84,7 +84,7 @@
 		private var checkClicked:Boolean = true;
 	
 		private var objAppModel:AppModel=AppModel.getInstance();
-		var strSource:String = AppModel.AUTOPLAY_VIDEO_URL; //objAppModel.stageRef.loaderInfo.parameters.playlist == null ? "playlist.xml" : objAppModel.stageRef.loaderInfo.parameters.playlist;
+		var strSource:String = objAppModel.autoPlayVideoURL; //objAppModel.stageRef.loaderInfo.parameters.playlist == null ? "playlist.xml" : objAppModel.stageRef.loaderInfo.parameters.playlist;
 		
 		public function VideoPlayer(singletonEnf:SingletonEnforcer)
 		{
@@ -96,7 +96,6 @@
 				objAppModel.stageRef.stage.align		= StageAlign.TOP_LEFT;				
 			}	
 			initVideoPlayer();
-			//trace("Def Vid="+AppModel.AUTOPLAY_VIDEO_URL)
 		}
 		
 		public static function getInstance():VideoPlayer

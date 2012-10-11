@@ -39,12 +39,12 @@ package code.views
 		
 		private function initTagCloud():void
 		{
-			for (var i:Number = 0; i<AppModel.tagsArray.length; i++)
+			for (var i:Number = 0; i<objAppModel.tagsArray.length; i++)
 			{		
 				cloudMenuMc = new  CloudMenu_mc();	
 				refTagCloudMc.addChild(cloudMenuMc);
-				cloudMenuMc.tempText = AppModel.tagsArray[i].label;
-				var fontSize:String =  AppModel.tagsArray[i].count;
+				cloudMenuMc.tempText = objAppModel.tagsArray[i].label;
+				var fontSize:String =  objAppModel.tagsArray[i].count;
 							
 				var styles:StyleSheet = new StyleSheet();
 				styles.setStyle("body",{fontFamily:'Arial'});			
@@ -56,7 +56,7 @@ package code.views
 				cloudMenuMc.label_txt.wordWrap = false;
 				cloudMenuMc.label_txt.selectable = true;			
 				cloudMenuMc.label_txt.styleSheet = styles;
-				cloudMenuMc.label_txt.htmlText = "<link>"+AppModel.tagsArray[i].label+"</link>";
+				cloudMenuMc.label_txt.htmlText = "<link>"+objAppModel.tagsArray[i].label+"</link>";
 				
 				cloudMenuMc.x = xPos + 5;
 				cloudMenuMc.y = yPos;			

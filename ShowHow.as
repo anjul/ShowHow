@@ -38,8 +38,8 @@ package
 			{
 				_filmId=this.loaderInfo.parameters.filmId;
 				_omniId=this.loaderInfo.parameters.omniId;
-				_baseUrl=AppModel.BASE_URL=this.loaderInfo.parameters.baseUrl;
-				_productID=AppModel.PID=this.loaderInfo.parameters.productId;
+				_baseUrl=objAppModel.baseURL=this.loaderInfo.parameters.baseUrl;
+				_productID=objAppModel.pid=this.loaderInfo.parameters.productId;
 				_dataUrl=this.loaderInfo.parameters.dataUrl;
 				
 				ServiceConstants.FULL_PATH = _baseUrl+product+_productID;
@@ -49,9 +49,9 @@ package
 			}
 			else
 			{
-				AppModel.PID = "1";
-				ServiceConstants.FULL_PATH = "http://www.showhow2.com/product/"+AppModel.PID+"/";
-				AppModel.BASE_URL = "http://www.showhow2.com/";
+				objAppModel.pid = "1";
+				ServiceConstants.FULL_PATH = "http://dev.showhow2.com/product/"+objAppModel.pid+"/";
+				objAppModel.baseURL = "http://dev.showhow2.com/";
 				
 				debugText.text = "No FlashVars recieved"+_filmId+_omniId+_baseUrl+_dataUrl+_productID
 				//throw new Error("No FlashVars recieved");

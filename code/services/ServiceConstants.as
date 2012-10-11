@@ -22,5 +22,7 @@ package code.services
 		
 		public static const FILMS_LOCAL_XML_PATH="assets/xmlData/films.xml"
 		public static var FULL_PATH:String;
+		
+		public static const STYLESHEET:String="player/data/SH2htmlText.css";
 	}
 }
