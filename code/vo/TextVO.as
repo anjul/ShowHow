@@ -7,9 +7,5 @@ package code.vo
 		public var htmlText:String;
 		public var breadcrumbs:String;
 		public var productName:String;
-		
-		public function TextVO()
-		{
-		}
 	}
 }

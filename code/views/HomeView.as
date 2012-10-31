@@ -1,5 +1,6 @@
 ﻿package code.views
 {
+	import code.events.AppEvents;
 	import code.model.AppModel;
 	import code.views.Finder;
 	import code.views.HomeViewConstants;
@@ -49,7 +50,7 @@
 		private var fullTranscript:FullTranscriptWindow;
 		private var checkClicked:Boolean = true;
 		
-		private var videoBucket:VideoBucketHolder;
+		//private var videoBucket:VideoBucketHolder;
 		private var objVideoPlayer:VideoPlayer;
 		private var tabFullMC;
 		
@@ -73,7 +74,7 @@
 			attachFinderMC();		
 			attachHomeBtn();
 			
-			videoBucket = new VideoBucketHolder();
+			//videoBucket = new VideoBucketHolder();
 			objVideoPlayer = VideoPlayer.getInstance();
 		}
 		
@@ -130,6 +131,7 @@
 			 HomeViewConstants.finderMc.x = finderX;
 			 HomeViewConstants.finderMc.y = finderY;
 			 finder = new Finder(HomeViewConstants.finderMc);
+			 finder.addEventListener(AppEvents.CLOSE_WINDOW,closeWindow);
 		 }
 		 
 		 private function attachSmartStartMC():void
@@ -185,7 +187,7 @@
 		 {
 			 fullTranscript = new FullTranscriptWindow();
 			 fullTranscript.x = 0;
-			 fullTranscript.y = 68;			 
+			 fullTranscript.y = 90;			 
 			 this.addChild(fullTranscript);
 			 fullTranscript.visible = false;
 		 }
@@ -335,23 +337,14 @@
 		 
 		public function attachVideoBucket(tabObject:Object):void
 		{
-			 // Before adding a child need to check if it's already existed or not			
-			if(this.contains(videoBucket))
-			{
-				this.removeChild(videoBucket);
-				videoBucket = new VideoBucketHolder();
-				VideoBucketConstants.VIDEOBUCKET_ARRAY= [];						
-				videoBucket.openSH2SnapTab(tabObject);
-				//trace("VideoBucket  Flushed")
-			}
-			else{				
-				videoBucket.openSH2SnapTab(tabObject);
-				//trace("VideoBucket Not Flushed")
-			}			
-			this.addChild(videoBucket);		
+			 // Before adding a child need to check if it's already existed or not		
+			var videoBucket:VideoBucketHolder = new VideoBucketHolder();
+			this.addChild(videoBucket);	
+			VideoBucketConstants.VIDEOBUCKET_ARRAY = [];					
 			HomeViewConstants.refVideoBucket = videoBucket;
 			videoBucket.x = VideoBucketConstants.videoBucketX;
-			videoBucket.y = VideoBucketConstants.videoBucketY;		
+			videoBucket.y = VideoBucketConstants.videoBucketY;
+			videoBucket.openSH2SnapTab(tabObject);			
 		}
 		 
 		public function back2videoBtn_ClickHandler(event:MouseEvent=null,videoURL=null,obj=null,chapterID:String=null):void
@@ -362,21 +355,16 @@
 			if(obj!=null)
 				tabFullMC=obj;
 			
-			if(tabFullMC.name!=VideoBucketConstants.TAB_SH2_SNAP)
+			if(tabFullMC.name != VideoBucketConstants.TAB_SH2_SNAP)
 				tabFullMC.totalResultTxt.text=tabFullMC.currentPageTxt.text="";
 
 			currentChapterID = chapterID;
 			
-			tabFullMC.addEventListener(Event.ENTER_FRAME,frameUpdate);			
+			tabFullMC.addEventListener(Event.ENTER_FRAME,frameUpdate);	
 			
-			if(this.contains(videoBucket))
+			if(HomeViewConstants.refVideoBucket != null)
 			{
-				this.removeChild(videoBucket)
-				if(VideoBucketConstants.scrollBtnRef[0]!=null && VideoBucketConstants.scrollBtnRef[1]!=null)
-				{
-					VideoBucketConstants.scrollBtnRef[0].visible=false
-					VideoBucketConstants.scrollBtnRef[1].visible=false
-				}
+				HomeViewConstants.refVideoBucket.parent.removeChild(HomeViewConstants.refVideoBucket);
 			}
 		}
 				 
@@ -389,6 +377,7 @@
 				 event.currentTarget.removeEventListener(Event.ENTER_FRAME,frameUpdate);		
 				 objVideoPlayer.playClicked(null,requestedVideoURL);			
 				 tabFullMC.mouseChildren=true;
+				 tabFullMC = null;
 				 if(currentChapterID!=null)
 				 	displayTranscriptWindow();
 			 }
@@ -459,7 +448,7 @@
 			 objAppModel.stageRef.addChild(transcriptView);
 			 transcriptView.x = transcriptWindowX;
 			 transcriptView.y = transcriptWindowY;			
-			 transcriptView.visible=false;
+			 transcriptView.visible = false;
 		 }
 		 
 		 private function attachShowHowLogo():void
@@ -540,6 +529,11 @@
 				 fullTabRef.totalResultTxt.text = "Total Result: "+totalResultCount;
 				 fullTabRef.currentPageTxt.text = "Result Page "+currentPageCount+" of "+totalPages;
 			 }
+		 }
+		 
+		 private function closeWindow(event:AppEvents):void
+		 {
+			 back2videoBtn_ClickHandler();
 		 }
 		 
 		 private function resetAll():void

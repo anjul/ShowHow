@@ -58,26 +58,18 @@ package code.services
 		}
 		
 		protected function onProgress(evt:ProgressEvent):void
-		{			
+		{				
 		}
 		
 		protected function onResult(evt:Event):void
 		{
-			//trace("xml loaded " + evt.toString());
-			// TODO: dispatch event to main once service is loaded
-			//objUtilities.hideLoader();
-			//isServiceConnecting = false;
 		}
 		
 		protected function onError(evt:IOErrorEvent):void
 		{						
-			trace("xml error " + evt.toString());
-			//TODO: Dispatch Error Event to gloabl application
-			
-			//isServiceConnecting = false;
 		}
 		
-		public function addEventListener(type:String, listener:Function, useCapture:Boolean=false, priority:int=0, useWeakReference:Boolean=false):void
+		public function addEventListener(type:String, listener:Function, useCapture:Boolean=false, priority:int=0, useWeakReference:Boolean=true):void
 		{
 			evtDispatcher.addEventListener(type, listener, useCapture, priority, useWeakReference);
 		}

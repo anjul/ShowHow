@@ -1,9 +1,8 @@
 package code.vo
 {
-	public class FilmVO
+	public class MostViewedVO
 	{
 		public var chapterID:String;
-//		public var chapterLevel:String;
 		public var videoTitle:String;
 		public var description:String;
 		public var image_url:String;

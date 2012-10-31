@@ -23,13 +23,15 @@ package code.views
 		public static const HGAP:int = -20;
 		public static const VGAP:int = 0;
 				
-		public static const nextBtnX:int=950;
-		public static const nextBtnY:int=180;
+		public static const nextBtnX:int=918;
+		public static const nextBtnY:int=100;
 		public static const previousBtnX:int=23;
-		public static const previousBtnY:int=180;
+		public static const previousBtnY:int=100;
 		
 		public static const videoBucketX:int=0;
 		public static const videoBucketY:int=83;
+		public static const listViewX:int = 974;
+		public static const listViewY:int = 80;
 		public static var scrollBtnRef:Array=[];
 		
 	}

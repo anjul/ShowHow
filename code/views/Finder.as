@@ -10,6 +10,7 @@ package code.views
 	import flash.events.KeyboardEvent;
 	import flash.events.MouseEvent;
 	import flash.events.TextEvent;
+	import flash.text.TextFormat;
 	
 	public class Finder extends MovieClip
 	{
@@ -29,15 +30,18 @@ package code.views
 		{
 			objFinderModel.addEventListener(AppEvents.INIT_XML_DATA_LOADED,xmlDataLoaded);
 			objFinderModel.addEventListener(AppEvents.XML_DATA_LOAD_FAILURE,xmlDataLoadFailure);
+			objFinderModel.addEventListener(AppEvents.SEARCH_NOT_FOUND,searchNotFound);
 			
-			finderRef.searchTxt.addEventListener(MouseEvent.CLICK,finderEvents);			
+			finderRef.searchTxt.addEventListener(MouseEvent.CLICK,finderEvents);	
+			finderRef.searchTxt.addEventListener(KeyboardEvent.KEY_UP,finderEvents);
+			finderRef.searchTxt.addEventListener(KeyboardEvent.KEY_DOWN,finderEvents);		
 			finderRef.finderBtn.addEventListener(MouseEvent.MOUSE_OVER,finderEvents);
 			finderRef.finderBtn.addEventListener(MouseEvent.MOUSE_OUT,finderEvents);
 			finderRef.finderBtn.addEventListener(MouseEvent.CLICK,finderEvents);
 			finderRef.finderBtn.buttonMode = true;
 		}
 		
-		private function finderEvents(event:MouseEvent):void
+		private function finderEvents(event:*):void
 		{
 			switch(event.type)
 			{
@@ -61,6 +65,19 @@ package code.views
 							break;
 					}					
 				break;
+				
+				case "keyUp":	
+					if(event.charCode == 13)
+					{
+						objFinderModel.loadXML(ServiceConstants.FULL_PATH+ServiceConstants.FINDER_XML_PATH+finderRef.searchTxt.text);
+					}
+					break;
+				
+				case "keyDown":	
+					var tf:TextFormat = new TextFormat();
+					tf.bold = false;
+					finderRef.searchTxt.defaultTextFormat = tf;
+					break;
 			}
 		}
 		
@@ -69,6 +86,7 @@ package code.views
 			var obj:Object = new Object();
 			obj.name = "finder";
 			obj.tag_full = HomeViewConstants.smartStartMC.tag_full;
+			objAppModel.homeViewRef.back2videoBtn_ClickHandler();
 			objAppModel.homeViewRef.attachVideoBucket(obj);
 			
 			objVideoPlayer.controlVideoPlayBack(false);	// Pausing Video Player
@@ -100,6 +118,11 @@ package code.views
 				objVideoPlayer.playClicked(null,requestedVideoURL);
 				
 			}
+		}
+		
+		private function searchNotFound(event:AppEvents):void
+		{
+			finderRef.searchTxt.htmlText = "<b>Search Text Doesn't found</b>";
 		}
 	}
 }

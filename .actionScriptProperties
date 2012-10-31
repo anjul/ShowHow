@@ -11,6 +11,7 @@
     <sourceAttachmentPath/>
   </compiler>
   <applications>
+    <application path="code/component/VScrollbar.as"/>
     <application path="ShowHow.as"/>
   </applications>
   <modules/>

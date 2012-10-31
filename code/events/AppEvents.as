@@ -4,9 +4,11 @@ package code.events
 	
 	public class AppEvents extends Event
 	{
-		public static const INIT_XML_DATA_LOADED:String = "init_xml_data_loaded";
-		public static const XML_DATA_LOAD_FAILURE:String = "xml_data_loaded_failure";
-		public static const PLAY_NEXT_VIDEO:String = "play_next_video";
+		public static const INIT_XML_DATA_LOADED:String = "initXmlDataLoaded";
+		public static const XML_DATA_LOAD_FAILURE:String = "xmlDataLoadedFailure";
+		public static const PLAY_NEXT_VIDEO:String = "playNextVideo";
+		public static const SEARCH_NOT_FOUND:String = "searchNotFound";
+		public static const CLOSE_WINDOW:String = "closeWindow";
 		
 		public function AppEvents(type:String, bubbles:Boolean=true, cancelable:Boolean=true)
 		{

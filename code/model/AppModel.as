@@ -10,6 +10,7 @@
 	import code.vo.FilmConstants;
 	import code.vo.FilmVO;
 	import code.vo.MetadataVO;
+	import code.vo.MostViewedVO;
 	import code.vo.PreferencesVO;
 	import code.vo.TagsVO;
 	import code.vo.TextVO;
@@ -29,7 +30,7 @@
 		private var preferenceXML:XML;
 		private var tagXML:XML;
 		private var textXML:XML;
-		private var metadataXML:XML;
+		private var mostviewedXML:XML;
 		
 		private var currentServiceID:String="mediaelements";
 		public  var homeViewRef:HomeView;
@@ -41,7 +42,7 @@
 		public var pid:String;
 		public var tagsArray:Array=[];
 		public var textArray:Array=[];
-		public var metadataArray:Array=[];
+		public var mostviewedArray:Array=[];
 		
 		private var prefPresenterOptionTxt:String;
 		private var audioOptionTxt:String;
@@ -51,11 +52,11 @@
 		private var preferencVO:PreferencesVO;
 		private var tagsVO:TagsVO;
 		private var textVO:TextVO;
-		private var metadataVO:MetadataVO;
 		private var productName:String;	
 		public var count=0;
 		private var percentageCount:int=0;
 		private var loadingPercentage:int=0;
+		public var isWindowOpen:Boolean = false;
 			
 		public function AppModel(singletonEnf:SingletonEnforcer)
 		{
@@ -82,9 +83,10 @@
 		
 		protected override function onProgress(event:ProgressEvent):void
 		{
-			var percentage:int = (Math.ceil((event.bytesLoaded/event.bytesTotal))/4);			
+			var percentage:int = (event.bytesLoaded/event.bytesTotal)*100			
 			loadingPercentage = percentageCount+percentage;
-			objAppModel.stageRef.preloadingClip.loaderText.text = loadingPercentage.toString()+"%";
+			objAppModel.stageRef.preloadingClip.loaderText.text = "Loading..."//loadingPercentage.toString()+"%";
+			//trace(percentage)
 		}
 		
 		protected override function onResult(evt:Event):void
@@ -160,7 +162,6 @@
 				
 				case ServiceConstants.TEXT_XML:
 					textXML = oXML.copy();
-					
 					for(i=0;i<textXML.chapter.length();i++)
 					{
 						textVO = new TextVO();
@@ -172,46 +173,33 @@
 					textVO.breadcrumbs=textXML.breadcrumbs[0].toString();
 					textVO.productName=productName=textXML.productname[0].toString();
 					dispatchEvent(new AppEvents(AppEvents.INIT_XML_DATA_LOADED));
-					//loadXML("assets/xmlData/metadata.xml");
-					//loadXML(ServiceConstants.FULL_PATH+ServiceConstants.METADATA_XML_PATH);					
+					//loadXML(ServiceConstants.FULL_PATH+ServiceConstants.MOSTVIEWED_XML_PATH);					
+					break; 				
+				/*case ServiceConstants.MOSTVIEWED:
+					mostviewedXML = oXML.copy();
+					for(i=0;i<mostviewedXML.chapterlist.chapter.length();i++)
+					{
+						var mostViewedVO = new MostViewedVO();
+						mostViewedVO.chapterID = mostviewedXML.chapterlist.chapter.@id[i].toString();
+						mostViewedVO.videoTitle = mostviewedXML.chapterlist.chapter.result[i].title.toString();
+						mostViewedVO.description = mostviewedXML.chapterlist.chapter.result[i].description.toString();
+						mostViewedVO.image_url = mostviewedXML.chapterlist.chapter.result[i].image.@url.toString();
+						mostViewedVO.duration = mostviewedXML.chapterlist.chapter.result[i].duration.@time.toString();
+						mostViewedVO.pr_name = mostviewedXML.chapterlist.chapter.result[i].title.pr_name.toString();
+						mostViewedVO.sef_title = mostviewedXML.chapterlist.chapter.result[i].sef_title.toString();
+						
+						mostViewedVO.presenterTitle = mostviewedXML.chapterlist.chapter.presenter[i].@text.toString();
+						mostViewedVO.presenterID = mostviewedXML.chapterlist.chapter.presenter[i].@id.toString();
+						mostViewedVO.videoURL = mostviewedXML.chapterlist.chapter.presenter[i].video.@url.toString();
+						
+						mostViewedVO.audioID = mostviewedXML.chapterlist.chapter.presenter[i].audio.option.@id.toString();
+						mostViewedVO.audioURL = mostviewedXML.chapterlist.chapter.presenter[i].audio.option.@url.toString();
+						mostViewedVO.optionText = mostviewedXML.chapterlist.chapter.presenter[i].audio.option.@text.toString();
+						mostviewedArray.push(mostViewedVO);
+					}		
+					trace(mostviewedArray)
+					dispatchEvent(new AppEvents(AppEvents.INIT_XML_DATA_LOADED));*/
 					break; 
-				
-				/*case ServiceConstants.METADATA_XML:
-					metadataXML = oXML.copy();
-					
-					for(i=0;i<metadataXML.filmDetails.length();i++)
-					{
-						metadataVO = new MetadataVO();
-						metadataVO.title = metadataXML.filmDetails.title[i].toString();
-						metadataVO.description = metadataXML.filmDetails.description[i].toString();
-						metadataVO.imageURL =  metadataXML.filmDetails.image.@url[i].toString();	
-						metadataVO.duration =  metadataXML.filmDetails.duration.@time[i].toString();
-						metadataVO.videoURL =  metadataXML.filmDetails.video.@url[i].toString();
-						metadataVO.audioURL =  metadataXML.filmDetails.audio.@url[i].toString();
-						metadataArray.push(metadataVO);
-					}	
-					
-					for(i=0;i<metadataXML.markers.length();i++)
-					{
-						metadataVO = new MetadataVO();
-						metadataVO.markerID = metadataXML.markers.marker.@id[i].toString();						
-						metadataVO.markerTime =  metadataXML.markers.marker.@time[i].toString();
-						metadataVO.markerText = metadataXML.markers.marker.text[i].toString();
-						metadataArray.push(metadataVO);
-					}	
-					
-					for(i=0;i<metadataXML.cuelist.length();i++)
-					{
-						metadataVO = new MetadataVO();
-						metadataVO.cuepointID = metadataXML.cuelist.cuepoint[i].@id[i].toString();
-						metadataVO.cuepointTime = metadataXML.cuelist.cuepoint[i].@time[i].toString();
-						metadataVO.subtitle =  metadataXML.cuelist.cuepoint[i].subtitle[i].toString();	
-						metadataVO.heading =  metadataXML.cuelist.cuepoint[i].heading[i].toString();		
-						metadataArray.push(metadataVO);
-					}	
-					MetadataVO.htmlText = metadataXML.htmltext.toString();						
-					dispatchEvent(new AppEvents(AppEvents.INIT_XML_DATA_LOADED));
-					break; */
 			}				
 		}
 		

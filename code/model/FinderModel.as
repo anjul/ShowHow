@@ -66,6 +66,7 @@ package code.model
 			}
 			else{
 				trace("Search Text Doesn't found")
+				dispatchEvent(new AppEvents(AppEvents.SEARCH_NOT_FOUND));
 			}
 		}			
 	}

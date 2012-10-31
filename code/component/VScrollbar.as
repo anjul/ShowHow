@@ -7,7 +7,7 @@ package code.component
 	import flash.events.MouseEvent;
 	import flash.geom.Rectangle;
 	
-	public class Scrollbar extends Sprite
+	public class VScrollbar extends Sprite
 	{
 		private var top		:Number;
 		private var bottom	:Number;
@@ -29,12 +29,27 @@ package code.component
 		private var upScrollControlHeight:Number;
 		private var downScrollControlHeight:Number;
 		private var sRect:Rectangle;
+		private var sBar:MovieClip;
 		
-		public function Scrollbar(target:MovieClip):void
+		public function VScrollbar(isListViewScroller:Boolean=false):void
 		{
-			var sBar:MovieClip = new ScrollbarAssets();
+			if(isListViewScroller)
+			{
+				sBar = new ListScrollbarAssets();
+			}
+			else
+			{
+				sBar = new ScrollbarAssets();
+			}
 			addChild(sBar);
+		}
+		
+		public function set configure(target:MovieClip):void
+		{
+//			var sBar:MovieClip = new ScrollbarAssets();
+			
 			sBar.y = target.y-37;
+			//sBar.x = -8;
 			dragHandleMC = sBar.dragHandleMC;	
 			track = sBar.track;
 			upScrollControl = sBar.upScrollControl;
@@ -70,7 +85,7 @@ package code.component
 			
 			isUp = false;
 			isDown = false;
-			arrowMove = 10;
+			arrowMove = 5;
 			
 			// Add the listerner for upArrow
 			upScrollControl.useHandCursor = true;
@@ -86,9 +101,9 @@ package code.component
 			downScrollControl.addEventListener(MouseEvent.MOUSE_DOWN, downScroll);
 			downScrollControl.addEventListener(MouseEvent.MOUSE_UP, stopScroll);
 			
-			setMask(); 
-			this.x = targetMC.x+targetMC.width + 5;
-			this.y = targetMC.y+5;			
+			//setMask(); 
+			this.x = targetMC.x+targetMC.width;
+			this.y = targetMC.y+2;			
 		}
 		
 		// Set mask for the content 
@@ -97,6 +112,8 @@ package code.component
 			var square:Sprite = new Sprite();
 			square.graphics.beginFill(0x000000);
 			square.graphics.drawRect(targetMC.x, targetMC.y, targetMC.width+5, (track.height+downScrollControlHeight));
+			square.cacheAsBitmap = true;
+			targetMC.cacheAsBitmap = true;
 			targetMC.parent.addChild(square);			
 			targetMC.mask = square;	
 		}

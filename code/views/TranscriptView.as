@@ -1,10 +1,11 @@
 ﻿package code.views
 {		
-	import code.component.Scrollbar;
+	import code.component.VScrollbar;
 	import code.events.AppEvents;
 	import code.model.AppModel;
 	import code.services.ServiceConstants;
 	import code.vo.MetadataVO;
+	import code.vo.TextVO;
 	
 	import flash.display.MovieClip;
 	import flash.events.Event;
@@ -13,9 +14,12 @@
 	import flash.net.URLLoader;
 	import flash.net.URLRequest;
 	import flash.text.AntiAliasType;
+	import flash.text.GridFitType;
 	import flash.text.StyleSheet;
 	import flash.text.TextField;
 	import flash.text.TextFieldAutoSize;
+	import flash.text.TextFieldType;
+	import flash.text.TextFormat;
 
 	public class TranscriptView extends MovieClip
 	{		
@@ -24,12 +28,15 @@
 		private var defaultScaleY:Number=0;
 		private var objVideoPlayer:VideoPlayer = VideoPlayer.getInstance();
 		private var videoURL:String;
-		private var videoCount:int=0;
+		private var videoCount:int = 0;
 		private var chapterID:String;
-		private var scroller:code.component.Scrollbar;
+		private var scroller:VScrollbar;
+		private var transScroller:VScrollbar;
 		private var fullTranscript:FullTranscriptWindow;
 		private var seperator:Seperator;
 		private var transcriptText:TextField;
+		private var transcriptTitleText:TextField;
+		private var miniTranscriptText:TextField;
 		private var transcriptTextX:int = 0;
 		private var transcriptTextY:int = 0;
 		private var urlRequest:URLRequest;
@@ -38,24 +45,68 @@
 		private var sheet:StyleSheet = new StyleSheet();
 		private var cssReady:Boolean = false;
 		private var isLoaded:Boolean = true;
-		private var transScroller:code.component.Scrollbar;
+		private var playButton:PlayButtonIcon;	
+		private var startX:int = 0;
+		private var startY:int = 0;
+		private var gap:int = 3;
+		private var listScroller:VScrollbar;
 		
 		public function TranscriptView()
 		{
-			configure();
 			loadCSS();
+		}
+		
+		private function loadCSS():void
+		{
+			styleURL = objAppModel.baseURL+ServiceConstants.STYLESHEET;
+			urlRequest = new URLRequest();
+			urlRequest.url =  styleURL; 
+			
+			urlLoader = new URLLoader();
+			urlLoader.load(urlRequest);
+			
+			urlLoader.addEventListener(IOErrorEvent.IO_ERROR, cssEvents);
+			urlLoader.addEventListener(Event.COMPLETE, cssEvents);		
+		}
+		
+		private function cssEvents(event:*):void
+		{
+			switch(event.type)
+			{				
+				case 'complete':
+					sheet.parseCSS(urlLoader.data);
+					cssReady = true;	 
+					createTextField();
+					break;
+				
+				case 'ioError':
+					trace("IO Error or Bad File name error");
+					break;
+				
+				default:
+					trace("Desired Event Not Found");
+					break;
+			}
+		}
+		
+		private function createTextField():void			
+		{
+			miniTranscriptText = new TextField();
+			miniTranscriptText.multiline = true;
+			miniTranscriptText.wordWrap = true;	
+			miniTranscriptText.autoSize = TextFieldAutoSize.LEFT;
+			miniTranscriptText.styleSheet = sheet;					
+			miniTranscriptText.selectable = true;
+			miniTranscriptText.width = 400;					
+			HomeViewConstants.transcriptWindow.html_mc.addChild(miniTranscriptText);
+			
+			configure();
 		}
 		
 		private function configure():void
 		{
 			this.addChild(HomeViewConstants.transcriptWindow);	
-			objVideoPlayer.addEventListener(AppEvents.PLAY_NEXT_VIDEO,playNextVideo);
-			
-			HomeViewConstants.transcriptWindow.height = HomeViewConstants.transcriptWindow.height-5;			
-			defaultScaleX = HomeViewConstants.transcriptWindow.html_mc.scaleX;
-			defaultScaleY = HomeViewConstants.transcriptWindow.html_mc.scaleY;
-			scroller=new code.component.Scrollbar(HomeViewConstants.transcriptWindow.html_mc)
-			this.addChild(scroller);
+			objVideoPlayer.addEventListener(AppEvents.PLAY_NEXT_VIDEO,playNextVideo);			
 		}
 		
 		public function playVideo():void
@@ -70,13 +121,29 @@
 			}
 			loadHtmlText(objAppModel.getHtmlText(chapterID));
 			HomeViewConstants.transcriptWindow.toolPanel.play();
-			//objVideoPlayer.playClicked(null,videoURL);
 		}
 		
 		public function loadHtmlText(htmltext:String):void
-		{			
-			HomeViewConstants.transcriptWindow.html_mc.chapterTxt.htmlText = htmltext;
-			HomeViewConstants.transcriptWindow.html_mc.chapterTxt.mouseWheelEnabled =  false;
+		{				
+			miniTranscriptText.htmlText = htmltext;
+			miniTranscriptText.mouseWheelEnabled =  true;
+			miniTranscriptText.height  = miniTranscriptText.textHeight;
+			
+			if(scroller == null)
+			{
+				scroller = new VScrollbar();
+				this.addChild(scroller);	
+				scroller.configure = HomeViewConstants.transcriptWindow.html_mc;
+			}
+			else{
+				this.removeChild(scroller);
+				scroller = null;
+				
+				scroller = new VScrollbar();
+				this.addChild(scroller);	
+				scroller.configure = HomeViewConstants.transcriptWindow.html_mc;
+			}		
+			
 			HomeViewConstants.transcriptWindow.product_txt.text = objAppModel.getProductName();
 			HomeViewConstants.transcriptWindow.breadcrumTxt.text = objAppModel.getBreadcrumText();			
 			handleToolPanel();
@@ -101,6 +168,8 @@
 		
 		public function displayFullTranscriptWindow(_fullTranscript:*):void
 		{
+			objVideoPlayer.controlVideoPlayBack(false);	
+			
 			this.fullTranscript = _fullTranscript;
 			fullTranscript.gotoAndPlay(2);			
 			fullTranscript.addEventListener(Event.ENTER_FRAME,enterFrameHandler);
@@ -115,19 +184,6 @@
 			}
 		}
 		
-		private function loadCSS():void
-		{
-			styleURL = objAppModel.baseURL+ServiceConstants.STYLESHEET;
-			urlRequest = new URLRequest();
-			urlRequest.url =  styleURL; 
-			
-			urlLoader = new URLLoader();
-			urlLoader.load(urlRequest);
-			
-			urlLoader.addEventListener(IOErrorEvent.IO_ERROR, cssEvents);
-			urlLoader.addEventListener(Event.COMPLETE, cssEvents);
-		}
-		
 		private function displayTranscript():void
 		{
 			fullTranscript.html_mc.alpha=1;
@@ -135,66 +191,124 @@
 			{
 				var startX:int = transcriptTextX;
 				var startY:int = transcriptTextY;
-				var gap:int = 120;
-				//trace(">>"+fullTranscript.back2videoBtn)
+				var sepY:int = 0;
+				var gap:int = 20;
+				
+				fullTranscript.back2videoBtn.buttonMode = true;
 				fullTranscript.back2videoBtn.addEventListener(MouseEvent.CLICK,closeWindow);			
 				fullTranscript.productNameMC.productTxt.text = objAppModel.getProductName();
 				
 				for(var i:int=0;i<objAppModel.textArray.length;i++)
 				{
+					var textVO:TextVO = TextVO(objAppModel.textArray[i]);
+					
 					transcriptText = new TextField();
-					transcriptText.htmlText = objAppModel.textArray[i].htmlText;
-					transcriptText.selectable = false;
-					
-					fullTranscript.html_mc.addChild(transcriptText);
-					transcriptText.styleSheet = sheet;
-					transcriptText.autoSize = TextFieldAutoSize.LEFT;
-					//transcriptText.antiAliasType =  AntiAliasType.ADVANCED;
-					transcriptText.mouseWheelEnabled = false;
 					transcriptText.multiline =true;
-					transcriptText.wordWrap = true;
-					//transcriptText.embedFonts = true;
-	
-					transcriptText.width = 700;
+					transcriptText.wordWrap = true;	
+					transcriptText.autoSize = TextFieldAutoSize.LEFT;
+					transcriptText.styleSheet = sheet;					
+					transcriptText.selectable = true;																
+					transcriptText.mouseWheelEnabled = true;					
+					transcriptText.width = 650;						
+					transcriptText.htmlText = textVO.htmlText;			
+					transcriptText.height = transcriptText.textHeight;
 					transcriptText.y = startY;
-					startY = startY + gap;
+					fullTranscript.html_mc.addChild(transcriptText);
+					startY = startY+transcriptText.textHeight+gap;
 					
-					//refArr.push(transcriptText);
+					//Attatching Play Button
+					
+					playButton = new PlayButtonIcon();
+					playButton.x = transcriptText.width+10;
+					playButton.y = transcriptText.y;
+					playButton.buttonMode = true;
+					
+					playButton.videoURL = objAppModel.getvideoURL(textVO.chapterID);
+					playButton.htmlText = textVO.htmlText;
+					
+					playButton.addEventListener(MouseEvent.CLICK,playTranscript);
+					fullTranscript.html_mc.addChild(playButton);
 					
 					seperator = new Seperator();
-					fullTranscript.html_mc.addChild(seperator);
-					seperator.y =  transcriptText.y +gap;
+					seperator.y =  startY;		
 					
-					//refArr.push(seperator);
-					
+					startY = seperator.y+gap;
+					fullTranscript.html_mc.addChild(seperator);					
 				}
-				transScroller=new code.component.Scrollbar(fullTranscript.html_mc)
+				
+				transScroller = new VScrollbar();
+				transScroller.configure = fullTranscript.html_mc
 				fullTranscript.addChild(transScroller);
-				transScroller.x =fullTranscript.html_mc.width+72;
-				transScroller.y =transcriptTextY+45;
-			}
-			transScroller.alpha=1;
-			isLoaded=false;
+				transScroller.x = fullTranscript.html_mc.width+72;
+				transScroller.y = transcriptTextY+45;
 
+			}
+			transScroller.alpha = 1;
+			isLoaded=false;
+			displayTranscriptTitles()
 		}
 		
-		private function cssEvents(event:*):void
+		private function displayTranscriptTitles():void
 		{
-			switch(event.type)
-			{				
-				case 'complete':
-					sheet.parseCSS(urlLoader.data);
-					cssReady = true;	 
-					break;
+			var sx:int = startX;
+			var sy:int = startY;
+			
+			var textFormat:TextFormat = new TextFormat();
+			textFormat.font = "Arial";
+			textFormat.size = 10;
+			
+			var textClip:MovieClip;
+			
+			for(var i:uint=0;i<objAppModel.textArray.length;i++)
+			{
+				var textVO:TextVO = TextVO(objAppModel.textArray[i]);
 				
-				case 'ioError':
-					trace("IO Error or Bad File name error");
-					break;
+				var titleText:TextField = new TextField();				
+				titleText.defaultTextFormat = textFormat;
+				titleText.textColor = 0x56BAD8;
+				titleText.multiline = true;
+				titleText.wordWrap = true;	
+				titleText.autoSize = TextFieldAutoSize.LEFT;
+				titleText.text = textVO.chapterName;
+				titleText.selectable = false;
+				titleText.width = 130;
+				titleText.height = 35;
+				titleText.x = sx;
+				titleText.y = sy;
 				
-				default:
-					trace("Desired Event Not Found");
-					break;
+				textClip = new MovieClip();
+				textClip.addChild(titleText);
+				textClip.buttonMode = true;
+				textClip.mouseChildren = false;
+				//textClip.videoURL = array[i].videoURL;
+				//textClip.chapterID = array[i].chapterID;
+				//textClip.addEventListener(MouseEvent.CLICK,playButton_Handler);
+				
+				/*var seperator:Shape = new Shape();
+				seperator.graphics.lineStyle(1, 0xBDBDBD, 1);
+				seperator.graphics.moveTo(titleText.x,titleText.height+5);
+				seperator.graphics.lineTo(titleText.width,titleText.height+5);				
+				textClip.addChild(seperator);*/
+				
+				fullTranscript.listView.html_mc.addChild(textClip);
+				sy = sy + titleText.height + gap;
 			}
+			listScroller = new VScrollbar(true);
+			fullTranscript.listView.addChild(listScroller);	
+			listScroller.configure = fullTranscript.listView.html_mc;
+		}
+		
+		private function playTranscript(event:MouseEvent):void
+		{
+			var currentVideoURL:String = objAppModel.baseURL
+				+objAppModel.player+objAppModel.pid
+				+objAppModel.content
+				+event.currentTarget.videoURL;
+			var currentTranscript:String = event.currentTarget.htmlText;
+			
+			closeWindow();
+			objVideoPlayer.playClicked(null,currentVideoURL);
+			loadHtmlText(currentTranscript);
 		}
 		
 		private function playNextVideo(event:AppEvents):void
@@ -203,7 +317,7 @@
 			
 			trace("Playing Next Video from playlist");
 			
-			if(videoCount>=objAppModel.textArray.length)
+			if(videoCount >= objAppModel.textArray.length)
 			{
 				videoCount=0;
 			}
@@ -218,7 +332,7 @@
 			}
 		}
 		
-		private function closeWindow(event:MouseEvent):void
+		private function closeWindow(event:MouseEvent=null):void
 		{
 			fullTranscript.html_mc.alpha=0;
 			transScroller.alpha=0;
