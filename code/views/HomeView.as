@@ -396,11 +396,13 @@
 			 objAppModel.stageRef.addChild(HomeViewConstants.welcomeMC);
 			 HomeViewConstants.welcomeMC.x = welcomeX;
 			 HomeViewConstants.welcomeMC.y = welcomeY;
+			 
 			 HomeViewConstants.welcomeMC.full_mc.productName.text = "Complete " +objAppModel.getProductName()+ " ShowHow2";
 			 HomeViewConstants.welcomeMC.full_mc.addEventListener(MouseEvent.CLICK,attachEvents);
 			 HomeViewConstants.welcomeMC.full_mc.addEventListener(MouseEvent.ROLL_OVER,attachEvents);
 			 HomeViewConstants.welcomeMC.full_mc.addEventListener(MouseEvent.ROLL_OUT,attachEvents);
 			 HomeViewConstants.welcomeMC.full_mc.buttonMode = true;
+			 HomeViewConstants.welcomeMC.full_mc.mouseChildren = false
 			 attachTagCloud();
 		 }
 		 

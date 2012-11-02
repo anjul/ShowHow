@@ -136,7 +136,7 @@ package code.component
 			{
 				if (dragHandleMC.y > top) 
 				{
-					dragHandleMC.y-=arrowMove;
+					dragHandleMC.y -= arrowMove;
 					if (dragHandleMC.y < top) 
 					{
 						dragHandleMC.y = top;

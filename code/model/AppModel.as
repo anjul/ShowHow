@@ -32,7 +32,7 @@
 		private var textXML:XML;
 		private var mostviewedXML:XML;
 		
-		private var currentServiceID:String="mediaelements";
+		private var currentServiceID:String="films";
 		public  var homeViewRef:HomeView;
 		
 		public var autoPlayVideoURL:String;
@@ -85,7 +85,7 @@
 		{
 			var percentage:int = (event.bytesLoaded/event.bytesTotal)*100			
 			loadingPercentage = percentageCount+percentage;
-			objAppModel.stageRef.preloadingClip.loaderText.text = "Loading..."//loadingPercentage.toString()+"%";
+			objAppModel.stageRef.preloadingClip.loaderText.text = "Loading"//loadingPercentage.toString()+"%";
 			//trace(percentage)
 		}
 		
@@ -94,7 +94,7 @@
 			super.onResult(evt);
 			var oXML:XML = XML(evt.target.data);
 			//trace(oXML.name())
-			var xmlID:String = oXML.name().toString() == "" ? currentServiceID : oXML.name().toString();
+			var xmlID:String = oXML.@id.toString() == "" ? currentServiceID : oXML.@id.toString();
 			var i:int;
 			percentageCount = loadingPercentage;
 			
@@ -172,10 +172,9 @@
 					}
 					textVO.breadcrumbs=textXML.breadcrumbs[0].toString();
 					textVO.productName=productName=textXML.productname[0].toString();
-					dispatchEvent(new AppEvents(AppEvents.INIT_XML_DATA_LOADED));
-					//loadXML(ServiceConstants.FULL_PATH+ServiceConstants.MOSTVIEWED_XML_PATH);					
+					loadXML(ServiceConstants.FULL_PATH+ServiceConstants.MOSTVIEWED_XML_PATH);					
 					break; 				
-				/*case ServiceConstants.MOSTVIEWED:
+				case ServiceConstants.MOSTVIEWED:
 					mostviewedXML = oXML.copy();
 					for(i=0;i<mostviewedXML.chapterlist.chapter.length();i++)
 					{
@@ -197,8 +196,7 @@
 						mostViewedVO.optionText = mostviewedXML.chapterlist.chapter.presenter[i].audio.option.@text.toString();
 						mostviewedArray.push(mostViewedVO);
 					}		
-					trace(mostviewedArray)
-					dispatchEvent(new AppEvents(AppEvents.INIT_XML_DATA_LOADED));*/
+					dispatchEvent(new AppEvents(AppEvents.INIT_XML_DATA_LOADED));
 					break; 
 			}				
 		}

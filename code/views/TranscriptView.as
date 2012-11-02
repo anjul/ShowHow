@@ -7,10 +7,12 @@
 	import code.vo.MetadataVO;
 	import code.vo.TextVO;
 	
+	import flash.display.DisplayObject;
 	import flash.display.MovieClip;
 	import flash.events.Event;
 	import flash.events.IOErrorEvent;
 	import flash.events.MouseEvent;
+	import flash.geom.ColorTransform;
 	import flash.net.URLLoader;
 	import flash.net.URLRequest;
 	import flash.text.AntiAliasType;
@@ -50,6 +52,10 @@
 		private var startY:int = 0;
 		private var gap:int = 3;
 		private var listScroller:VScrollbar;
+		private var textClipVector:Vector.<TextField>; 
+		private var textClipVector2:Vector.<TextField>; 
+		private const GREEN:uint = 0x56D85A;
+		private const INDIGO:uint = 0x56BAD8;
 		
 		public function TranscriptView()
 		{
@@ -153,7 +159,11 @@
 		{				
 			HomeViewConstants.transcriptWindow.toolPanel.gotoAndPlay(2);
 			var toolPanel:MovieClip = HomeViewConstants.transcriptWindow.toolPanel;
-			toolPanel.transcript.addEventListener(MouseEvent.CLICK,toolPanelEvents);
+			toolPanel.transcriptBtn.addEventListener(MouseEvent.CLICK,toolPanelEvents);
+			toolPanel.printBtn.addEventListener(MouseEvent.CLICK,toolPanelEvents);
+			toolPanel.referItBtn.addEventListener(MouseEvent.CLICK,toolPanelEvents);
+			toolPanel.favouriteBtn.addEventListener(MouseEvent.CLICK,toolPanelEvents);
+			
 
 			/*toolPanel.panel.plusSize.addEventListener(MouseEvent.CLICK,toolPanelEvents);
 			toolPanel.panel.resetSize.addEventListener(MouseEvent.CLICK,toolPanelEvents);
@@ -162,8 +172,24 @@
 		
 		private function toolPanelEvents(event:MouseEvent):void
 		{
-			trace(event.currentTarget.name+"<>"+event.currentTarget);			
-			objAppModel.homeViewRef.displayWindow(true);			
+			//trace(event.currentTarget.name+"<>"+event.currentTarget);			
+			
+			switch(event.currentTarget.name)
+			{
+				case "transcriptBtn":
+					objAppModel.homeViewRef.displayWindow(true);
+				break;
+				case "printBtn":
+					
+				break;
+				case "referItBtn":
+					
+					break;
+				case "favouriteBtn":
+					
+				break;
+			}
+			//objAppModel.homeViewRef.displayWindow(true);			
 		}
 		
 		public function displayFullTranscriptWindow(_fullTranscript:*):void
@@ -198,12 +224,13 @@
 				fullTranscript.back2videoBtn.addEventListener(MouseEvent.CLICK,closeWindow);			
 				fullTranscript.productNameMC.productTxt.text = objAppModel.getProductName();
 				
+				textClipVector = new Vector.<TextField>();
 				for(var i:int=0;i<objAppModel.textArray.length;i++)
 				{
 					var textVO:TextVO = TextVO(objAppModel.textArray[i]);
 					
 					transcriptText = new TextField();
-					transcriptText.multiline =true;
+					transcriptText.multiline = true;
 					transcriptText.wordWrap = true;	
 					transcriptText.autoSize = TextFieldAutoSize.LEFT;
 					transcriptText.styleSheet = sheet;					
@@ -216,6 +243,7 @@
 					fullTranscript.html_mc.addChild(transcriptText);
 					startY = startY+transcriptText.textHeight+gap;
 					
+					textClipVector.push(transcriptText);
 					//Attatching Play Button
 					
 					playButton = new PlayButtonIcon();
@@ -241,7 +269,6 @@
 				fullTranscript.addChild(transScroller);
 				transScroller.x = fullTranscript.html_mc.width+72;
 				transScroller.y = transcriptTextY+45;
-
 			}
 			transScroller.alpha = 1;
 			isLoaded=false;
@@ -258,14 +285,14 @@
 			textFormat.size = 10;
 			
 			var textClip:MovieClip;
-			
+			textClipVector2 = new Vector.<TextField>();
 			for(var i:uint=0;i<objAppModel.textArray.length;i++)
 			{
 				var textVO:TextVO = TextVO(objAppModel.textArray[i]);
 				
 				var titleText:TextField = new TextField();				
 				titleText.defaultTextFormat = textFormat;
-				titleText.textColor = 0x56BAD8;
+				titleText.textColor = INDIGO;
 				titleText.multiline = true;
 				titleText.wordWrap = true;	
 				titleText.autoSize = TextFieldAutoSize.LEFT;
@@ -276,13 +303,17 @@
 				titleText.x = sx;
 				titleText.y = sy;
 				
+				textClipVector2.push(titleText);
+				
 				textClip = new MovieClip();
 				textClip.addChild(titleText);
 				textClip.buttonMode = true;
 				textClip.mouseChildren = false;
+				textClip.title = titleText;
 				//textClip.videoURL = array[i].videoURL;
-				//textClip.chapterID = array[i].chapterID;
-				//textClip.addEventListener(MouseEvent.CLICK,playButton_Handler);
+				textClip.chapterID = textVO.chapterID;
+				textClip.id = i;
+				textClip.addEventListener(MouseEvent.CLICK,playButton_Handler);
 				
 				/*var seperator:Shape = new Shape();
 				seperator.graphics.lineStyle(1, 0xBDBDBD, 1);
@@ -296,6 +327,29 @@
 			listScroller = new VScrollbar(true);
 			fullTranscript.listView.addChild(listScroller);	
 			listScroller.configure = fullTranscript.listView.html_mc;
+		}
+		
+		private function playButton_Handler(event:MouseEvent):void
+		{
+			var scrollY:int = getSelectedTextClipPosition(event.currentTarget.id);	
+			fullTranscript.html_mc.y = -scrollY+120;		
+			
+			event.currentTarget.title.textColor = GREEN;
+			
+			//Setting Color Blue to Non Selected Texts
+			for(var i:int=0;i<textClipVector2.length;i++)
+			{
+				if(event.currentTarget.id != i)
+				{
+					textClipVector2[i].textColor =  INDIGO;
+				}
+			}	
+		}
+		
+		
+		private function getSelectedTextClipPosition(index:int):int
+		{
+			return textClipVector[index].y;
 		}
 		
 		private function playTranscript(event:MouseEvent):void

@@ -2,7 +2,7 @@ package code.services
 {
 	public class ServiceConstants
 	{
-		public static const FILMS_XML:String="mediaelements";
+		public static const FILMS_XML:String="films";
 		public static const FILMS_XML_PATH="/films/"; 
 		
 		public static const PREFERENCES_XML="preferences"; 
@@ -14,10 +14,10 @@ package code.services
 		
 		public static const FINDER_XML_PATH:String="/search/";
 		
-		public static const TEXT_XML:String="main";
+		public static const TEXT_XML:String="texts";
 		public static const TEXT_XML_PATH:String="/text/";
 		
-		public static const MOSTVIEWED:String="mediaelements";
+		public static const MOSTVIEWED:String="mostviewed";
 		public static const MOSTVIEWED_XML_PATH:String="/mostViewed/";
 		
 		public static const FILMS_LOCAL_XML_PATH="assets/xmlData/films.xml"
